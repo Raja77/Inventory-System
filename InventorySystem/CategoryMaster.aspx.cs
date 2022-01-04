@@ -102,7 +102,7 @@ namespace Inventory
 
                 if (dvSubCategory.Visible==true && dvShowSubCategory.Visible == false)
                 {
-                    sqlCmd.Parameters.AddWithValue("@ActionType", "SaveCategoryWithSubCategory");
+                    sqlCmd.Parameters.AddWithValue("@ActionType", "SaveCateNSubCat");
                     sqlCmd.Parameters.AddWithValue("@SubCategoryName", txtSubCategoryName.Text);
                     sqlCmd.Parameters.AddWithValue("@SubCategoryDescription", txtSubCategoryDescription.Text);
                 }
@@ -110,26 +110,20 @@ namespace Inventory
                 {
                     sqlCmd.Parameters.AddWithValue("@ActionType", "SaveCategory");
                 }
-
-                try
-                {
                     int numRes = sqlCmd.ExecuteNonQuery();
-                }
-                catch (Exception ex)
+                if (numRes > 0)
                 {
-                    lblError.Text = ex.Message;
+                    lblError.Text = "Record Saved Successfully";
+                    lblError.ForeColor = System.Drawing.Color.CornflowerBlue;
+                    lblError.Font.Size = 16;
+                    txtCategoryName.Text = string.Empty;
+                    txtCategoryDescription.Text = string.Empty;
+                    txtSubCategoryName.Text = string.Empty;
+                    txtSubCategoryDescription.Text = string.Empty;
+                    GetCategoryMasterDetails();
                 }
-                //if (numRes > 0)
-                //{
-                //    lblError.Text = "Record Saved Successfully";
-                //    lblError.ForeColor = System.Drawing.Color.CornflowerBlue;
-                //    lblError.Font.Size = 16;
-                //    txtCategoryName.Text = string.Empty;
-                //    txtCategoryDescription.Text = string.Empty;
-                //    GetCategoryMasterDetails();
-                //}
-                //else
-                //    lblError.Text = ("Please Try Again !!!");
+                else
+                    lblError.Text = ("Please Try Again !!!");
             }
 
             catch (Exception ex)

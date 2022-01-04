@@ -79,7 +79,7 @@
     <h4>Check Category Details</h4>
     <hr />
     <asp:GridView ID="grdCategoryMaster" CellPadding="0" CellSpacing="0" CssClass="table table-bordered table-striped" AllowPaging="true" OnPageIndexChanging="grdCategoryMaster_PageIndexChanging"
-         DataKeyNames="CategoryId" GridLines="None" runat="server" AutoGenerateColumns="false" PageSize="2">
+         DataKeyNames="CategoryId" GridLines="None" runat="server" AutoGenerateColumns="false" PageSize="5">
         <HeaderStyle />
         <EmptyDataTemplate>
             <label class="lbl">No Category found in our system !</label>
