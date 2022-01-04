@@ -80,7 +80,14 @@
             </div>
         </div>
 
-
+        <div class="mb-4 row">
+            <label for="txtItemRatePerUnit" class="col-sm-2 " style="text-align: right;"><span id="Span6" runat="server" class="RequiredField">* </span>Item Rate Per Unit:</label>
+            <div class="col-sm-7">
+                <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" CssClass="lbl" ErrorMessage="Enter Item Rate Quantity"
+                    ControlToValidate="txtItemRatePerUnit" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
+            </div>
+        </div>
         <div class="mb-4 row">
             <label for="txtItemTotalCost" class="col-sm-2 " style="text-align: right;"><span id="Span5" runat="server" class="RequiredField">* </span>Item Total Cost:</label>
             <div class="col-sm-7">
