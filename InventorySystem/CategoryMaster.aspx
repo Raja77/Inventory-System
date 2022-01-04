@@ -2,65 +2,104 @@
     Inherits="Inventory.CategoryMaster" EnableViewState="true" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
+    <br />
+    <br />
     <asp:Label ID="lblError" runat="server" CssClass="lbl" Font-Size="14"></asp:Label>
-    <div id="dvInventoryDetails" runat="server">
-        <br />
-        <h4>Item Registry details</h4>
-        <hr />
-        <p style="font-size: 18px; background-color: lightpink; color: black;">
-            <strong style="font-size: 20px;">Disclamer: </strong><i>Fill the proper details.</i>
-        </p>
-       <div class="mb-4 row">
-            <label for="txtItemName" class="col-sm-2 " style="text-align: right;"><span id="spItemName" runat="server" class="RequiredField">* </span>Item Name:</label>
-            <div class="col-sm-7">
-                <asp:TextBox ID="txtItemName" runat="server" CssClass="form-control"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="rfvItemName" runat="server" CssClass="lbl" ErrorMessage="Enter Item Name"
-                    ControlToValidate="txtItemName" Display="Dynamic" ValidationGroup="VerifyItems"></asp:RequiredFieldValidator>
-            </div>
-        </div>
-        <div class="mb-4 row">
-            <label for="txtItemDescription" class="col-sm-2 " style="text-align: right;"><span id="spItemDescription" runat="server" class="RequiredField">* </span>Item Description:</label>
-            <div class="col-sm-7">
-                <asp:TextBox ID="txtItemDescription" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="10" Columns="5"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="rfvItemDescription" runat="server" CssClass="lbl" ErrorMessage="Enter Item Description"
-                    ControlToValidate="txtItemDescription" Display="Dynamic" ValidationGroup="VerifyItems"></asp:RequiredFieldValidator>
-            </div>
-        </div>
-        <div class="mb-4 row">
-            <label class="col-sm-3 "></label>
-            <div class="col-sm-6 ">
-                <asp:Button ID="btnSubmitItemEntries" runat="server" CssClass="btn" Text="Submit Details" ValidationGroup="VerifyItems" OnClick="btnSubmitItemEntries_Click" />
-                <asp:Button ID="btnCancel" runat="server" CssClass="btn" Text="Cancel" OnClick="btnCancel_Click" />
-            </div>
-        </div>
-    </div>
 
-    <div>
-         <Header>Item Registry <strong>(<span id="countItemRegistry" runat="server">0</span>)</strong></Header>
-        <asp:GridView ID="grdItemRegistry" CellPadding="0" CellSpacing="0" CssClass="table table-bordered table-striped"
-            DataKeyNames="ItemId" GridLines="None" runat="server" AutoGenerateColumns="false">
-            <HeaderStyle />
-            <EmptyDataTemplate>
-                <label class="lbl">No Item found in the system !</label>
-            </EmptyDataTemplate>
-            <AlternatingRowStyle CssClass="alt" />
-            <Columns>
-                   <asp:TemplateField HeaderText="S No." HeaderStyle-Width="10%" HeaderStyle-HorizontalAlign="Left">
-                    <ItemTemplate>
-                        <%# Container.DataItemIndex + 1 + "." %>
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <asp:BoundField DataField="ItemName" HeaderText="Item">
-                    <HeaderStyle />
-                </asp:BoundField>
-                <asp:TemplateField HeaderText="Item Description" HeaderStyle-CssClass="headerWidth">
-                    <ItemTemplate>
-                        <asp:Label ID="lblVerified" runat="server" Text='<%# Eval("ItemDescription") %>'></asp:Label>
-                    </ItemTemplate>
-                </asp:TemplateField>
-            </Columns>
-        </asp:GridView>
+    <div id="chkDetails" runat="server">
+        <div class="mb-4 row">
+            <label for="txtCategoryName" class="col-sm-3 txt"><span class="RequiredField">* </span>Category Name</label>
+            <div class="col-sm-6">
+                <asp:TextBox ID="txtCategoryName" runat="server" CssClass="form-control" placeholder="Category Name (like Stationary, Computer, Furniture)"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="rfvCategoryName" runat="server" CssClass="lbl" ErrorMessage="Enter Category Name"
+                    ControlToValidate="txtCategoryName" Display="Dynamic" ValidationGroup="valCategoryMaster"></asp:RequiredFieldValidator>
+            </div>
+        </div>
+        <br />
+        <div class="mb-4 row">
+            <label for="txtCategoryDescription" class="col-sm-3 txt"><span class="RequiredField">* </span>Category Description</label>
+            <div class="col-sm-6">
+                <asp:TextBox ID="txtCategoryDescription" TextMode="MultiLine" Rows="6" Columns="4" runat="server" CssClass="form-control" placeholder="Details/Description for Category"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="rfvCategoryDescription" runat="server" CssClass="lbl" ErrorMessage="Enter Category Description"
+                    ControlToValidate="txtCategoryDescription" Display="Dynamic" ValidationGroup="valCategoryMaster"></asp:RequiredFieldValidator>
+                 </div>
+        </div>
+          <div class="mb-4 row" id="dvShowSubCategory" runat="server">
+           <asp:LinkButton ID="lnkShowSubCategory" runat="server" Text="Add Sub Category" OnClick="lnkShowSubCategory_Click"></asp:LinkButton>
+        </div>
+         <div id="dvSubCategory" runat="server" visible="false">
+              <div class="mb-4 row">
+           <asp:LinkButton ID="lnkHideSubCategory" runat="server" Text="Hide Sub Category" OnClick="lnkHideSubCategory_Click"></asp:LinkButton>
+        </div>
+        <div class="mb-4 row">
+            <label for="txtSubCategoryName" class="col-sm-3 txt"><span class="RequiredField">* </span>Sub-Category Name</label>
+            <div class="col-sm-6">
+                <asp:TextBox ID="txtSubCategoryName" runat="server" CssClass="form-control" placeholder="Sub-Category Name (like Stationary, Computer, Furniture)"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="rfvSubCategoryName" runat="server" CssClass="lbl" ErrorMessage="Enter Sub-Category Name"
+                    ControlToValidate="txtSubCategoryName" Display="Dynamic" ValidationGroup="valCategoryMaster"></asp:RequiredFieldValidator>
+            </div>
+        </div>
+        <br />
+        <div class="mb-4 row">
+            <label for="txtSubCategoryDescription" class="col-sm-3 txt"><span class="RequiredField">* </span>Sub-Category Description</label>
+            <div class="col-sm-6">
+                <asp:TextBox ID="txtSubCategoryDescription" TextMode="MultiLine" Rows="6" Columns="4" runat="server" CssClass="form-control" placeholder="Details/Description for Sub-Category"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="rfvSubCategoryDescription" runat="server" CssClass="lbl" ErrorMessage="Enter Category Description"
+                    ControlToValidate="txtSubCategoryDescription" Display="Dynamic" ValidationGroup="valCategoryMaster"></asp:RequiredFieldValidator>
+                 </div>
+        </div>
+             </div>
+<%--        <br />
+        <div class="mb-4 row">
+            <label for="drpUserType" class="col-sm-3 txt"><span class="RequiredField">* </span>Select User/Role Type</label>
+            <div class="col-sm-5">
+                <asp:DropDownList ID="drpUserType" runat="server" CssClass="form-control drp">
+                    <asp:ListItem Text="Select User/Role Type" Value="-1"></asp:ListItem>
+                    <asp:ListItem Text="Principal" Value="Principal"></asp:ListItem>
+                    <asp:ListItem Text="Department HOD" Value="DepartmentHOD"></asp:ListItem>
+                    <asp:ListItem Text="Department Staff Member" Value="DepartmentStaffMember"></asp:ListItem>
+                    <asp:ListItem Text="Non Teaching Staff Member" Value="NonTeachingStaffMember"></asp:ListItem>
+                    <asp:ListItem Text="Local Fund Employee" Value="LFE"></asp:ListItem>
+                </asp:DropDownList>
+                <asp:RequiredFieldValidator ID="rfvdrpUserType" runat="server" CssClass="lbl" ErrorMessage="Select User/Role Type" InitialValue="-1"
+                    ControlToValidate="drpUserType" Display="Dynamic" ValidationGroup="valCategoryMaster"></asp:RequiredFieldValidator>
+            </div>
+        </div>--%>
+        <br />
+        <div class="mb-4 row">
+            <label for="btnSubmit" class="col-sm-3 txt"></label>
+              <label for="btnSubmit" class="col-sm-3 txt"></label>
+            <div class="col-sm-3">
+                <asp:Button ID="btnSubmit" runat="server" Text="Submit Category Details" CssClass="btn btn-primary txt" ToolTip="Click here to Submit Category Details"
+                    OnClick="btnSubmit_Click" ValidationGroup="valCategoryMaster" />
+            </div>
+        </div>
     </div>
+    <br />
+    <h4>Check Category Details</h4>
+    <hr />
+    <asp:GridView ID="grdCategoryMaster" CellPadding="0" CellSpacing="0" CssClass="table table-bordered table-striped" AllowPaging="true" OnPageIndexChanging="grdCategoryMaster_PageIndexChanging"
+         DataKeyNames="CategoryId" GridLines="None" runat="server" AutoGenerateColumns="false" PageSize="2">
+        <HeaderStyle />
+        <EmptyDataTemplate>
+            <label class="lbl">No Category found in our system !</label>
+        </EmptyDataTemplate>
+        <AlternatingRowStyle CssClass="alt" />
+        <Columns>
+            <asp:BoundField DataField="CategoryName" HeaderText="Category Name">
+                <HeaderStyle />
+            </asp:BoundField>
+            <asp:TemplateField HeaderText="Category Description" HeaderStyle-CssClass="headerWidth">
+                <ItemTemplate>
+                    <asp:Label ID="lblCategoryDescription" runat="server" Text='<%# DataBinder.Eval(Container.DataItem, "CategoryDescription")%>'></asp:Label>
+                </ItemTemplate>
+            </asp:TemplateField>
+           <%-- <asp:BoundField DataField="UserType" HeaderText="User Type">
+                <HeaderStyle />
+            </asp:BoundField>--%>
+        </Columns>
+         <PagerStyle HorizontalAlign="Right" CssClass="GridPager" />
+    </asp:GridView>
 
 </asp:Content>
 

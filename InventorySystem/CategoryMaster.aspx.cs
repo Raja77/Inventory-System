@@ -18,17 +18,10 @@ namespace Inventory
     public partial class CategoryMaster : Page
     {
         #region Properties
-        SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
-        SqlDataAdapter adapt;
-        static int ID = 0;
+        SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultInventoryConnection"].ConnectionString);
         DataSet ds = null;
         DataTable dtData = null;
         SqlCommand sqlCmd = null;
-        private string SortDirection
-        {
-            get { return ViewState["SortDirection"] != null ? ViewState["SortDirection"].ToString() : "ASC"; }
-            set { ViewState["SortDirection"] = value; }
-        }
         #endregion
 
         #region Events
@@ -36,51 +29,37 @@ namespace Inventory
         {
             if (!IsPostBack)
             {
-
-                var x = Request.Url.ToString();
-                GetItemRegistryDetails();
+                GetCategoryMasterDetails();
             }
             lblError.Text = string.Empty;
         }
 
-        protected void GetItemRegistryDetails(string sortExpression = null)
+        protected void GetCategoryMasterDetails()
         {
             try
             {
                 ds = new DataSet();
-                ds = FetchItemRegistryDetails();
+                ds = FetchCategoryMasterDetails();
                 if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
-                    if (sortExpression != null)
-                    {
-                        DataView dv = ds.Tables[0].AsDataView();
-                        this.SortDirection = this.SortDirection == "ASC" ? "DESC" : "ASC";
-
-                        dv.Sort = sortExpression + " " + this.SortDirection;
-                        grdItemRegistry.DataSource = dv;
-                    }
-                    else
-                    {
-                        grdItemRegistry.DataSource = ds;
-                    }
-                    grdItemRegistry.DataBind();
-                    countItemRegistry.InnerText = ds.Tables[0].Rows.Count.ToString();
-                    countItemRegistry.Attributes.Add("title", "Item Registry Details");
+                    grdCategoryMaster.DataSource = ds.Tables[0];
+                    grdCategoryMaster.DataBind();
+                    // countFreshApplication.InnerText = ds.Tables[0].Rows.Count.ToString();
                 }
                 else
                 {
-                    grdItemRegistry.DataSource = ds.Tables[0];
-                    grdItemRegistry.DataBind();
-                    countItemRegistry.InnerText = "0";
+                    grdCategoryMaster.DataSource = ds.Tables[0];
+                    grdCategoryMaster.DataBind();
+                    //countFreshApplication.InnerText = "0";
                 }
-               
             }
             catch (Exception ex)
             {
                 lblError.Text = ex.Message;
             }
         }
-        private DataSet FetchItemRegistryDetails()
+
+        private DataSet FetchCategoryMasterDetails()
         {
             try
             {
@@ -91,7 +70,7 @@ namespace Inventory
                 ds = new DataSet();
                 sqlCmd = new SqlCommand("spInventories", conn);
                 sqlCmd.CommandType = CommandType.StoredProcedure;
-                sqlCmd.Parameters.AddWithValue("@ActionType", "FetchItemRegistry");
+                sqlCmd.Parameters.AddWithValue("@ActionType", "FetchCategories");
                 SqlDataAdapter sqlSda = new SqlDataAdapter(sqlCmd);
                 sqlSda.Fill(ds);
             }
@@ -101,23 +80,13 @@ namespace Inventory
             }
             finally
             {
+                sqlCmd.Dispose();
                 ds.Dispose();
             }
             return ds;
         }
 
-        #endregion
-
-
-
-
-        protected void btnCancel_Click(object sender, EventArgs e)
-        {
-            txtItemName.Text = string.Empty;
-            txtItemDescription.Text = string.Empty;
-        }
-
-        protected void btnSubmitItemEntries_Click(object sender, EventArgs e)
+        protected void btnSubmit_Click(object sender, EventArgs e)
         {
             try
             {
@@ -125,28 +94,42 @@ namespace Inventory
                 {
                     conn.Open();
                 }
-
-
                 dtData = new DataTable();
                 sqlCmd = new SqlCommand("spInventories", conn);
                 sqlCmd.CommandType = CommandType.StoredProcedure;
-                sqlCmd.Parameters.AddWithValue("@ActionType", "SaveItemRegistry");
-                sqlCmd.Parameters.AddWithValue("@ItemName", txtItemName.Text);
-                sqlCmd.Parameters.AddWithValue("@ItemDescription", txtItemDescription.Text);
-                sqlCmd.Parameters.AddWithValue("@ItemCreatedBy", "User1");
-                sqlCmd.Parameters.AddWithValue("@ItemCreatedOn", DateTime.Now);
-                sqlCmd.Parameters.AddWithValue("@ItemUpdatedBy", "User2");
-                sqlCmd.Parameters.AddWithValue("@ItemUpdatedOn", DateTime.Now);
-                int numRes = sqlCmd.ExecuteNonQuery();
-                if (numRes > 0)
+                sqlCmd.Parameters.AddWithValue("@CategoryName", txtCategoryName.Text);
+                sqlCmd.Parameters.AddWithValue("@CategoryDescription", txtCategoryDescription.Text);
+
+                if (dvSubCategory.Visible==true && dvShowSubCategory.Visible == false)
                 {
-                    lblError.Text = "Record Saved Successfully";
-                    lblError.ForeColor = System.Drawing.Color.CornflowerBlue;
-                    lblError.Font.Size = 16;
-                    GetItemRegistryDetails();
+                    sqlCmd.Parameters.AddWithValue("@ActionType", "SaveCategoryWithSubCategory");
+                    sqlCmd.Parameters.AddWithValue("@SubCategoryName", txtSubCategoryName.Text);
+                    sqlCmd.Parameters.AddWithValue("@SubCategoryDescription", txtSubCategoryDescription.Text);
                 }
-                else
-                    lblError.Text = ("Please Try Again !!!");
+                else if (dvSubCategory.Visible == false && dvShowSubCategory.Visible == true)
+                {
+                    sqlCmd.Parameters.AddWithValue("@ActionType", "SaveCategory");
+                }
+
+                try
+                {
+                    int numRes = sqlCmd.ExecuteNonQuery();
+                }
+                catch (Exception ex)
+                {
+                    lblError.Text = ex.Message;
+                }
+                //if (numRes > 0)
+                //{
+                //    lblError.Text = "Record Saved Successfully";
+                //    lblError.ForeColor = System.Drawing.Color.CornflowerBlue;
+                //    lblError.Font.Size = 16;
+                //    txtCategoryName.Text = string.Empty;
+                //    txtCategoryDescription.Text = string.Empty;
+                //    GetCategoryMasterDetails();
+                //}
+                //else
+                //    lblError.Text = ("Please Try Again !!!");
             }
 
             catch (Exception ex)
@@ -160,5 +143,28 @@ namespace Inventory
                 conn.Close();
             }
         }
+
+        protected void grdCategoryMaster_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            grdCategoryMaster.PageIndex = e.NewPageIndex;
+            this.GetCategoryMasterDetails();
+        }
+
+        protected void lnkShowSubCategory_Click(object sender, EventArgs e)
+        {
+            dvSubCategory.Visible = true;
+            dvShowSubCategory.Visible = false;
+        }
+
+        protected void lnkHideSubCategory_Click(object sender, EventArgs e)
+        {
+            dvSubCategory.Visible = false;
+            dvShowSubCategory.Visible = true;
+        }
+        #endregion
+
+
+
+
     }
 }

@@ -131,7 +131,8 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="InventorySystem\ItemRegistry.aspx" />
+    <Content Include="InventorySystem\UserMaster.aspx" />
+    <Content Include="InventorySystem\CategoryMaster.aspx" />
     <Content Include="InventorySystem\InventoryEntries.aspx" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -194,12 +195,19 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="InventorySystem\ItemRegistry.aspx.cs">
-      <DependentUpon>ItemRegistry.aspx</DependentUpon>
+    <Compile Include="InventorySystem\UserMaster.aspx.cs">
+      <DependentUpon>UserMaster.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="InventorySystem\ItemRegistry.aspx.designer.cs">
-      <DependentUpon>ItemRegistry.aspx</DependentUpon>
+    <Compile Include="InventorySystem\UserMaster.aspx.designer.cs">
+      <DependentUpon>UserMaster.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="InventorySystem\CategoryMaster.aspx.cs">
+      <DependentUpon>CategoryMaster.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InventorySystem\CategoryMaster.aspx.designer.cs">
+      <DependentUpon>CategoryMaster.aspx</DependentUpon>
     </Compile>
     <Compile Include="InventorySystem\InventoryEntries.aspx.cs">
       <DependentUpon>InventoryEntries.aspx</DependentUpon>

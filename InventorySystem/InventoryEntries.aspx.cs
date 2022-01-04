@@ -18,9 +18,7 @@ namespace Inventory
     public partial class InventoryEntries : Page
     {
         #region Properties
-        SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);
-        SqlDataAdapter adapt;
-        static int ID = 0;
+        SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultInventoryConnection"].ConnectionString);     
         DataSet ds = null;
         DataTable dtData = null;
         SqlCommand sqlCmd = null;

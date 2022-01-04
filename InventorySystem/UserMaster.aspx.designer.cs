@@ -10,7 +10,7 @@
 namespace Inventory {
     
     
-    public partial class CategoryMaster {
+    public partial class UserMaster {
         
         /// <summary>
         /// lblError control.
@@ -31,112 +31,67 @@ namespace Inventory {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl chkDetails;
         
         /// <summary>
-        /// txtCategoryName control.
+        /// txtUserName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCategoryName;
+        protected global::System.Web.UI.WebControls.TextBox txtUserName;
         
         /// <summary>
-        /// rfvCategoryName control.
+        /// rfvUserName control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCategoryName;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvUserName;
         
         /// <summary>
-        /// txtCategoryDescription control.
+        /// txtUserEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtCategoryDescription;
+        protected global::System.Web.UI.WebControls.TextBox txtUserEmail;
         
         /// <summary>
-        /// rfvCategoryDescription control.
+        /// rfvUserEmail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCategoryDescription;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvUserEmail;
         
         /// <summary>
-        /// dvShowSubCategory control.
+        /// RegularExpressionValidator1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvShowSubCategory;
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator RegularExpressionValidator1;
         
         /// <summary>
-        /// lnkShowSubCategory control.
+        /// drpUserType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkShowSubCategory;
+        protected global::System.Web.UI.WebControls.DropDownList drpUserType;
         
         /// <summary>
-        /// dvSubCategory control.
+        /// rfvdrpUserType control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvSubCategory;
-        
-        /// <summary>
-        /// lnkHideSubCategory control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkHideSubCategory;
-        
-        /// <summary>
-        /// txtSubCategoryName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSubCategoryName;
-        
-        /// <summary>
-        /// rfvSubCategoryName control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvSubCategoryName;
-        
-        /// <summary>
-        /// txtSubCategoryDescription control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSubCategoryDescription;
-        
-        /// <summary>
-        /// rfvSubCategoryDescription control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvSubCategoryDescription;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvdrpUserType;
         
         /// <summary>
         /// btnSubmit control.
@@ -148,12 +103,12 @@ namespace Inventory {
         protected global::System.Web.UI.WebControls.Button btnSubmit;
         
         /// <summary>
-        /// grdCategoryMaster control.
+        /// grdUserMaster control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdCategoryMaster;
+        protected global::System.Web.UI.WebControls.GridView grdUserMaster;
     }
 }
