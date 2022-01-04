@@ -10,7 +10,8 @@
 namespace Inventory {
     
     
-    public partial class ItemRegistry {
+    public partial class CategoryMaster
+    {
         
         /// <summary>
         /// lblError control.
