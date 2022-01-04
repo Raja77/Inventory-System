@@ -15,7 +15,7 @@ using System.Globalization;
 
 namespace Inventory
 {
-    public partial class ItemRegistry : Page
+    public partial class CategoryMaster : Page
     {
         #region Properties
         SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultConnection"].ConnectionString);

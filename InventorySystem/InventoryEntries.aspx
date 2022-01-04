@@ -5,7 +5,7 @@
     <asp:Label ID="lblError" runat="server" CssClass="lbl" Font-Size="14"></asp:Label>
     <div id="dvInventoryDetails" runat="server">
         <br />
-        <h4>Update Application/Inventory details ICSC purpose</h4>
+        <h4>Update Application/Inventory details ICSC purposes</h4>
         <hr />
         <p style="font-size: 18px; background-color: lightpink; color: black;">
             <strong style="font-size: 20px;">Disclamer: </strong><i>Fill the proper details.</i>

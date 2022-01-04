@@ -1,5 +1,5 @@
-﻿<%@ Page Title="View Inventory(s)" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="ItemRegistry.aspx.cs"
-    Inherits="Inventory.ItemRegistry" EnableViewState="true" %>
+﻿<%@ Page Title="View Inventory(s)" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="CategoryMaster.aspx.cs"
+    Inherits="Inventory.CategoryMaster" EnableViewState="true" %>
 <%@ Register Assembly="AjaxControlToolkit" Namespace="AjaxControlToolkit" TagPrefix="ajaxToolkit" %>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
     <asp:Label ID="lblError" runat="server" CssClass="lbl" Font-Size="14"></asp:Label>
