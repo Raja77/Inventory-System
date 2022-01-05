@@ -19,7 +19,7 @@ namespace Inventory
     {
         #region Properties
         SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultInventoryConnection"].ConnectionString);
-        DataSet ds = null;
+        DataSet ds, dsSubCat = null;
         DataTable dtData = null;
         SqlCommand sqlCmd = null;
         #endregion
@@ -39,17 +39,22 @@ namespace Inventory
             try
             {
                 ds = new DataSet();
+                dsSubCat = new DataSet();
                 ds = FetchCategoryMasterDetails();
                 if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
                     grdCategoryMaster.DataSource = ds.Tables[0];
                     grdCategoryMaster.DataBind();
+                    grdSubCategoryMaster.DataSource = dsSubCat.Tables[0];
+                    grdSubCategoryMaster.DataBind();
                     // countFreshApplication.InnerText = ds.Tables[0].Rows.Count.ToString();
                 }
                 else
                 {
                     grdCategoryMaster.DataSource = ds.Tables[0];
                     grdCategoryMaster.DataBind();
+                    grdSubCategoryMaster.DataSource = dsSubCat.Tables[0];
+                    grdSubCategoryMaster.DataBind();
                     //countFreshApplication.InnerText = "0";
                 }
             }
@@ -73,6 +78,12 @@ namespace Inventory
                 sqlCmd.Parameters.AddWithValue("@ActionType", "FetchCategories");
                 SqlDataAdapter sqlSda = new SqlDataAdapter(sqlCmd);
                 sqlSda.Fill(ds);
+                //Get SubCategory Details for SubCategoryGrid
+                SqlCommand sqlCmd2 = new SqlCommand("spInventories", conn);
+                sqlCmd2.CommandType = CommandType.StoredProcedure;
+                sqlCmd2.Parameters.AddWithValue("@ActionType", "FetchSubCategories");
+                SqlDataAdapter sqlSda2 = new SqlDataAdapter(sqlCmd2);
+                sqlSda2.Fill(dsSubCat);
             }
             catch (Exception ex)
             {
@@ -82,6 +93,7 @@ namespace Inventory
             {
                 sqlCmd.Dispose();
                 ds.Dispose();
+               // dsSubCat.Dispose();
             }
             return ds;
         }
@@ -108,12 +120,17 @@ namespace Inventory
                 }
                 else if (dvSubCategory.Visible == false && dvShowSubCategory.Visible == true)
                 {
-                    sqlCmd.Parameters.AddWithValue("@ActionType", "SaveCategory");
+                    // sqlCmd.Parameters.AddWithValue("@ActionType", "SaveCategory");
+                    sqlCmd.Parameters.AddWithValue("@ActionType", "SaveCateNSubCat");
+                    //if subcategory not given then enter a default subcategory with same name as the category
+                    sqlCmd.Parameters.AddWithValue("@SubCategoryName", txtCategoryName.Text);
+                    sqlCmd.Parameters.AddWithValue("@SubCategoryDescription", "Subcategory for "+txtCategoryDescription.Text);
                 }
                     int numRes = sqlCmd.ExecuteNonQuery();
                 if (numRes > 0)
                 {
                     lblError.Text = "Record Saved Successfully";
+                    lblMsgSuccess.Visible = true;
                     lblError.ForeColor = System.Drawing.Color.CornflowerBlue;
                     lblError.Font.Size = 16;
                     txtCategoryName.Text = string.Empty;
