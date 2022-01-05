@@ -19,7 +19,7 @@ namespace Inventory
     {
         #region Properties
         SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultInventoryConnection"].ConnectionString);     
-        DataSet ds = null;
+        DataSet ds,dsGrid = null;
         DataTable dtData = null;
         SqlCommand sqlCmd = null;
         private string SortDirection
@@ -59,11 +59,12 @@ namespace Inventory
             {
                 ds = new DataSet();
                 ds = FetchItemRegistryDetails();
-                if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                //dsGrid also gets populated from FetchItemRegistryDetails()
+                if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0 && dsGrid.Tables.Count > 0 && dsGrid.Tables[0].Rows.Count > 0)
                 {
                     if (sortExpression != null)
                     {
-                        DataView dv = ds.Tables[0].AsDataView();
+                        DataView dv = dsGrid.Tables[0].AsDataView();
                         this.SortDirection = this.SortDirection == "ASC" ? "DESC" : "ASC";
 
                         dv.Sort = sortExpression + " " + this.SortDirection;
@@ -71,7 +72,7 @@ namespace Inventory
                     }
                     else
                     {
-                        grdInventoryEntries.DataSource = ds;
+                        grdInventoryEntries.DataSource = dsGrid;
                     }
                     grdInventoryEntries.DataBind();
                     countInventoryEntries.InnerText = ds.Tables[0].Rows.Count.ToString();
@@ -79,7 +80,7 @@ namespace Inventory
                 }
                 else
                 {
-                    grdInventoryEntries.DataSource = ds.Tables[0];
+                    grdInventoryEntries.DataSource = dsGrid.Tables[0];
                     grdInventoryEntries.DataBind();
                     countInventoryEntries.InnerText = "0";
                 }
@@ -87,12 +88,13 @@ namespace Inventory
 
                 if (ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
                 {
-                    drpItem.DataSource = ds.Tables[1];
-                    drpItem.DataBind();
-                    drpItem.DataTextField = "ItemName";
-                    drpItem.DataValueField = "ItemID";
-                    drpItem.DataBind();
+                    drpCategory.DataSource = ds.Tables[1];
+                    drpCategory.DataBind();
+                    drpCategory.DataTextField = "CategoryName";
+                    drpCategory.DataValueField = "CategoryID";
+                    drpCategory.DataBind();
                 }
+                drpCategory_SelectedIndexChanged1(null, null);
             }
             catch (Exception ex)
             {
@@ -108,11 +110,19 @@ namespace Inventory
                     conn.Open();
                 }
                 ds = new DataSet();
+                dsGrid = new DataSet();
                 sqlCmd = new SqlCommand("spInventories", conn);
                 sqlCmd.CommandType = CommandType.StoredProcedure;
                 sqlCmd.Parameters.AddWithValue("@ActionType", "FetchInventoryEntries");
                 SqlDataAdapter sqlSda = new SqlDataAdapter(sqlCmd);
                 sqlSda.Fill(ds);
+
+                //Fetch special for display in Grid
+                SqlCommand sqlCmdGrid = new SqlCommand("spInventories", conn);
+                sqlCmdGrid.CommandType = CommandType.StoredProcedure;
+                sqlCmdGrid.Parameters.AddWithValue("@ActionType", "FetchInventoryForGrid");
+                SqlDataAdapter sqlSdaGrid = new SqlDataAdapter(sqlCmdGrid);
+                sqlSdaGrid.Fill(dsGrid);
             }
             catch (Exception ex)
             {
@@ -143,9 +153,11 @@ namespace Inventory
                 sqlCmd = new SqlCommand("spInventories", conn);
                 sqlCmd.CommandType = CommandType.StoredProcedure;
                 sqlCmd.Parameters.AddWithValue("@ActionType", "SaveInventoryEntries");
-                sqlCmd.Parameters.AddWithValue("@ItemId", drpItem.SelectedItem.Value);
-                sqlCmd.Parameters.AddWithValue("@InventoryName", drpItem.SelectedItem.Text);
-                sqlCmd.Parameters.AddWithValue("@ItemDescription", txtInventoryDescription.Text);
+               // sqlCmd.Parameters.AddWithValue("@ItemId", drpCategory.SelectedItem.Value);
+                sqlCmd.Parameters.AddWithValue("@CategoryId", drpCategory.SelectedItem.Value);
+                sqlCmd.Parameters.AddWithValue("@SubCategoryId", drpSubCategory.SelectedItem.Value);
+                sqlCmd.Parameters.AddWithValue("@InventoryName", txtInventoryName.Text);
+                sqlCmd.Parameters.AddWithValue("@InventoryDescription", txtInventoryDescription.Text);
                 sqlCmd.Parameters.AddWithValue("@PurchasedFrom",  txtPurchasedFrom.Text);
                 sqlCmd.Parameters.AddWithValue("@PurchaseDate", txtPurchaseDate.Text);
 
@@ -181,7 +193,47 @@ namespace Inventory
             }
         }
 
-        protected void drpItem_SelectedIndexChanged(object sender, EventArgs e)
+        protected void drpCategory_SelectedIndexChanged1(object sender, EventArgs e)
+        {
+            try
+            {
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                ds = new DataSet();
+                sqlCmd = new SqlCommand("spInventories", conn);
+                sqlCmd.CommandType = CommandType.StoredProcedure;
+                sqlCmd.Parameters.AddWithValue("@ActionType", "FetchSubCatsByCatId");
+                sqlCmd.Parameters.AddWithValue("@CategoryId", Int32.Parse(drpCategory.SelectedValue));
+                SqlDataAdapter sqlSda = new SqlDataAdapter(sqlCmd);
+                sqlSda.Fill(ds);
+                if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
+                {
+                    drpSubCategory.DataSource = ds.Tables[0];
+                    drpSubCategory.DataTextField = "SubCategoryName";
+                    drpSubCategory.DataValueField = "SubCategoryID";
+                    drpSubCategory.DataBind();
+                }
+                else
+                {
+                    drpSubCategory.DataSource = ds.Tables[0];
+                    drpSubCategory.DataTextField = "SubCategoryName";
+                    drpSubCategory.DataValueField = "SubCategoryID";
+                    drpSubCategory.DataBind();
+                }
+            }
+            catch (Exception ex)
+            {
+                lblError.Text = ex.Message;
+            }
+            finally
+            {
+                ds.Dispose();
+            }
+        }
+
+        protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
         {
 
         }

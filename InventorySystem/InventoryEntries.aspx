@@ -10,20 +10,40 @@
         <p style="font-size: 18px; background-color: lightpink; color: black;">
             <strong style="font-size: 20px;">Disclamer: </strong><i>Fill the proper details.</i>
         </p>
-     
+    <%-- <asp:DropDownList ID="DropDownList1" runat="server" CssClass="form-control drp" OnSelectedIndexChanged="DropDownList1_SelectedIndexChanged">
+                    <asp:ListItem Text="Select Category" Value="-1"></asp:ListItem>
+                 <asp:ListItem Text="Select Category 2" Value="1"></asp:ListItem>
+                </asp:DropDownList>--%>
 
           <div class="mb-4 row">
-            <label for="drpItem" class="col-sm-2 " style="text-align: right;"><span class="RequiredField">* </span>Item Name:</label>
+            <label for="drpCategory" class="col-sm-2 " style="text-align: right;"><span class="RequiredField">* </span>Select Category:</label>
             <div class="col-sm-4">
-                <asp:DropDownList ID="drpItem" runat="server" CssClass="form-control drp">
-                    <asp:ListItem Text="Select Status" Value="-1"></asp:ListItem>
+                <asp:DropDownList ID="drpCategory" runat="server" AutoPostBack="true" CssClass="form-control drp" OnSelectedIndexChanged="drpCategory_SelectedIndexChanged1">
+                    <asp:ListItem Text="Select Category" Value="-1"></asp:ListItem>
                 </asp:DropDownList>
-                <asp:RequiredFieldValidator ID="rfvdrpStatus" runat="server" CssClass="lbl" ErrorMessage="Select Status" InitialValue="-1"
-                    ControlToValidate="drpItem" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator ID="rfvdrpCategory" runat="server" CssClass="lbl" ErrorMessage="Select Category" InitialValue="-1"
+                    ControlToValidate="drpCategory" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
+            </div>
+        </div>
+        <div class="mb-4 row">
+            <label for="drpSubCategory" class="col-sm-2 " style="text-align: right;"><span class="RequiredField">* </span>Select Sub Category:</label>
+            <div class="col-sm-4">
+                <asp:DropDownList ID="drpSubCategory" runat="server" CssClass="form-control drp">
+                    <asp:ListItem Text="Select Sub Category" Value="-1"></asp:ListItem>
+                </asp:DropDownList>
+                <asp:RequiredFieldValidator ID="rfvdrpSubCategory" runat="server" CssClass="lbl" ErrorMessage="Select Sub Category" InitialValue="-1"
+                    ControlToValidate="drpSubCategory" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
             </div>
         </div>
 
-
+        <div class="mb-4 row">
+            <label for="txtInventoryName" class="col-sm-2 " style="text-align: right;"><span id="SpanInventoryName" runat="server" class="RequiredField">* </span>Item Name:</label>
+            <div class="col-sm-7">
+                <asp:TextBox ID="txtInventoryName" runat="server" CssClass="form-control"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="rfvtxtInventoryName" runat="server" CssClass="lbl" ErrorMessage="Enter Item Name"
+                    ControlToValidate="txtInventoryName" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
+            </div>
+        </div>
              <div class="mb-4 row">
             <label for="txtInventoryDescription" class="col-sm-2 " style="text-align: right;"><span id="spInventoryDescription" runat="server" class="RequiredField">* </span>Inventory Description:</label>
             <div class="col-sm-7">
@@ -33,7 +53,7 @@
             </div>
         </div>
           <div class="mb-4 row">
-              <label for="txtPurchaseDate" class="col-sm-2" style="text-align: right;">Purchase Date:</label>
+              <label for="txtPurchaseDate" class="col-sm-2" style="text-align: right;">Purchase Date (yyyy-mm-dd):</label>
                             <div class="col-sm-2">
                                 <div class="col-sm-10">
                                     <asp:TextBox ID="txtPurchaseDate" runat="server" CssClass="form-control"></asp:TextBox>
@@ -80,14 +100,14 @@
             </div>
         </div>
 
-        <div class="mb-4 row">
+<%--        <div class="mb-4 row">
             <label for="txtItemRatePerUnit" class="col-sm-2 " style="text-align: right;"><span id="Span6" runat="server" class="RequiredField">* </span>Item Rate Per Unit:</label>
             <div class="col-sm-7">
                 <asp:TextBox ID="TextBox1" runat="server" CssClass="form-control"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator2" runat="server" CssClass="lbl" ErrorMessage="Enter Item Rate Quantity"
                     ControlToValidate="txtItemRatePerUnit" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
             </div>
-        </div>
+        </div>--%>
         <div class="mb-4 row">
             <label for="txtItemTotalCost" class="col-sm-2 " style="text-align: right;"><span id="Span5" runat="server" class="RequiredField">* </span>Item Total Cost:</label>
             <div class="col-sm-7">
@@ -140,7 +160,7 @@
         <div>
          <Header>Inventory Entries <strong>(<span id="countInventoryEntries" runat="server">0</span>)</strong></Header>
         <asp:GridView ID="grdInventoryEntries" CellPadding="0" CellSpacing="0" CssClass="table table-bordered table-striped"
-            DataKeyNames="ItemId" GridLines="None" runat="server" AutoGenerateColumns="true">
+            DataKeyNames="InventoryId" GridLines="None" runat="server" AutoGenerateColumns="true">
             <HeaderStyle />
             <EmptyDataTemplate>
                 <label class="lbl">No Inventory found in the system !</label>

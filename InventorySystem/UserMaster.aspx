@@ -37,6 +37,7 @@
                     <asp:ListItem Text="Department Staff Member" Value="DepartmentStaffMember"></asp:ListItem>
                     <asp:ListItem Text="Non Teaching Staff Member" Value="NonTeachingStaffMember"></asp:ListItem>
                     <asp:ListItem Text="Local Fund Employee" Value="LFE"></asp:ListItem>
+                    <asp:ListItem Text="Data Entry Operator" Value="DEO"></asp:ListItem>
                 </asp:DropDownList>
                 <asp:RequiredFieldValidator ID="rfvdrpUserType" runat="server" CssClass="lbl" ErrorMessage="Select User/Role Type" InitialValue="-1"
                     ControlToValidate="drpUserType" Display="Dynamic" ValidationGroup="valUserMaster"></asp:RequiredFieldValidator>
@@ -47,7 +48,7 @@
             <label for="btnSubmit" class="col-sm-3 txt"></label>
               <label for="btnSubmit" class="col-sm-3 txt"></label>
             <div class="col-sm-3">
-                <asp:Button ID="btnSubmit" runat="server" Text="Submit User Details" CssClass="btn btn-primary txt" ToolTip="Click here to Submit User Details"
+                <asp:Button ID="btnSubmit" runat="server" Text="Create User" CssClass="btn btn-primary txt" ToolTip="Click here to Submit User Details"
                     OnClick="btnSubmit_Click" ValidationGroup="valUserMaster" />
             </div>
         </div>

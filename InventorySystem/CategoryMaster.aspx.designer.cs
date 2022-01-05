@@ -148,6 +148,15 @@ namespace Inventory {
         protected global::System.Web.UI.WebControls.Button btnSubmit;
         
         /// <summary>
+        /// lblMsgSuccess control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMsgSuccess;
+        
+        /// <summary>
         /// grdCategoryMaster control.
         /// </summary>
         /// <remarks>
@@ -155,5 +164,14 @@ namespace Inventory {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grdCategoryMaster;
+        
+        /// <summary>
+        /// grdSubCategoryMaster control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grdSubCategoryMaster;
     }
 }

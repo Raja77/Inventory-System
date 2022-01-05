@@ -24,11 +24,11 @@
                     ControlToValidate="txtCategoryDescription" Display="Dynamic" ValidationGroup="valCategoryMaster"></asp:RequiredFieldValidator>
                  </div>
         </div>
-          <div class="mb-4 row" id="dvShowSubCategory" runat="server">
+        <div class="mb-4 row" id="dvShowSubCategory" runat="server">
            <asp:LinkButton ID="lnkShowSubCategory" runat="server" Text="Add Sub Category" OnClick="lnkShowSubCategory_Click"></asp:LinkButton>
         </div>
          <div id="dvSubCategory" runat="server" visible="false">
-              <div class="mb-4 row">
+          <div class="mb-4 row">
            <asp:LinkButton ID="lnkHideSubCategory" runat="server" Text="Hide Sub Category" OnClick="lnkHideSubCategory_Click"></asp:LinkButton>
         </div>
         <div class="mb-4 row">
@@ -70,9 +70,10 @@
             <label for="btnSubmit" class="col-sm-3 txt"></label>
               <label for="btnSubmit" class="col-sm-3 txt"></label>
             <div class="col-sm-3">
-                <asp:Button ID="btnSubmit" runat="server" Text="Submit Category Details" CssClass="btn btn-primary txt" ToolTip="Click here to Submit Category Details"
+                <asp:Button ID="btnSubmit" runat="server" Text="Create Category" CssClass="btn btn-primary txt" ToolTip="Click here to Submit Category Details"
                     OnClick="btnSubmit_Click" ValidationGroup="valCategoryMaster" />
             </div>
+            <asp:Label ID="lblMsgSuccess" runat="server" Text="Data Saved Successfully" Visible="false"></asp:Label>
         </div>
     </div>
     <br />
@@ -97,6 +98,31 @@
            <%-- <asp:BoundField DataField="UserType" HeaderText="User Type">
                 <HeaderStyle />
             </asp:BoundField>--%>
+        </Columns>
+         <PagerStyle HorizontalAlign="Right" CssClass="GridPager" />
+    </asp:GridView>
+    <h4>Sub Category Details</h4>
+    <hr />
+     <asp:GridView ID="grdSubCategoryMaster" CellPadding="0" CellSpacing="0" CssClass="table table-bordered table-striped" AllowPaging="true" OnPageIndexChanging="grdCategoryMaster_PageIndexChanging"
+         DataKeyNames="SubCategoryId" GridLines="None" runat="server" AutoGenerateColumns="false" PageSize="5">
+        <HeaderStyle />
+        <EmptyDataTemplate>
+            <label class="lbl">No Sub Category found in our system !</label>
+        </EmptyDataTemplate>
+        <AlternatingRowStyle CssClass="alt" />
+        <Columns>
+            <asp:BoundField DataField="CategoryName" HeaderText="Category Name">
+                <HeaderStyle />
+            </asp:BoundField>
+            <asp:BoundField DataField="CategoryDescription" HeaderText="Category Description">
+                <HeaderStyle />
+            </asp:BoundField>
+            <asp:BoundField DataField="SubCategoryName" HeaderText="Sub Category Name">
+                <HeaderStyle />
+            </asp:BoundField>
+            <asp:BoundField DataField="SubCategoryDescription" HeaderText="Sub Category Description">
+                <HeaderStyle />
+            </asp:BoundField>
         </Columns>
          <PagerStyle HorizontalAlign="Right" CssClass="GridPager" />
     </asp:GridView>

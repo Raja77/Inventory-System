@@ -1,0 +1,16 @@
+Faisal - 06-01-2022 2.40 PM
+Updated DB Script
+Category Subcategory working OK
+Added Subcategory View Grid to Subcategory Master
+Inventory Working OK
+Inventory Category and Subcategory working
+Modified Inventory Grid Procedure to show fewer entries
+
+Not Working
+category pagination not working
+inventory date calendar not working
+
+Issues:
+Only 1 subcategory adding
+No Editing possibility
+Page Menu not available
