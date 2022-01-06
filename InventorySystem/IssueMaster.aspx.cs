@@ -39,24 +39,31 @@ namespace Inventory
             try
             {
                 ds = new DataSet();
-                //dsSubCat = new DataSet();
                 ds = FetchCategoryMasterDetails();
                 if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
                     grdIssueMaster.DataSource = ds.Tables[0];
                     grdIssueMaster.DataBind();
-                    //grdSubCategoryMaster.DataSource = dsSubCat.Tables[0];
-                    //grdSubCategoryMaster.DataBind();
-                    // countFreshApplication.InnerText = ds.Tables[0].Rows.Count.ToString();
                 }
                 else
                 {
                     grdIssueMaster.DataSource = ds.Tables[0];
                     grdIssueMaster.DataBind();
-                    //grdSubCategoryMaster.DataSource = dsSubCat.Tables[0];
-                    //grdSubCategoryMaster.DataBind();
-                    //countFreshApplication.InnerText = "0";
                 }
+
+                if (ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
+                {
+                    drpInventory.DataSource = ds.Tables[1];
+                    drpInventory.DataTextField = "UserName";
+                    drpInventory.DataValueField = "UserId";
+                    drpInventory.DataBind();
+                }
+                else
+                {
+                    drpInventory.DataSource = ds.Tables[1];
+                    drpInventory.DataBind();
+                }
+
             }
             catch (Exception ex)
             {
@@ -131,15 +138,15 @@ namespace Inventory
                 dtData = new DataTable();
                 sqlCmd = new SqlCommand("spInventories", conn);
                 sqlCmd.CommandType = CommandType.StoredProcedure;
-                //sqlCmd.Parameters.AddWithValue("@CategoryName", txtCategoryName.Text);
-                //sqlCmd.Parameters.AddWithValue("@CategoryDescription", txtCategoryDescription.Text);
-
-                
-                //    sqlCmd.Parameters.AddWithValue("@ActionType", "SaveCateNSubCat");
-                //    sqlCmd.Parameters.AddWithValue("@SubCategoryName", txtSubCategoryName.Text);
-                //    sqlCmd.Parameters.AddWithValue("@SubCategoryDescription", txtSubCategoryDescription.Text);
-               
-              
+                sqlCmd.Parameters.AddWithValue("@ActionType", "SaveIssueDetails");
+                sqlCmd.Parameters.AddWithValue("@UserId", "2");
+                sqlCmd.Parameters.AddWithValue("@IssueDate", txtIssueDate.Text);
+                sqlCmd.Parameters.AddWithValue("@IssuedBy", "1");
+                sqlCmd.Parameters.AddWithValue("@IssueQuantity", txtIssueQuantity.Text);
+                sqlCmd.Parameters.AddWithValue("@InventoryId", drpInventory.SelectedItem.Value);
+                sqlCmd.Parameters.AddWithValue("@IsReceived", chkIsReceived.Checked);
+                sqlCmd.Parameters.AddWithValue("@IssuerRemarks", txtIssuerRemarks.Text);
+                sqlCmd.Parameters.AddWithValue("@ReceiptRemarks", txtReceiptRemarks.Text);
                 int numRes = sqlCmd.ExecuteNonQuery();
                 if (numRes > 0)
                 {
@@ -147,17 +154,13 @@ namespace Inventory
                     //lblMsgSuccess.Visible = true;
                     lblError.ForeColor = System.Drawing.Color.CornflowerBlue;
                     lblError.Font.Size = 16;
-
                     GetIssueMasterDetails();
                     dvAddIssueMasterDetails.Visible = false;
-
-                    //txtCategoryName.Text = string.Empty;
-                    //txtCategoryDescription.Text = string.Empty;
-                    //txtSubCategoryName.Text = string.Empty;
-                    //txtSubCategoryDescription.Text = string.Empty;
-                    //chkSubCategory.Checked = false;
-
-
+                    txtIssueDate.Text = string.Empty;
+                    txtIssueQuantity.Text = string.Empty;
+                    txtIssuerRemarks.Text = string.Empty;
+                    txtReceiptRemarks.Text = string.Empty;
+                    chkIsReceived.Checked = false;
                 }
                 else
                     lblError.Text = ("Please Try Again !!!");
@@ -193,7 +196,6 @@ namespace Inventory
                 grdSubCategoryMaster.DataBind();
             }
         }
-
 
         protected void grdIssueMaster_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
@@ -256,19 +258,10 @@ namespace Inventory
             GetIssueMasterDetails();
         }
 
-        protected void btnSubmit_Click1(object sender, EventArgs e)
-        {
-
-        }
-
         protected void btnAddIssueMaster_Click(object sender, EventArgs e)
         {
             dvAddIssueMasterDetails.Visible = true;
         }
         #endregion
-
-
-
-
     }
 }

@@ -149,6 +149,7 @@ namespace Inventory
                 {
                     conn.Open();
                 }
+
                 dtData = new DataTable();
                 sqlCmd = new SqlCommand("spInventories", conn);
                 sqlCmd.CommandType = CommandType.StoredProcedure;
@@ -165,9 +166,13 @@ namespace Inventory
                 sqlCmd.Parameters.AddWithValue("@ItemQuantity", txtItemQuantity.Text);
                 sqlCmd.Parameters.AddWithValue("@ItemRatePerUnit", txtItemRatePerUnit.Text);
 
-                sqlCmd.Parameters.AddWithValue("@InventoryCreatedBy", "User1");
+                sqlCmd.Parameters.AddWithValue("@ItemTotalCost", txtItemTotalCost.Text);
+                sqlCmd.Parameters.AddWithValue("@SalesTax", txtSalesTax.Text);
+                sqlCmd.Parameters.AddWithValue("@TotalAmount", txtTotalAmount.Text);
+
+                sqlCmd.Parameters.AddWithValue("@InventoryCreatedBy", "1");
                 sqlCmd.Parameters.AddWithValue("@InventoryCreatedOn", DateTime.Now);
-                sqlCmd.Parameters.AddWithValue("@InventoryUpdatedBy", "User2");
+                sqlCmd.Parameters.AddWithValue("@InventoryUpdatedBy", "1");
                 sqlCmd.Parameters.AddWithValue("@InventoryUpdatedOn", DateTime.Now);
 
                 sqlCmd.Parameters.AddWithValue("@IsConsumable", chkIsConsumable.Checked);
