@@ -6,7 +6,7 @@
     <br />
     <br />
     <asp:Label ID="lblError" runat="server" CssClass="lbl" Font-Size="14"></asp:Label>
-  
+
 
     <div id="dvAddIssueMasterDetails" runat="server" visible="false">
         <div class="mb-4 row">
@@ -18,21 +18,21 @@
             </div>
         </div>
         <br />
-            <div class="mb-4 row">
-                <label for="txtIssueDate" class="col-sm-3 txt"><span class="RequiredField">* </span>Issue Date</label>
-              <div class="col-sm-4">
-                                    <asp:TextBox ID="txtIssueDate" runat="server" CssClass="form-control" placeholder="dd-MMM-yyyy"></asp:TextBox>
-                                </div>
-                                <div class="col-sm-2">
-                                    <asp:ImageButton ID="imgPopup" ImageUrl="../Images/cal.png" Width="35px" Height="35px" ImageAlign="Bottom"
-                                        runat="server" />
-                                    <ajaxToolkit:CalendarExtender ID="Calendar1" PopupButtonID="imgPopup" runat="server" TargetControlID="txtIssueDate"
-                                        Format="dd-MMM-yyyy"></ajaxToolkit:CalendarExtender>
-                                </div>
-                                <asp:RequiredFieldValidator ID="rfvIssueDate" runat="server" CssClass="lbl" ErrorMessage="Enter Issued Date"
-                    ControlToValidate="txtIssueDate" Display="Dynamic" ValidationGroup="valIssueMaster"></asp:RequiredFieldValidator>
+        <div class="mb-4 row">
+            <label for="txtIssueDate" class="col-sm-3 txt"><span class="RequiredField">* </span>Issue Date</label>
+            <div class="col-sm-4">
+                <asp:TextBox ID="txtIssueDate" runat="server" CssClass="form-control" placeholder="dd-MMM-yyyy"></asp:TextBox>
             </div>
-        
+            <div class="col-sm-2">
+                <asp:ImageButton ID="imgPopup" ImageUrl="../Images/cal.png" Width="35px" Height="35px" ImageAlign="Bottom"
+                    runat="server" />
+                <ajaxToolkit:CalendarExtender ID="Calendar1" PopupButtonID="imgPopup" runat="server" TargetControlID="txtIssueDate"
+                    Format="dd-MMM-yyyy"></ajaxToolkit:CalendarExtender>
+            </div>
+            <asp:RequiredFieldValidator ID="rfvIssueDate" runat="server" CssClass="lbl" ErrorMessage="Enter Issued Date"
+                ControlToValidate="txtIssueDate" Display="Dynamic" ValidationGroup="valIssueMaster"></asp:RequiredFieldValidator>
+        </div>
+
         <div class="mb-4 row">
             <label for="txtIssueQuantity" class="col-sm-3 txt"><span class="RequiredField">* </span>Issue Quantity</label>
             <div class="col-sm-2">
@@ -41,7 +41,7 @@
                     ControlToValidate="txtIssueQuantity" Display="Dynamic" ValidationGroup="valCategoryMaster"></asp:RequiredFieldValidator>
             </div>
         </div>
-      <br />
+        <br />
         <div class="mb-4 row">
             <label for="drpInventory" class="col-sm-3 " style="text-align: right;"><span class="RequiredField">* </span>Select Inventory:</label>
             <div class="col-sm-4">
@@ -55,30 +55,30 @@
         <br />
         <div class="mb-4 row">
             <label for="chkSubCategory" class="col-sm-3 txt">
-               Is Received
+                Is Received
             </label>
             <div class="col-sm-4">
                 <asp:CheckBox ID="chkIsReceived" runat="server" Style="margin-top: 10px;" />
             </div>
         </div>
         <br />
-            <div class="mb-4 row">
-                <label for="txtIssuerRemarks" class="col-sm-3 txt"><span class="RequiredField">* </span>Issuer Remarks</label>
-                <div class="col-sm-4">
-                    <asp:TextBox ID="txtIssuerRemarks" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="6" Columns="4"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="rfvIssuerRemarks" runat="server" CssClass="lbl" ErrorMessage="Enter Issuer Remarks"
-                        ControlToValidate="txtIssuerRemarks" Display="Dynamic" ValidationGroup="valIssueMaster"></asp:RequiredFieldValidator>
-                </div>
+        <div class="mb-4 row">
+            <label for="txtIssuerRemarks" class="col-sm-3 txt"><span class="RequiredField">* </span>Issuer Remarks</label>
+            <div class="col-sm-4">
+                <asp:TextBox ID="txtIssuerRemarks" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="6" Columns="4"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="rfvIssuerRemarks" runat="server" CssClass="lbl" ErrorMessage="Enter Issuer Remarks"
+                    ControlToValidate="txtIssuerRemarks" Display="Dynamic" ValidationGroup="valIssueMaster"></asp:RequiredFieldValidator>
             </div>
-           <br />
-           <div class="mb-4 row">
-                <label for="txtReceiptRemarks" class="col-sm-3 txt"><span class="RequiredField">* </span>Receipt Remarks</label>
-                <div class="col-sm-4">
-                    <asp:TextBox ID="txtReceiptRemarks" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="6" Columns="4"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="rfvReceiptRemarks" runat="server" CssClass="lbl" ErrorMessage="Enter Issuer Remarks"
-                        ControlToValidate="txtReceiptRemarks" Display="Dynamic" ValidationGroup="valIssueMaster"></asp:RequiredFieldValidator>
-                </div>
+        </div>
+        <br />
+        <div class="mb-4 row">
+            <label for="txtReceiptRemarks" class="col-sm-3 txt"><span class="RequiredField">* </span>Receipt Remarks</label>
+            <div class="col-sm-4">
+                <asp:TextBox ID="txtReceiptRemarks" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="6" Columns="4"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="rfvReceiptRemarks" runat="server" CssClass="lbl" ErrorMessage="Enter Issuer Remarks"
+                    ControlToValidate="txtReceiptRemarks" Display="Dynamic" ValidationGroup="valIssueMaster"></asp:RequiredFieldValidator>
             </div>
+        </div>
         <br />
         <div class="mb-4 row">
             <label for="btnSubmit" class="col-sm-3 txt"></label>
@@ -96,9 +96,8 @@
             <h4>Check Issue Master Details</h4>
         </label>
         <div class="col-sm-9 txt">
-            <asp:Button ID="btnAddIssueMaster" runat="server" Text="Add New Issue Details" OnClick="btnAddIssueMaster_Click" 
-                CssClass="btn btn-primary txt" ToolTip="Click here to Add New Issue Details"
-                 />
+            <asp:Button ID="btnAddIssueMaster" runat="server" Text="Add New Issue Details" OnClick="btnAddIssueMaster_Click"
+                CssClass="btn btn-primary txt" ToolTip="Click here to Add New Issue Details" />
         </div>
         <asp:Label ID="Label1" runat="server" Text="Data Saved Successfully" Visible="false"></asp:Label>
     </div>
