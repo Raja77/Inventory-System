@@ -25,6 +25,7 @@
                     ControlToValidate="drpCategory" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
             </div>
         </div>
+        <br />
         <div class="mb-4 row">
             <label for="drpSubCategory" class="col-sm-2 " style="text-align: right;"><span class="RequiredField">* </span>Select Sub Category:</label>
             <div class="col-sm-4">
@@ -35,7 +36,7 @@
                     ControlToValidate="drpSubCategory" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
             </div>
         </div>
-
+         <br />
         <div class="mb-4 row">
             <label for="txtInventoryName" class="col-sm-2 " style="text-align: right;"><span id="SpanInventoryName" runat="server" class="RequiredField">* </span>Item Name:</label>
             <div class="col-sm-7">
@@ -44,37 +45,40 @@
                     ControlToValidate="txtInventoryName" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
             </div>
         </div>
+         <br />
              <div class="mb-4 row">
             <label for="txtInventoryDescription" class="col-sm-2 " style="text-align: right;"><span id="spInventoryDescription" runat="server" class="RequiredField">* </span>Inventory Description:</label>
             <div class="col-sm-7">
-                <asp:TextBox ID="txtInventoryDescription" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="10" Columns="6"></asp:TextBox>
+                <asp:TextBox ID="txtInventoryDescription" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="6" Columns="4"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="rfvInventoryDescription" runat="server" CssClass="lbl" ErrorMessage="Enter Inventory Description"
                     ControlToValidate="txtInventoryDescription" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
             </div>
         </div>
+         <br />
           <div class="mb-4 row">
-              <label for="txtPurchaseDate" class="col-sm-2" style="text-align: right;">Purchase Date (yyyy-mm-dd):</label>
-                            <div class="col-sm-2">
-                                <div class="col-sm-10">
-                                    <asp:TextBox ID="txtPurchaseDate" runat="server" CssClass="form-control"></asp:TextBox>
+              <label for="txtPurchaseDate" class="col-sm-2" style="text-align: right;">Purchase Date (dd-MMM-yyyy):</label>
+                         
+                                <div class="col-sm-3">
+                                    <asp:TextBox ID="txtPurchaseDate" runat="server" CssClass="form-control" placeholder="dd-MMM-yyyy"></asp:TextBox>
                                 </div>
-                                <div class="col-sm-1">
-                                    <asp:ImageButton ID="imgPopup" ImageUrl="~/assets/images/cal.png" Width="35px" Height="35px" ImageAlign="Bottom"
+                                <div class="col-sm-2">
+                                    <asp:ImageButton ID="imgPopup" ImageUrl="../Images/cal.png" Width="35px" Height="35px" ImageAlign="Bottom"
                                         runat="server" />
                                     <ajaxToolkit:CalendarExtender ID="Calendar1" PopupButtonID="imgPopup" runat="server" TargetControlID="txtPurchaseDate"
                                         Format="dd-MMM-yyyy"></ajaxToolkit:CalendarExtender>
                                 </div>
-                            </div>
+                       
                  </div>
-
+         <br />
              <div class="mb-4 row">
             <label for="txtPurchasedFrom" class="col-sm-2 " style="text-align: right;"><span id="Span1" runat="server" class="RequiredField">* </span>Purchased From:</label>
             <div class="col-sm-7">
-                <asp:TextBox ID="txtPurchasedFrom" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="10" Columns="6"></asp:TextBox>
+                <asp:TextBox ID="txtPurchasedFrom" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="6" Columns="4"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="rfvPurchasedFrom" runat="server" CssClass="lbl" ErrorMessage="Enter Purchased From"
                     ControlToValidate="txtPurchasedFrom" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
             </div>
         </div>
+         <br />
            <div class="mb-4 row">
             <label for="txtBill_InvoiceNo" class="col-sm-2 " style="text-align: right;"><span id="Span2" runat="server" class="RequiredField">* </span>Bill InvoiceNo:</label>
             <div class="col-sm-7">
@@ -83,6 +87,7 @@
                     ControlToValidate="txtBill_InvoiceNo" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
             </div>
         </div>
+         <br />
           <div class="mb-4 row">
             <label for="txtItemQuantity" class="col-sm-2 " style="text-align: right;"><span id="Span3" runat="server" class="RequiredField">* </span>Item Quantity:</label>
             <div class="col-sm-7">
@@ -91,6 +96,7 @@
                     ControlToValidate="txtItemQuantity" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
             </div>
         </div>
+         <br />
 <div class="mb-4 row">
             <label for="txtItemRatePerUnit" class="col-sm-2 " style="text-align: right;"><span id="Span4" runat="server" class="RequiredField">* </span>Item Rate Per Unit:</label>
             <div class="col-sm-7">
@@ -99,7 +105,7 @@
                     ControlToValidate="txtItemRatePerUnit" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
             </div>
         </div>
-
+         <br />
 <%--        <div class="mb-4 row">
             <label for="txtItemRatePerUnit" class="col-sm-2 " style="text-align: right;"><span id="Span6" runat="server" class="RequiredField">* </span>Item Rate Per Unit:</label>
             <div class="col-sm-7">
@@ -116,9 +122,27 @@
                     ControlToValidate="txtItemTotalCost" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
             </div>
         </div>
+          <br />
 
-
-
+         <div class="mb-4 row">
+            <label for="chkIsConsumable" class="col-sm-3 txt">
+               Is Consumable
+            </label>
+            <div class="col-sm-4">
+                <asp:CheckBox ID="chkIsConsumable" runat="server" Style="margin-top: 10px;" />
+            </div>
+        </div>
+          <br />
+          <div class="mb-4 row">
+            <label for="chkIsIssue" class="col-sm-3 txt">
+               Do you want to add Issue details
+            </label>
+            <div class="col-sm-4">
+                <asp:CheckBox ID="chkIsIssue" runat="server" Style="margin-top: 10px;" />
+            </div>
+        </div>
+        <br />
+        <br />
 
 
 

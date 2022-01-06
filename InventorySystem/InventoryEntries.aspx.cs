@@ -169,6 +169,8 @@ namespace Inventory
                 sqlCmd.Parameters.AddWithValue("@InventoryCreatedOn", DateTime.Now);
                 sqlCmd.Parameters.AddWithValue("@InventoryUpdatedBy", "User2");
                 sqlCmd.Parameters.AddWithValue("@InventoryUpdatedOn", DateTime.Now);
+
+                sqlCmd.Parameters.AddWithValue("@IsConsumable", chkIsConsumable.Checked);
                 int numRes = sqlCmd.ExecuteNonQuery();
                 if (numRes > 0)
                 {

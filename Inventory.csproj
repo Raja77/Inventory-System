@@ -114,6 +114,7 @@
     <Content Include="About.aspx" />
     <Content Include="App_Data\Script on Jan 05 2022.sql" />
     <Content Include="App_Data\Script on Jan 05 2022_1.sql" />
+    <Content Include="App_Data\shafat_Jan_06_2022_1.sql" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -133,6 +134,19 @@
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
+    <Content Include="IC Inventory screen shots\category Add without sub cattegory.PNG" />
+    <Content Include="IC Inventory screen shots\category Add.PNG" />
+    <Content Include="IC Inventory screen shots\category List screen.PNG" />
+    <Content Include="IC Inventory screen shots\Inventory add without issue.PNG" />
+    <Content Include="IC Inventory screen shots\Inventory add.PNG" />
+    <Content Include="IC Inventory screen shots\Inventory List.PNG" />
+    <Content Include="IC Inventory screen shots\Issue Add.PNG" />
+    <Content Include="IC Inventory screen shots\List screen of category.PNG" />
+    <Content Include="IC Inventory screen shots\User Master screen.PNG" />
+    <Content Include="Images\cal.png" />
+    <Content Include="Images\minusIcon.png" />
+    <Content Include="Images\plusIcon.png" />
+    <Content Include="InventorySystem\IssueMaster.aspx" />
     <Content Include="InventorySystem\UserMaster.aspx" />
     <Content Include="InventorySystem\CategoryMaster.aspx" />
     <Content Include="InventorySystem\InventoryEntries.aspx" />
@@ -196,6 +210,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="InventorySystem\IssueMaster.aspx.cs">
+      <DependentUpon>IssueMaster.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InventorySystem\IssueMaster.aspx.designer.cs">
+      <DependentUpon>IssueMaster.aspx</DependentUpon>
     </Compile>
     <Compile Include="InventorySystem\UserMaster.aspx.cs">
       <DependentUpon>UserMaster.aspx</DependentUpon>

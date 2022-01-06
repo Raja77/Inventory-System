@@ -15,7 +15,7 @@ using System.Globalization;
 
 namespace Inventory
 {
-    public partial class CategoryMaster : Page
+    public partial class IssueMaster : Page
     {
         #region Properties
         SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultInventoryConnection"].ConnectionString);
@@ -29,12 +29,12 @@ namespace Inventory
         {
             if (!IsPostBack)
             {
-                GetCategoryMasterDetails();
+                GetIssueMasterDetails();
             }
             lblError.Text = string.Empty;
         }
 
-        protected void GetCategoryMasterDetails()
+        protected void GetIssueMasterDetails()
         {
             try
             {
@@ -43,16 +43,16 @@ namespace Inventory
                 ds = FetchCategoryMasterDetails();
                 if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
-                    grdCategoryMaster.DataSource = ds.Tables[0];
-                    grdCategoryMaster.DataBind();
+                    grdIssueMaster.DataSource = ds.Tables[0];
+                    grdIssueMaster.DataBind();
                     //grdSubCategoryMaster.DataSource = dsSubCat.Tables[0];
                     //grdSubCategoryMaster.DataBind();
                     // countFreshApplication.InnerText = ds.Tables[0].Rows.Count.ToString();
                 }
                 else
                 {
-                    grdCategoryMaster.DataSource = ds.Tables[0];
-                    grdCategoryMaster.DataBind();
+                    grdIssueMaster.DataSource = ds.Tables[0];
+                    grdIssueMaster.DataBind();
                     //grdSubCategoryMaster.DataSource = dsSubCat.Tables[0];
                     //grdSubCategoryMaster.DataBind();
                     //countFreshApplication.InnerText = "0";
@@ -91,7 +91,7 @@ namespace Inventory
             return ds;
         }
 
-        private DataTable FetchSubCategoryMasterDetails(string id)
+        private DataTable FetchIssueMasterDetails(string id)
         {
             try
             {
@@ -104,7 +104,7 @@ namespace Inventory
                 sqlCmd = new SqlCommand("spInventories", conn);
                 sqlCmd.CommandType = CommandType.StoredProcedure;
                 sqlCmd.Parameters.AddWithValue("@CategoryId", id);
-                sqlCmd.Parameters.AddWithValue("@ActionType", "FetchSubCategories");
+                sqlCmd.Parameters.AddWithValue("@ActionType", "FetchIssueDetails");
                 SqlDataAdapter sqlSda = new SqlDataAdapter(sqlCmd);
                 sqlSda.Fill(dtData);
             }
@@ -131,19 +131,15 @@ namespace Inventory
                 dtData = new DataTable();
                 sqlCmd = new SqlCommand("spInventories", conn);
                 sqlCmd.CommandType = CommandType.StoredProcedure;
-                sqlCmd.Parameters.AddWithValue("@CategoryName", txtCategoryName.Text);
-                sqlCmd.Parameters.AddWithValue("@CategoryDescription", txtCategoryDescription.Text);
+                //sqlCmd.Parameters.AddWithValue("@CategoryName", txtCategoryName.Text);
+                //sqlCmd.Parameters.AddWithValue("@CategoryDescription", txtCategoryDescription.Text);
 
-                if (dvSubCategory.Visible == true && chkSubCategory.Checked == true)
-                {
-                    sqlCmd.Parameters.AddWithValue("@ActionType", "SaveCateNSubCat");
-                    sqlCmd.Parameters.AddWithValue("@SubCategoryName", txtSubCategoryName.Text);
-                    sqlCmd.Parameters.AddWithValue("@SubCategoryDescription", txtSubCategoryDescription.Text);
-                }
-                else if (dvSubCategory.Visible == false && chkSubCategory.Checked == false)
-                {
-                    sqlCmd.Parameters.AddWithValue("@ActionType", "SaveCategory");
-                }
+                
+                //    sqlCmd.Parameters.AddWithValue("@ActionType", "SaveCateNSubCat");
+                //    sqlCmd.Parameters.AddWithValue("@SubCategoryName", txtSubCategoryName.Text);
+                //    sqlCmd.Parameters.AddWithValue("@SubCategoryDescription", txtSubCategoryDescription.Text);
+               
+              
                 int numRes = sqlCmd.ExecuteNonQuery();
                 if (numRes > 0)
                 {
@@ -152,15 +148,16 @@ namespace Inventory
                     lblError.ForeColor = System.Drawing.Color.CornflowerBlue;
                     lblError.Font.Size = 16;
 
-                    GetCategoryMasterDetails();
-                    dvAddCategoryDetails.Visible = false;
-                    dvSubCategory.Visible = false;
+                    GetIssueMasterDetails();
+                    dvAddIssueMasterDetails.Visible = false;
 
-                    txtCategoryName.Text = string.Empty;
-                    txtCategoryDescription.Text = string.Empty;
-                    txtSubCategoryName.Text = string.Empty;
-                    txtSubCategoryDescription.Text = string.Empty;
-                    chkSubCategory.Checked = false;
+                    //txtCategoryName.Text = string.Empty;
+                    //txtCategoryDescription.Text = string.Empty;
+                    //txtSubCategoryName.Text = string.Empty;
+                    //txtSubCategoryDescription.Text = string.Empty;
+                    //chkSubCategory.Checked = false;
+
+
                 }
                 else
                     lblError.Text = ("Please Try Again !!!");
@@ -178,54 +175,46 @@ namespace Inventory
             }
         }
 
-        protected void grdCategoryMaster_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        protected void grdIssueMaster_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            grdCategoryMaster.PageIndex = e.NewPageIndex;
-            this.GetCategoryMasterDetails();
+            grdIssueMaster.PageIndex = e.NewPageIndex;
+            this.GetIssueMasterDetails();
         }
 
-        protected void grdCategoryMaster_RowDataBound(object sender, GridViewRowEventArgs e)
+        protected void grdIssueMaster_RowDataBound(object sender, GridViewRowEventArgs e)
         {
             if (e.Row.RowType == DataControlRowType.DataRow)
             {
-                string categoryId = grdCategoryMaster.DataKeys[e.Row.RowIndex].Value.ToString();
+                string categoryId = grdIssueMaster.DataKeys[e.Row.RowIndex].Value.ToString();
                 GridView grdSubCategoryMaster = e.Row.FindControl("grdSubCategoryMaster") as GridView;
                 dtData = new DataTable();
-                dtData = FetchSubCategoryMasterDetails(categoryId);
+                dtData = FetchIssueMasterDetails(categoryId);
                 grdSubCategoryMaster.DataSource = dtData;
                 grdSubCategoryMaster.DataBind();
             }
         }
 
-        protected void chkSubCategory_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkSubCategory.Checked)
-                dvSubCategory.Visible = true;
-            else
-                dvSubCategory.Visible = false;
 
-        }
-
-        protected void grdCategoryMaster_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
+        protected void grdIssueMaster_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
         {
             //Setting the EditIndex property to -1 to cancel the Edit mode in Gridview  
-            grdCategoryMaster.EditIndex = -1;
-            GetCategoryMasterDetails();
+            grdIssueMaster.EditIndex = -1;
+            GetIssueMasterDetails();
         }
 
-        protected void grdCategoryMaster_RowEditing(object sender, GridViewEditEventArgs e)
+        protected void grdIssueMaster_RowEditing(object sender, GridViewEditEventArgs e)
         {
             //NewEditIndex property used to determine the index of the row being edited.  
-            grdCategoryMaster.EditIndex = e.NewEditIndex;
-            GetCategoryMasterDetails();
+            grdIssueMaster.EditIndex = e.NewEditIndex;
+            GetIssueMasterDetails();
         }
 
-        protected void grdCategoryMaster_RowUpdating(object sender, GridViewUpdateEventArgs e)
+        protected void grdIssueMaster_RowUpdating(object sender, GridViewUpdateEventArgs e)
         {
             //Finding the controls from Gridview for the row which is going to update  
-            Label categoryId = grdCategoryMaster.Rows[e.RowIndex].FindControl("lblCategoryId") as Label;
-            TextBox categoryName = grdCategoryMaster.Rows[e.RowIndex].FindControl("txtCategoryName") as TextBox;
-            TextBox categoryDescription = grdCategoryMaster.Rows[e.RowIndex].FindControl("txtCategoryDescription") as TextBox;
+            Label categoryId = grdIssueMaster.Rows[e.RowIndex].FindControl("lblCategoryId") as Label;
+            TextBox categoryName = grdIssueMaster.Rows[e.RowIndex].FindControl("txtCategoryName") as TextBox;
+            TextBox categoryDescription = grdIssueMaster.Rows[e.RowIndex].FindControl("txtCategoryDescription") as TextBox;
 
             try
             {
@@ -262,14 +251,19 @@ namespace Inventory
                 conn.Close();
             }
             //Setting the EditIndex property to -1 to cancel the Edit mode in Gridview  
-            grdCategoryMaster.EditIndex = -1;
+            grdIssueMaster.EditIndex = -1;
             //Call ShowData method for displaying updated data  
-            GetCategoryMasterDetails();
+            GetIssueMasterDetails();
         }
 
-        protected void btnAddCategory_Click(object sender, EventArgs e)
+        protected void btnSubmit_Click1(object sender, EventArgs e)
         {
-            dvAddCategoryDetails.Visible = true;
+
+        }
+
+        protected void btnAddIssueMaster_Click(object sender, EventArgs e)
+        {
+            dvAddIssueMasterDetails.Visible = true;
         }
         #endregion
 
