@@ -67,11 +67,11 @@ alter PROCEDURE [dbo].[spInventories]
 	@CommentId  bigint = NULL,  
 	@CommentCreatorName NVARCHAR(100) = NULL,
 	@CommentSubject NVARCHAR(100) = NULL,
-	@CommentDescription NVARCHAR(100) = NULL,
+	@CommentDescription NVARCHAR(max) = NULL,
 	@CommentPageName NVARCHAR(100) = NULL,
 	@CommentCreatedOn datetime = NULL, 
 	@CommentReplierName NVARCHAR(100) = NULL,
-	@CommentReply NVARCHAR(100) = NULL,
+	@CommentReply NVARCHAR(max) = NULL,
 	@CommentRepliedOn datetime = NULL, 
 
 
