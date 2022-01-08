@@ -231,7 +231,7 @@
         </div>
         <br />
     </div>
-    <div>
+    <div style="overflow-x:auto;">
         <header>Inventory Entries <strong>(<span id="countInventoryEntries" runat="server">0</span>)</strong></header>
         <asp:GridView ID="grdInventoryEntries" CellPadding="0" CellSpacing="0" CssClass="table table-bordered table-striped"
             DataKeyNames="InventoryId" GridLines="None" runat="server" AutoGenerateColumns="true" PageSize="5"

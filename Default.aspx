@@ -92,6 +92,7 @@
         <br />
         <h4>Comment Log</h4>
         <hr />
+    <div style="overflow-x:auto;">
         <asp:GridView ID="grdComments" CellPadding="0" CellSpacing="0" CssClass="table table-bordered table-striped" AllowPaging="false" OnPageIndexChanging="grdComments_PageIndexChanging"
              DataKeyNames="CommentId" GridLines="None" runat="server" AutoGenerateColumns="true">
             <HeaderStyle />
@@ -100,5 +101,5 @@
             </EmptyDataTemplate>
             <AlternatingRowStyle CssClass="alt" />          
         </asp:GridView>
-  
+  </div>
     </asp:Content>

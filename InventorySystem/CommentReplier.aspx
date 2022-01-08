@@ -38,6 +38,7 @@
     </script>
     <hr />
     <h1>Reply to Comments</h1>
+    <div style="overflow-x:auto;">
     <asp:GridView ID="grdReplyMaster" CellPadding="0" CellSpacing="0" CssClass="table table-bordered table-striped"
         AllowPaging="true" OnPageIndexChanging="grdReplyMaster_PageIndexChanging" OnRowDataBound="grdReplyMaster_RowDataBound"
         DataKeyNames="CommentId" GridLines="None" runat="server" AutoGenerateColumns="false" PageSize="5"
@@ -114,7 +115,7 @@
         </Columns>
         <PagerStyle HorizontalAlign="Right" CssClass="GridPager" />
     </asp:GridView>
-
+   </div>
 
 </asp:Content>
 

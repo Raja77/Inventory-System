@@ -46,7 +46,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" runat="server" href="~/">Inventory System</a>
+                    <a class="navbar-brand" runat="server" href="~/">
+                    <img src="/Images/icsclogosmall.png"  height="30" alt="">
+                        </a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
@@ -68,14 +70,16 @@
                 <h4>Page Review Comments</h4>
                 <hr />
                 <asp:Label ID="lblError" runat="server" Text="Label"></asp:Label>
-                <asp:GridView ID="grdComments" CellPadding="0" CellSpacing="0" CssClass="table table-bordered table-striped" AllowPaging="false"
-                     DataKeyNames="CommentId" GridLines="None" runat="server" AutoGenerateColumns="true">
-                    <HeaderStyle />
-                    <EmptyDataTemplate>
-                        <label class="lbl">No Comments Yet!</label>
-                    </EmptyDataTemplate>
-                    <AlternatingRowStyle CssClass="alt" />          
-                </asp:GridView>
+                <div style="overflow-x:auto;">
+                    <asp:GridView ID="grdComments" CellPadding="0" CellSpacing="0" CssClass="table table-bordered table-striped" AllowPaging="false"
+                         DataKeyNames="CommentId" GridLines="None" runat="server" AutoGenerateColumns="true">
+                        <HeaderStyle />
+                        <EmptyDataTemplate>
+                            <label class="lbl">No Comments Yet!</label>
+                        </EmptyDataTemplate>
+                        <AlternatingRowStyle CssClass="alt" />          
+                    </asp:GridView>
+                </div>
                 <p>&copy; <%: DateTime.Now.Year %> - ICSC Inventory System</p>
             </footer>
         </div>

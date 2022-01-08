@@ -78,6 +78,7 @@ namespace Inventory
             {
                 sqlCmd.Dispose();
                 ds.Dispose();
+                conn.Close();
             }
             return ds;
         }
@@ -90,7 +91,7 @@ namespace Inventory
                 {
                     conn.Open();
                 }
-                dtData = new DataTable();
+                //dtData = new DataTable();
                 sqlCmd = new SqlCommand("spInventories", conn);
                 sqlCmd.CommandType = CommandType.StoredProcedure;
                 sqlCmd.Parameters.AddWithValue("@ActionType", "SaveUserDetails");
@@ -118,7 +119,7 @@ namespace Inventory
             }
             finally
             {
-                dtData.Dispose();
+               // dtData.Dispose();
                 sqlCmd.Dispose();
                 conn.Close();
             }

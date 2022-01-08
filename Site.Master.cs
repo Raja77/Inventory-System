@@ -15,7 +15,6 @@ namespace Inventory
     {
         SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultInventoryConnection"].ConnectionString);
         DataSet ds = null;
-        DataTable dtData = null;
         SqlCommand sqlCmd = null;
 
         protected void Page_Load(object sender, EventArgs e)
