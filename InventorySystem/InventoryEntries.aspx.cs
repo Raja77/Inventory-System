@@ -12,6 +12,7 @@ using System.Drawing;
 using System.Net;
 using System.Data.SqlTypes;
 using System.Globalization;
+using System.Net.Mail;
 
 namespace Inventory
 {
@@ -35,10 +36,10 @@ namespace Inventory
             if (!IsPostBack)
             {
                 GetInventoryEntries();
-                var x= Request.Url.ToString();
+                var x= Request.Url.ToString();               
             }
             lblError.Text = string.Empty;
-        }
+        }       
 
         public string ConvertNullableBoolToYesNo(object pBool)
         {
@@ -52,14 +53,13 @@ namespace Inventory
             }
         }
 
-
         protected void GetInventoryEntries(string sortExpression = null)
         {
             try
             {
                 ds = new DataSet();
-                ds = FetchItemRegistryDetails();
-                //dsGrid also gets populated from FetchItemRegistryDetails()
+                ds = FetchInventoryDetails();
+                //dsGrid also gets populated from FetchInventoryDetails()
                 if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0 && dsGrid.Tables.Count > 0 && dsGrid.Tables[0].Rows.Count > 0)
                 {
                     if (sortExpression != null)
@@ -74,9 +74,10 @@ namespace Inventory
                     {
                         grdInventoryEntries.DataSource = dsGrid;
                     }
+                    countInventoryEntries.InnerText = dsGrid.Tables[0].Rows.Count.ToString();
+                    countInventoryEntries.Attributes.Add("title", "Inventory Details");
                     grdInventoryEntries.DataBind();
-                    countInventoryEntries.InnerText = ds.Tables[0].Rows.Count.ToString();
-                    countInventoryEntries.Attributes.Add("title", "Item Registry Details");
+              
                 }
                 else
                 {
@@ -94,14 +95,28 @@ namespace Inventory
                     drpCategory.DataValueField = "CategoryID";
                     drpCategory.DataBind();
                 }
+                if (ds.Tables.Count > 0 && ds.Tables[2].Rows.Count > 0)
+                {
+                    drpIssuedTo.DataSource = ds.Tables[2];
+                    drpIssuedTo.DataTextField = "UserName";
+                    drpIssuedTo.DataValueField = "UserId";
+                    drpIssuedTo.DataBind();
+                }
+                else
+                {
+                    drpIssuedTo.DataSource = ds.Tables[2];
+                    drpIssuedTo.DataBind();
+                }
                 drpCategory_SelectedIndexChanged1(null, null);
+
+          
             }
             catch (Exception ex)
             {
                 lblError.Text = ex.Message;
             }
         }
-        private DataSet FetchItemRegistryDetails()
+        private DataSet FetchInventoryDetails()
         {
             try
             {
@@ -149,11 +164,13 @@ namespace Inventory
                 {
                     conn.Open();
                 }
+                //As of now put UserId =1 for Data Entry operator
+                string UserId = "1";
 
                 dtData = new DataTable();
                 sqlCmd = new SqlCommand("spInventories", conn);
                 sqlCmd.CommandType = CommandType.StoredProcedure;
-                sqlCmd.Parameters.AddWithValue("@ActionType", "SaveInventoryEntries");
+                sqlCmd.Parameters.AddWithValue("@ActionType", "SaveIEandIssue");
                // sqlCmd.Parameters.AddWithValue("@ItemId", drpCategory.SelectedItem.Value);
                 sqlCmd.Parameters.AddWithValue("@CategoryId", drpCategory.SelectedItem.Value);
                 sqlCmd.Parameters.AddWithValue("@SubCategoryId", drpSubCategory.SelectedItem.Value);
@@ -170,12 +187,21 @@ namespace Inventory
                 sqlCmd.Parameters.AddWithValue("@SalesTax", txtSalesTax.Text);
                 sqlCmd.Parameters.AddWithValue("@TotalAmount", txtTotalAmount.Text);
 
-                sqlCmd.Parameters.AddWithValue("@InventoryCreatedBy", "1");
+                sqlCmd.Parameters.AddWithValue("@InventoryCreatedBy", UserId);
                 sqlCmd.Parameters.AddWithValue("@InventoryCreatedOn", DateTime.Now);
-                sqlCmd.Parameters.AddWithValue("@InventoryUpdatedBy", "1");
+                sqlCmd.Parameters.AddWithValue("@InventoryUpdatedBy", UserId);
                 sqlCmd.Parameters.AddWithValue("@InventoryUpdatedOn", DateTime.Now);
 
                 sqlCmd.Parameters.AddWithValue("@IsConsumable", chkIsConsumable.Checked);
+                
+                sqlCmd.Parameters.AddWithValue("@UserId", drpIssuedTo.SelectedItem.Value);
+                sqlCmd.Parameters.AddWithValue("@IssueDate", txtIssueDate.Text);
+                sqlCmd.Parameters.AddWithValue("@IssuedBy", UserId);
+                sqlCmd.Parameters.AddWithValue("@IssueQuantity", txtIssueQuantity.Text);
+                sqlCmd.Parameters.AddWithValue("@IsReceived", chkIsReceived.Checked);
+                sqlCmd.Parameters.AddWithValue("@IssuerRemarks", txtIssuerRemarks.Text);
+                sqlCmd.Parameters.AddWithValue("@ReceiptRemarks", txtReceiptRemarks.Text);
+
                 int numRes = sqlCmd.ExecuteNonQuery();
                 if (numRes > 0)
                 {
@@ -197,6 +223,20 @@ namespace Inventory
                 dtData.Dispose();
                 sqlCmd.Dispose();
                 conn.Close();
+            }
+        }
+
+        protected void grdInventoryEntries_PageIndexChanging(object sender, GridViewPageEventArgs e)
+        {
+            grdInventoryEntries.PageIndex = e.NewPageIndex;
+            this.GetInventoryEntries();
+        }
+
+        protected void grdInventoryEntries_RowDataBound(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.Header || e.Row.RowType == DataControlRowType.DataRow)
+            {
+                e.Row.Cells[1].Attributes.Add("style", "display:none");
             }
         }
 
@@ -240,9 +280,22 @@ namespace Inventory
             }
         }
 
-        protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        //protected void chkIsIssue_CheckedChanged(object sender, EventArgs e)
+        //{
 
-        }
+        //    if(chkIsIssue.Checked)
+        //    {
+        //        dvAddIssueMasterDetails.Visible = true;
+        //    }
+        //    else
+        //    {
+        //        dvAddIssueMasterDetails.Visible = false;
+        //    }
+        //}
+
+        //protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+
+        //}
     }
 }

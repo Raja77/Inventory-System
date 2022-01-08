@@ -1,0 +1,59 @@
+1. UserMaster.aspx
+User entries
+
+2. CategoryMaster.aspx
+Category entries   +  Add Subcategory
+
+Cat: Computers    Subcat: Desktops, Laptops, Mobiles
+Cat: Furnitures   Subcat: Chairs, Tables
+
+3. InventoryMaster.aspx
+ Dropdown for Category and 
+ Subcategory
+ Enter rest details
+
+Usertype hardcoded as of now with the followings:
+Dpartments
+Staff
+Faculty,
+LFE
+Principal
+
+*****************************Jan 05 2022***********************
+
+1 Add more fields in UserMaster table including Name and UserName should be unique and nor space allowed
+1 a. Edit Delete placed in GV
+
+2. Category Name and Sub-CategoryName(not throughout) should be unique
+Do you want to add Sub Category details(checkbox)
+2 a. Nested GV with only one GV and not 2 with Edit and Delete
+
+
+3. Inventory UI changes including calendar
+Do you want to add Issue details(checkbox)
+ Panel visible
+dropdown for Issue to linked to users
+
+4. IssueMaster.aspx
+Grid where we populate from Issue table entries only with edit links
+Grid 2 for adding issue details of unissued items just like we did in Inventory
+
+
+*****************************Jan 06 2022*************************
+1. Issue details should be always visible (for Data Entry operator)
+2. Login page for  Data Entry operator
+3. Multi addition of sub categories in grid of Category
+4. Nested grid on Inventory entries screen with Issue details
+5. Repeater for Category as well as in Inventory screen
+
+
+
+
+
+
+
+
+
+
+
+

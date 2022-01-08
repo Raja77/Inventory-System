@@ -94,33 +94,6 @@ namespace Inventory {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvtxtInventoryName;
         
         /// <summary>
-        /// spInventoryDescription control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spInventoryDescription;
-        
-        /// <summary>
-        /// txtInventoryDescription control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtInventoryDescription;
-        
-        /// <summary>
-        /// rfvInventoryDescription control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvInventoryDescription;
-        
-        /// <summary>
         /// txtPurchaseDate control.
         /// </summary>
         /// <remarks>
@@ -130,22 +103,31 @@ namespace Inventory {
         protected global::System.Web.UI.WebControls.TextBox txtPurchaseDate;
         
         /// <summary>
-        /// imgPopup control.
+        /// imgPurchaseDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ImageButton imgPopup;
+        protected global::System.Web.UI.WebControls.ImageButton imgPurchaseDate;
         
         /// <summary>
-        /// Calendar1 control.
+        /// calPurchaseDate control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::AjaxControlToolkit.CalendarExtender Calendar1;
+        protected global::AjaxControlToolkit.CalendarExtender calPurchaseDate;
+        
+        /// <summary>
+        /// rfvPurchaseDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPurchaseDate;
         
         /// <summary>
         /// Span1 control.
@@ -173,6 +155,33 @@ namespace Inventory {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvPurchasedFrom;
+        
+        /// <summary>
+        /// spInventoryDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl spInventoryDescription;
+        
+        /// <summary>
+        /// txtInventoryDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtInventoryDescription;
+        
+        /// <summary>
+        /// rfvInventoryDescription control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvInventoryDescription;
         
         /// <summary>
         /// Span2 control.
@@ -391,13 +400,139 @@ namespace Inventory {
         protected global::System.Web.UI.WebControls.CheckBox chkIsConsumable;
         
         /// <summary>
-        /// chkIsIssue control.
+        /// dvAddIssueMasterDetails control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkIsIssue;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvAddIssueMasterDetails;
+        
+        /// <summary>
+        /// drpIssuedTo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpIssuedTo;
+        
+        /// <summary>
+        /// rfvIssuedTo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvIssuedTo;
+        
+        /// <summary>
+        /// txtIssueDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtIssueDate;
+        
+        /// <summary>
+        /// imgIssueDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.ImageButton imgIssueDate;
+        
+        /// <summary>
+        /// calIssueDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::AjaxControlToolkit.CalendarExtender calIssueDate;
+        
+        /// <summary>
+        /// rfvIssueDate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvIssueDate;
+        
+        /// <summary>
+        /// txtIssueQuantity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtIssueQuantity;
+        
+        /// <summary>
+        /// rfvIssueQuantity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvIssueQuantity;
+        
+        /// <summary>
+        /// revIssueQuantity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revIssueQuantity;
+        
+        /// <summary>
+        /// chkIsReceived control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkIsReceived;
+        
+        /// <summary>
+        /// txtIssuerRemarks control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtIssuerRemarks;
+        
+        /// <summary>
+        /// rfvIssuerRemarks control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvIssuerRemarks;
+        
+        /// <summary>
+        /// txtReceiptRemarks control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtReceiptRemarks;
+        
+        /// <summary>
+        /// rfvReceiptRemarks control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvReceiptRemarks;
         
         /// <summary>
         /// btnSubmitInventoryEntries control.
