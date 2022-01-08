@@ -17,7 +17,7 @@ GO
  --select * from tbCategories
  --select * from tbIssuedetails
 
-alter PROCEDURE [dbo].[spInventories]  
+create PROCEDURE [dbo].[spInventories]  
 (  
 	@UserId  bigint = NULL,  
 	@IssueId bigint = NULL,
@@ -89,7 +89,7 @@ IF @ActionType = 'SaveUserDetails'
     END  
     IF @ActionType = 'FetchUserDetails'  
     BEGIN  
-        Select UserId,UserName, UserEmail, UserType from tbUserDetails
+        Select * from tbUserDetails
 		    END 
 IF @ActionType = 'SaveCategory'  
     BEGIN  
@@ -229,8 +229,8 @@ IF @ActionType = 'SaveCategory'
 		BEGIN  
 			SELECT	InventoryId, c.CategoryName,  InventoryName, InventoryDescription, 
 					PurchasedFrom, 	PurchaseDate, Bill_InvoiceNo, 
-					ItemQuantity, ItemRatePerUnit, 
-					CreatedBy, CreatedOn, UpdatedBy, UpdatedOn
+					ItemQuantity, ItemRatePerUnit ,IsConsumable
+					--CreatedBy, CreatedOn, UpdatedBy, UpdatedOn
 			FROM	tbInventoryEntries i, tbCategories c
 			where	i.CategoryId = c.CategoryId
 		END
@@ -242,6 +242,7 @@ IF @ActionType = 'SaveCategory'
 			    IF @ActionType = 'FetchIssueDetails'  
     BEGIN  
         Select * from tbIssuedetails
+		   Select UserId, UserName from tbUserDetails
 		    END 
 IF @ActionType = 'SaveIssueDetails'  
     BEGIN  

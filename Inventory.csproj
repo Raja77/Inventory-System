@@ -115,6 +115,7 @@
     <Content Include="App_Data\Script on Jan 05 2022.sql" />
     <Content Include="App_Data\Script on Jan 05 2022_1.sql" />
     <Content Include="App_Data\shafat_Jan_06_2022_1.sql" />
+    <Content Include="App_Data\shafat_Jan_08_2022_1.sql" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
@@ -146,6 +147,7 @@
     <Content Include="Images\cal.png" />
     <Content Include="Images\minusIcon.png" />
     <Content Include="Images\plusIcon.png" />
+    <Content Include="InventorySystem\CommentReplier.aspx" />
     <Content Include="InventorySystem\IssueMaster.aspx" />
     <Content Include="InventorySystem\UserMaster.aspx" />
     <Content Include="InventorySystem\CategoryMaster.aspx" />
@@ -210,6 +212,13 @@
     </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="InventorySystem\CommentReplier.aspx.cs">
+      <DependentUpon>CommentReplier.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="InventorySystem\CommentReplier.aspx.designer.cs">
+      <DependentUpon>CommentReplier.aspx</DependentUpon>
     </Compile>
     <Compile Include="InventorySystem\IssueMaster.aspx.cs">
       <DependentUpon>IssueMaster.aspx</DependentUpon>
