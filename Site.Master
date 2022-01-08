@@ -6,7 +6,7 @@
 <head runat="server">
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title><%: Page.Title %> - My ASP.NET Application</title>
+    <title><%: Page.Title %> - ICSC Inventory System</title>
 
     <asp:PlaceHolder runat="server">
         <%: Scripts.Render("~/bundles/modernizr") %>
@@ -51,9 +51,10 @@
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
                         <li><a runat="server" href="~/InventorySystem/UserMaster.aspx">User Master</a></li>
-                         <li><a runat="server" href="~/InventorySystem/CategoryMaster.aspx">Category</a></li>
+                         <li><a runat="server" href="~/InventorySystem/CategoryMaster.aspx">Category Master</a></li>
                         <li><a runat="server" href="~/InventorySystem/InventoryEntries.aspx">Inventory Entries</a></li>
                          <li><a runat="server" href="~/InventorySystem/IssueMaster.aspx">Issue Details</a></li>
+                        <li><a runat="server" href="~/">Home (Comments Log)</a></li>
                     </ul>
                 </div>
             </div>
@@ -63,7 +64,19 @@
             </asp:ContentPlaceHolder>
             <hr />
             <footer>
-                <p>&copy; <%: DateTime.Now.Year %> - My ASP.NET Application</p>
+                <hr />
+                <h4>Page Review Comments</h4>
+                <hr />
+                <asp:Label ID="lblError" runat="server" Text="Label"></asp:Label>
+                <asp:GridView ID="grdComments" CellPadding="0" CellSpacing="0" CssClass="table table-bordered table-striped" AllowPaging="false"
+                     DataKeyNames="CommentId" GridLines="None" runat="server" AutoGenerateColumns="true">
+                    <HeaderStyle />
+                    <EmptyDataTemplate>
+                        <label class="lbl">No Comments Yet!</label>
+                    </EmptyDataTemplate>
+                    <AlternatingRowStyle CssClass="alt" />          
+                </asp:GridView>
+                <p>&copy; <%: DateTime.Now.Year %> - ICSC Inventory System</p>
             </footer>
         </div>
 

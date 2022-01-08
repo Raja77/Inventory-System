@@ -10,16 +10,7 @@
 namespace Inventory {
     
     
-    public partial class SiteMaster {
-        
-        /// <summary>
-        /// MainContent control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+    public partial class CommentReplier {
         
         /// <summary>
         /// lblError control.
@@ -31,12 +22,12 @@ namespace Inventory {
         protected global::System.Web.UI.WebControls.Label lblError;
         
         /// <summary>
-        /// grdComments control.
+        /// grdReplyMaster control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdComments;
+        protected global::System.Web.UI.WebControls.GridView grdReplyMaster;
     }
 }
