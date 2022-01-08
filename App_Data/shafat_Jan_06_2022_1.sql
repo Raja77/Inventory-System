@@ -64,6 +64,12 @@ alter PROCEDURE [dbo].[spInventories]
 	@IssuerRemarks nvarchar(MAX)	=null,
 	@ReceiptRemarks nvarchar(MAX)	=null,
 
+	@CommentId  bigint = NULL,  
+	@CommenterName NVARCHAR(100) = NULL,
+	@CommentSubject NVARCHAR(100) = NULL,
+	@CommentDescription NVARCHAR(100) = NULL,
+	@CommentPageName NVARCHAR(100) = NULL,
+
 
 
 	@ActionType NVARCHAR(25)
@@ -246,19 +252,34 @@ IF @ActionType = 'SaveCategory'
 IF @ActionType = 'SaveIssueDetails'  
     BEGIN  
         IF NOT EXISTS (SELECT * FROM tbIssuedetails WHERE IssueId=@IssueId)  
+			BEGIN  
+				INSERT INTO tbIssuedetails (UserId,	IssueDate, IssuedBy, IssueQuantity, InventoryId, IsReceived, IssuerRemarks,	ReceiptRemarks) 
+				VALUES (@UserId,	@IssueDate, @IssuedBy, @IssueQuantity, @InventoryId, @IsReceived, @IssuerRemarks,	@ReceiptRemarks)
+			END  
+        ELSE  
+			BEGIN  	
+				UPDATE tbIssuedetails SET UserId=@UserId,	IssueDate=@IssueDate, IssuedBy=@IssuedBy, IssueQuantity=@IssueQuantity, InventoryId=@InventoryId, 
+				IsReceived=@IsReceived, IssuerRemarks=@IssuerRemarks,	ReceiptRemarks=@ReceiptRemarks WHERE IssueId=@IssueId  
+			END  
+	END 
+	IF @ActionType = 'SaveCommentDetails'  
+    BEGIN  
+        IF NOT EXISTS (SELECT * FROM tbUserDetails WHERE UserId=@UserId)  
         BEGIN  
-		INSERT INTO tbIssuedetails (UserId,	IssueDate, IssuedBy, IssueQuantity, InventoryId, IsReceived, IssuerRemarks,	ReceiptRemarks) 
-		VALUES (@UserId,	@IssueDate, @IssuedBy, @IssueQuantity, @InventoryId, @IsReceived, @IssuerRemarks,	@ReceiptRemarks)
+            INSERT INTO tbUserDetails (UserName,UserEmail,UserType)  
+            VALUES (@UserName,@UserEmail,@UserType)  
         END  
         ELSE  
-        BEGIN  	
-           UPDATE tbIssuedetails SET UserId=@UserId,	IssueDate=@IssueDate, IssuedBy=@IssuedBy, IssueQuantity=@IssueQuantity, InventoryId=@InventoryId, 
-		   IsReceived=@IsReceived, IssuerRemarks=@IssuerRemarks,	ReceiptRemarks=@ReceiptRemarks WHERE IssueId=@IssueId  
+        BEGIN  
+            UPDATE tbUserDetails SET UserName=@UserName,UserEmail=@UserEmail, UserType=@UserType WHERE UserId=@UserId  
         END  
     END 
+    IF @ActionType = 'FetchCommentDetails'  
+    BEGIN  
+        Select * from tbUserDetails
+		    END 
 
 
-	
 END
 GO
 
