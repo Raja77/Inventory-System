@@ -15,7 +15,6 @@ namespace Inventory
     {
         SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultInventoryConnection"].ConnectionString);
         DataSet ds = null;
-        DataTable dtData = null;
         SqlCommand sqlCmd = null;
 
         protected void Page_Load(object sender, EventArgs e)
@@ -77,6 +76,50 @@ namespace Inventory
                 ds.Dispose();
             }
             return ds;
+        }
+
+        protected void btnSubmit_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                if (conn.State == ConnectionState.Closed)
+                {
+                    conn.Open();
+                }
+                string pageName = (new System.IO.FileInfo(Request.Url.AbsolutePath)).Name;
+                sqlCmd = new SqlCommand("spInventories", conn);
+                sqlCmd.CommandType = CommandType.StoredProcedure;
+                sqlCmd.Parameters.AddWithValue("@ActionType", "SaveCommentDetails");
+                sqlCmd.Parameters.AddWithValue("@CommentCreatorName", txtCommenter.Text);
+                sqlCmd.Parameters.AddWithValue("@CommentPageName", pageName);
+                sqlCmd.Parameters.AddWithValue("@CommentDescription", txtCommentDescription.Text);
+                sqlCmd.Parameters.AddWithValue("@CommentSubject", txtSubject.Text);
+                sqlCmd.Parameters.AddWithValue("@CommentCreatedOn", DateTime.Now);
+                int numRes = sqlCmd.ExecuteNonQuery();
+                if (numRes > 0)
+                {
+                    lblCommentSubmitError.Text = "Comment Saved Successfully";
+                    lblCommentSubmitError.ForeColor = System.Drawing.Color.CornflowerBlue;
+                    lblCommentSubmitError.Font.Size = 16;
+                    txtCommenter.Text = string.Empty;
+                    txtCommentDescription.Text = string.Empty;
+                    txtSubject.Text = string.Empty;
+                    GetCommentDetails();
+                }
+                else
+                    lblCommentSubmitError.Text = ("Please Try Again !!!");
+            }
+
+            catch (Exception ex)
+            {
+                lblCommentSubmitError.Text = ex.Message;
+            }
+            finally
+            {
+               
+                sqlCmd.Dispose();
+                conn.Close();
+            }
         }
     }
 }

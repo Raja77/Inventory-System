@@ -122,6 +122,7 @@
         <asp:Label ID="Label1" runat="server" Text="Data Saved Successfully" Visible="false"></asp:Label>
     </div>
     <hr />
+    <div style="overflow-x:auto;">
     <asp:GridView ID="grdCategoryMaster" CellPadding="0" CellSpacing="0" CssClass="table table-bordered table-striped"
         AllowPaging="true" OnPageIndexChanging="grdCategoryMaster_PageIndexChanging" OnRowDataBound="grdCategoryMaster_RowDataBound"
         DataKeyNames="CategoryId" GridLines="None" runat="server" AutoGenerateColumns="false" PageSize="5"
@@ -209,7 +210,7 @@
         </Columns>
         <PagerStyle HorizontalAlign="Right" CssClass="GridPager" />
     </asp:GridView>
-
+    </div>
 
 </asp:Content>
 

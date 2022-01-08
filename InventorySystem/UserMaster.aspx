@@ -56,6 +56,7 @@
     <br />
     <h4>Check User Details</h4>
     <hr />
+    <div style="overflow-x:auto;">
     <asp:GridView ID="grdUserMaster" CellPadding="0" CellSpacing="0" CssClass="table table-bordered table-striped" AllowPaging="true" OnPageIndexChanging="grdUserMaster_PageIndexChanging"
          DataKeyNames="UserId" GridLines="None" runat="server" AutoGenerateColumns="false" PageSize="5">
         <HeaderStyle />
@@ -78,6 +79,6 @@
         </Columns>
          <PagerStyle HorizontalAlign="Right" CssClass="GridPager" />
     </asp:GridView>
-  
+  </div>
 </asp:Content>
 

@@ -46,7 +46,9 @@
                         <span class="icon-bar"></span>
                         <span class="icon-bar"></span>
                     </button>
-                    <a class="navbar-brand" runat="server" href="~/">Inventory System</a>
+                    <a class="navbar-brand" runat="server" href="~/">
+                    <img src="/Images/icsclogosmall.png"  height="30" alt="">
+                        </a>
                 </div>
                 <div class="navbar-collapse collapse">
                     <ul class="nav navbar-nav">
@@ -65,17 +67,50 @@
             <hr />
             <footer>
                 <hr />
-                <h4>Page Review Comments</h4>
-                <hr />
-                <asp:Label ID="lblError" runat="server" Text="Label"></asp:Label>
-                <asp:GridView ID="grdComments" CellPadding="0" CellSpacing="0" CssClass="table table-bordered table-striped" AllowPaging="false"
-                     DataKeyNames="CommentId" GridLines="None" runat="server" AutoGenerateColumns="true">
-                    <HeaderStyle />
-                    <EmptyDataTemplate>
-                        <label class="lbl">No Comments Yet!</label>
-                    </EmptyDataTemplate>
-                    <AlternatingRowStyle CssClass="alt" />          
-                </asp:GridView>
+                <div id="PageCommentSection" style="background: repeating-linear-gradient(45deg,#f2f2f2,#f2f2f2 10px,#ffffff 10px ,#ffffff 20px); padding:10px">
+                    <h4>Page Review Comments</h4>
+                        <asp:Label ID="lblError" runat="server" Text="Label"></asp:Label>
+                        <div style="overflow-x:auto;">
+                    <asp:GridView ID="grdComments" CellPadding="0" CellSpacing="0" CssClass="table table-bordered table-striped" AllowPaging="false"
+                         DataKeyNames="CommentId" GridLines="None" runat="server" AutoGenerateColumns="true">
+                        <HeaderStyle />
+                        <EmptyDataTemplate>
+                            <label class="lbl">No Comments Yet!</label>
+                        </EmptyDataTemplate>
+                        <AlternatingRowStyle CssClass="alt" />          
+                    </asp:GridView>
+                </div>
+                    <hr />
+                    <h4>Submit a new Comment about this page</h4>
+                         <div id="chkDetails" runat="server">
+            <div class="mb-4 row">
+                <div class="col-sm-3">
+                <label for="txtCommenter" class="txt"><span class="RequiredField">* </span>Name</label>
+                    <asp:TextBox ID="txtCommenter" runat="server" CssClass="form-control" placeholder="Your Name"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="rfvCommenter" runat="server" CssClass="lbl" ErrorMessage="Enter Your Name"
+                        ControlToValidate="txtCommenter" Display="Dynamic" ValidationGroup="valUserMaster"></asp:RequiredFieldValidator>
+                </div>
+                <div class="col-sm-2">
+                <label for="txtSubject" class="txt"><span class="RequiredField">* </span>Subject</label>
+                    <asp:TextBox ID="txtSubject" runat="server" CssClass="form-control" placeholder="Enter Comment Subject"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="rfvSubject" runat="server" CssClass="lbl" ErrorMessage="Enter Comment Subject"
+                        ControlToValidate="txtSubject" Display="Dynamic" ValidationGroup="valUserMaster"></asp:RequiredFieldValidator>
+                </div>
+                <div class="col-sm-5">
+            <label for="txtCommentDescription" class="txt"><span class="RequiredField">* </span>Details</label>
+                <asp:TextBox ID="txtCommentDescription" runat="server" CssClass="form-control" placeholder="Details/Description for Comment"></asp:TextBox>
+                <asp:RequiredFieldValidator ID="rfvCommentDescription" runat="server" CssClass="lbl" ErrorMessage="Enter Comment Description"
+                    ControlToValidate="txtCommentDescription" Display="Dynamic" ValidationGroup="valUserMaster"></asp:RequiredFieldValidator>
+            </div>
+                <div class="col-sm-2">
+                <br />
+                    <asp:Button ID="btnSubmit" runat="server" Text="Comment" CssClass="btn btn-primary txt" ToolTip="Click here to Submit Your Comment"
+                       OnClick="btnSubmit_Click" ValidationGroup="valUserMaster" />
+                </div>
+            </div>
+        </div>
+                        <asp:Label ID="lblCommentSubmitError" runat="server" CssClass="lbl" Font-Size="14" Text=""></asp:Label>
+                </div>
                 <p>&copy; <%: DateTime.Now.Year %> - ICSC Inventory System</p>
             </footer>
         </div>
