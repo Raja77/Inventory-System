@@ -217,6 +217,7 @@
     </Compile>
     <Compile Include="InventorySystem\CommentReplier.aspx.cs">
       <DependentUpon>CommentReplier.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="InventorySystem\CommentReplier.aspx.designer.cs">
       <DependentUpon>CommentReplier.aspx</DependentUpon>
