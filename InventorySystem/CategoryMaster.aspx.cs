@@ -12,6 +12,7 @@ using System.Drawing;
 using System.Net;
 using System.Data.SqlTypes;
 using System.Globalization;
+using System.Text;
 
 namespace Inventory
 {
@@ -25,12 +26,15 @@ namespace Inventory
         #endregion
 
         #region Events
+
         protected void Page_Load(object sender, EventArgs e)
         {
             if (!IsPostBack)
             {
                 GetCategoryMasterDetails();
+                CreateSubCategoryGrid();
             }
+
             lblError.Text = string.Empty;
         }
 
@@ -124,6 +128,7 @@ namespace Inventory
         {
             try
             {
+                string XMLData = CreateSubCategoryXML();
                 if (conn.State == ConnectionState.Closed)
                 {
                     conn.Open();
@@ -139,6 +144,7 @@ namespace Inventory
                     sqlCmd.Parameters.AddWithValue("@ActionType", "SaveCateNSubCat");
                     sqlCmd.Parameters.AddWithValue("@SubCategoryName", txtSubCategoryName.Text);
                     sqlCmd.Parameters.AddWithValue("@SubCategoryDescription", txtSubCategoryDescription.Text);
+                    sqlCmd.Parameters.AddWithValue("@XmlData", XMLData);
                 }
                 else if (dvSubCategory.Visible == false && chkSubCategory.Checked == false)
                 {
@@ -155,6 +161,7 @@ namespace Inventory
                     GetCategoryMasterDetails();
                     dvAddCategoryDetails.Visible = false;
                     dvSubCategory.Visible = false;
+                    dvListCategoryDetails.Visible = true;
 
                     txtCategoryName.Text = string.Empty;
                     txtCategoryDescription.Text = string.Empty;
@@ -203,7 +210,6 @@ namespace Inventory
                 dvSubCategory.Visible = true;
             else
                 dvSubCategory.Visible = false;
-
         }
 
         protected void grdCategoryMaster_RowCancelingEdit(object sender, GridViewCancelEditEventArgs e)
@@ -267,14 +273,65 @@ namespace Inventory
             GetCategoryMasterDetails();
         }
 
+        private string CreateSubCategoryXML()
+        {
+            StringBuilder sb = new StringBuilder();
+            //Loop through each row of gridview
+            foreach (GridViewRow row in grdSubCategory.Rows)
+            {
+                string subCategoryName = row.Cells[1].Text;
+                string subCategoryDescription = row.Cells[2].Text;
+                sb.Append(String.Format("<SubCategory SubCategoryName='{0}' SubCategoryDescription='{1}'/>",
+                    subCategoryName, subCategoryDescription));
+            }
+            return String.Format("<ROOT>{0}</ROOT>", sb.ToString());
+        }
+
+        protected void BindGrid()
+        {
+            grdSubCategory.DataSource = (DataTable)ViewState["SubCategory"];
+            grdSubCategory.DataBind();
+        }
+
+        protected void AddSubCategory_Click(object sender, EventArgs e)
+        {
+            //  AddNewRecordRowToGrid();
+            DataTable dt = (DataTable)ViewState["SubCategory"];
+            dt.Rows.Add(txtSubCategoryName.Text.Trim(), txtSubCategoryDescription.Text.Trim());
+            ViewState["SubCategory"] = dt;
+            if(dt.Rows.Count>0)
+            {
+                lnkAddSubCategory.Text = "Add one more Sub Category";
+            }
+            this.BindGrid();
+            txtSubCategoryName.Text = string.Empty;
+            txtSubCategoryDescription.Text = string.Empty;
+        }
+
+        protected void btnCancel_Click(object sender, EventArgs e)
+        {
+            txtCategoryName.Text = txtCategoryDescription.Text = txtSubCategoryName.Text = txtSubCategoryDescription.Text = string.Empty;
+            chkSubCategory.Checked = false;
+            CreateSubCategoryGrid();
+            dvAddCategoryDetails.Visible = dvSubCategory.Visible = false;
+            dvListCategoryDetails.Visible = true;
+        }
+
         protected void btnAddCategory_Click(object sender, EventArgs e)
         {
+            lnkAddSubCategory.Text= "Add Sub-Category";
             dvAddCategoryDetails.Visible = true;
+            dvListCategoryDetails.Visible = false;
+            CreateSubCategoryGrid();
+        }
+
+        protected void CreateSubCategoryGrid()
+        {
+            DataTable dt = new DataTable();
+            dt.Columns.AddRange(new DataColumn[2] { new DataColumn("SubCategoryName"), new DataColumn("SubCategoryDescription") });
+            ViewState["SubCategory"] = dt;
+            this.BindGrid();
         }
         #endregion
-
-
-
-
     }
 }

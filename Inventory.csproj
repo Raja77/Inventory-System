@@ -116,6 +116,7 @@
     <Content Include="App_Data\Script on Jan 05 2022_1.sql" />
     <Content Include="App_Data\shafat_Jan_06_2022_1.sql" />
     <Content Include="App_Data\shafat_Jan_08_2022_1.sql" />
+    <Content Include="App_Data\shafat_Jan_09_2022_1.sql" />
     <Content Include="Contact.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap-theme.min.css" />
