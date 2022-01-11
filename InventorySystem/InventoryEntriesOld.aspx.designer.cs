@@ -10,7 +10,7 @@
 namespace Inventory {
     
     
-    public partial class InventoryAndIssue {
+    public partial class InventoryEntriesOld {
         
         /// <summary>
         /// lblError control.
@@ -497,8 +497,7 @@ namespace Inventory {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.CheckBox chkIsReceived;
-        protected global::System.Web.UI.WebControls.CheckBox chkAddIssueDetails;
-
+        
         /// <summary>
         /// txtIssuerRemarks control.
         /// </summary>
@@ -536,24 +535,6 @@ namespace Inventory {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvReceiptRemarks;
         
         /// <summary>
-        /// lnkAddIssueDetail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton lnkAddIssueDetail;
-        
-        /// <summary>
-        /// grdIssueDetailEntry control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdIssueDetailEntry;
-        
-        /// <summary>
         /// btnSubmitInventoryEntries control.
         /// </summary>
         /// <remarks>
@@ -570,51 +551,6 @@ namespace Inventory {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancel;
-        
-        /// <summary>
-        /// lblMsgSuccess control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblMsgSuccess;
-        
-        /// <summary>
-        /// dvListInventoryDetails control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvListInventoryDetails;
-        
-        /// <summary>
-        /// btnAddInventory control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddInventory;
-        
-        /// <summary>
-        /// Label1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
-        
-        /// <summary>
-        /// grdInventoryMaster control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.GridView grdInventoryMaster;
         
         /// <summary>
         /// countInventoryEntries control.

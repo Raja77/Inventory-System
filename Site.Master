@@ -88,24 +88,24 @@
                 <label for="txtCommenter" class="txt"><span class="RequiredField">* </span>Name</label>
                     <asp:TextBox ID="txtCommenter" runat="server" CssClass="form-control" placeholder="Your Name"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="rfvCommenter" runat="server" CssClass="lbl" ErrorMessage="Enter Your Name"
-                        ControlToValidate="txtCommenter" Display="Dynamic" ValidationGroup="valUserMaster"></asp:RequiredFieldValidator>
+                        ControlToValidate="txtCommenter" Display="Dynamic" ValidationGroup="valUserMastert"></asp:RequiredFieldValidator>
                 </div>
                 <div class="col-sm-2">
                 <label for="txtSubject" class="txt"><span class="RequiredField">* </span>Subject</label>
                     <asp:TextBox ID="txtSubject" runat="server" CssClass="form-control" placeholder="Enter Comment Subject"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="rfvSubject" runat="server" CssClass="lbl" ErrorMessage="Enter Comment Subject"
-                        ControlToValidate="txtSubject" Display="Dynamic" ValidationGroup="valUserMaster"></asp:RequiredFieldValidator>
+                        ControlToValidate="txtSubject" Display="Dynamic" ValidationGroup="valUserMastert"></asp:RequiredFieldValidator>
                 </div>
                 <div class="col-sm-5">
             <label for="txtCommentDescription" class="txt"><span class="RequiredField">* </span>Details</label>
                 <asp:TextBox ID="txtCommentDescription" runat="server" CssClass="form-control" placeholder="Details/Description for Comment"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="rfvCommentDescription" runat="server" CssClass="lbl" ErrorMessage="Enter Comment Description"
-                    ControlToValidate="txtCommentDescription" Display="Dynamic" ValidationGroup="valUserMaster"></asp:RequiredFieldValidator>
+                    ControlToValidate="txtCommentDescription" Display="Dynamic" ValidationGroup="valUserMastert"></asp:RequiredFieldValidator>
             </div>
                 <div class="col-sm-2">
                 <br />
                     <asp:Button ID="btnSubmit" runat="server" Text="Comment" CssClass="btn btn-primary txt" ToolTip="Click here to Submit Your Comment"
-                       OnClick="btnSubmit_Click" ValidationGroup="valUserMaster" />
+                       OnClick="btnSubmit_Click" ValidationGroup="valUserMastert" />
                 </div>
             </div>
         </div>

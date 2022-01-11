@@ -13,18 +13,16 @@ using System.Net;
 using System.Data.SqlTypes;
 using System.Globalization;
 using System.Net.Mail;
-using System.Text;
 
 namespace Inventory
 {
-    public partial class InventoryAndIssue : Page
+    public partial class InventoryEntriesOld : Page
     {
         #region Properties
         SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultInventoryConnection"].ConnectionString);     
         DataSet ds,dsGrid = null;
         DataTable dtData = null;
         SqlCommand sqlCmd = null;
-
         private string SortDirection
         {
             get { return ViewState["SortDirection"] != null ? ViewState["SortDirection"].ToString() : "ASC"; }
@@ -38,7 +36,6 @@ namespace Inventory
             if (!IsPostBack)
             {
                 GetInventoryEntries();
-                CreateIssueDetailsGrid();
                 var x= Request.Url.ToString();               
             }
             lblError.Text = string.Empty;
@@ -62,11 +59,12 @@ namespace Inventory
             {
                 ds = new DataSet();
                 ds = FetchInventoryDetails();
-                if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0 )
+                //dsGrid also gets populated from FetchInventoryDetails()
+                if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0 && dsGrid.Tables.Count > 0 && dsGrid.Tables[0].Rows.Count > 0)
                 {
                     if (sortExpression != null)
                     {
-                        DataView dv = ds.Tables[0].AsDataView();
+                        DataView dv = dsGrid.Tables[0].AsDataView();
                         this.SortDirection = this.SortDirection == "ASC" ? "DESC" : "ASC";
 
                         dv.Sort = sortExpression + " " + this.SortDirection;
@@ -74,9 +72,9 @@ namespace Inventory
                     }
                     else
                     {
-                        grdInventoryEntries.DataSource = ds;
+                        grdInventoryEntries.DataSource = dsGrid;
                     }
-                    countInventoryEntries.InnerText = ds.Tables[0].Rows.Count.ToString();
+                    countInventoryEntries.InnerText = dsGrid.Tables[0].Rows.Count.ToString();
                     countInventoryEntries.Attributes.Add("title", "Inventory Details");
                     grdInventoryEntries.DataBind();
               
@@ -88,7 +86,7 @@ namespace Inventory
                     countInventoryEntries.InnerText = "0";
                 }
 
-                //Bind Category Dropdown
+
                 if (ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
                 {
                     drpCategory.DataSource = ds.Tables[1];
@@ -97,7 +95,6 @@ namespace Inventory
                     drpCategory.DataValueField = "CategoryID";
                     drpCategory.DataBind();
                 }
-                //Bind Issue Department Dropdown
                 if (ds.Tables.Count > 0 && ds.Tables[2].Rows.Count > 0)
                 {
                     drpIssuedTo.DataSource = ds.Tables[2];
@@ -111,6 +108,8 @@ namespace Inventory
                     drpIssuedTo.DataBind();
                 }
                 drpCategory_SelectedIndexChanged1(null, null);
+
+          
             }
             catch (Exception ex)
             {
@@ -126,11 +125,19 @@ namespace Inventory
                     conn.Open();
                 }
                 ds = new DataSet();
+                dsGrid = new DataSet();
                 sqlCmd = new SqlCommand("spInventories", conn);
                 sqlCmd.CommandType = CommandType.StoredProcedure;
                 sqlCmd.Parameters.AddWithValue("@ActionType", "FetchInventoryEntries");
                 SqlDataAdapter sqlSda = new SqlDataAdapter(sqlCmd);
                 sqlSda.Fill(ds);
+
+                //Fetch special for display in Grid
+                SqlCommand sqlCmdGrid = new SqlCommand("spInventories", conn);
+                sqlCmdGrid.CommandType = CommandType.StoredProcedure;
+                sqlCmdGrid.Parameters.AddWithValue("@ActionType", "FetchInventoryForGrid");
+                SqlDataAdapter sqlSdaGrid = new SqlDataAdapter(sqlCmdGrid);
+                sqlSdaGrid.Fill(dsGrid);
             }
             catch (Exception ex)
             {
@@ -142,202 +149,9 @@ namespace Inventory
             }
             return ds;
         }
-        #endregion
 
-        #region IssueSubGrid
-        protected void AddIssueDetail_Click(object sender, EventArgs e)
-        {
-            //  AddNewRecordRowToGrid();
-            DataTable dt = (DataTable)ViewState["IssueDetail"];
-            string UserId, IssueDate, IssueQuantity, IssuerRemarks, ReceiptRemarks;
-            bool IsReceived;
-            UserId = drpIssuedTo.SelectedValue.Trim();
-            IssueDate = txtIssueDate.Text.Trim();
-            IssueQuantity = txtIssueQuantity.Text.Trim();
-            IsReceived = (chkIsReceived.Checked);
-            IssuerRemarks = txtIssuerRemarks.Text.Trim();
-            ReceiptRemarks = txtReceiptRemarks.Text.Trim();
-            // IssuedBy = ""
-
-            dt.Rows.Add(UserId, IssueDate, IssueQuantity, IsReceived, IssuerRemarks, ReceiptRemarks);
-            ViewState["IssueDetails"] = dt;
-            if (dt.Rows.Count > 0)
-            {
-                lnkAddIssueDetail.Text = "Add Another Issue Detail";
-            }
-            this.BindGrid();
-            drpIssuedTo.SelectedValue = "-1";
-            txtIssueDate.Text = string.Empty;
-            txtIssueQuantity.Text = string.Empty;
-            chkIsReceived.Checked = false;
-            txtIssuerRemarks.Text = string.Empty;
-            txtReceiptRemarks.Text = string.Empty;
-        }
-
-        protected void CreateIssueDetailsGrid()
-        {
-            DataTable dt = new DataTable();
-            dt.Columns.AddRange(new DataColumn[6] { new DataColumn("UserId"), new DataColumn("IssueDate"),
-                                                    new DataColumn("IssueQuantity"), new DataColumn("IsReceived"),
-                                                    new DataColumn("IssuerRemarks"), new DataColumn("ReceiptRemarks")
-                                                  });
-            ViewState["IssueDetails"] = dt;
-            this.BindGrid();
-        }
-        private DataTable FetchIssueDetails(string id)
-        {
-            try
-            {
-                if (conn.State == ConnectionState.Closed)
-                {
-                    conn.Open();
-                }
-                //Get Issue Details for IssueDetailsGrid
-                dtData = new DataTable();
-                sqlCmd = new SqlCommand("spInventories", conn);
-                sqlCmd.CommandType = CommandType.StoredProcedure;
-                sqlCmd.Parameters.AddWithValue("@InventoryId", id);
-                sqlCmd.Parameters.AddWithValue("@ActionType", "FetchIssueByInvId");
-                SqlDataAdapter sqlSda = new SqlDataAdapter(sqlCmd);
-                sqlSda.Fill(dtData);
-            }
-            catch (Exception ex)
-            {
-                lblError.Text = ex.Message;
-            }
-            finally
-            {
-                sqlCmd.Dispose();
-                dtData.Dispose();
-            }
-            return dtData;
-        }
-        protected void chkAddIssueDetails_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkAddIssueDetails.Checked)
-                dvAddIssueMasterDetails.Visible = true;
-            else
-                dvAddIssueMasterDetails.Visible = false;
-        }
-
-        //check
-        private string CreateIssueDetailsXML()
-        {
-            StringBuilder sb = new StringBuilder();
-            //Loop through each row of gridview
-            foreach (GridViewRow row in grdIssueDetailDisplay.Rows)
-            {
-                string subCategoryName = row.Cells[1].Text;
-                string subCategoryDescription = row.Cells[2].Text;
-                sb.Append(String.Format("<SubCategory SubCategoryName='{0}' SubCategoryDescription='{1}'/>",
-                    subCategoryName, subCategoryDescription));
-            }
-            return String.Format("<ROOT>{0}</ROOT>", sb.ToString());
-        }
-        //for saving
-        protected void btnSubmit_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                string XMLData = CreateIssueDetailsXML();
-                if (conn.State == ConnectionState.Closed)
-                {
-                    conn.Open();
-                }
-                dtData = new DataTable();
-                sqlCmd = new SqlCommand("spInventories", conn);
-                sqlCmd.CommandType = CommandType.StoredProcedure;
-                sqlCmd.Parameters.AddWithValue("@CategoryName", txtCategoryName.Text);
-                sqlCmd.Parameters.AddWithValue("@CategoryDescription", txtCategoryDescription.Text);
-
-                if (dvSubCategory.Visible == true && chkSubCategory.Checked == true)
-                {
-                    sqlCmd.Parameters.AddWithValue("@ActionType", "SaveCateNSubCat");
-                    sqlCmd.Parameters.AddWithValue("@SubCategoryName", txtSubCategoryName.Text);
-                    sqlCmd.Parameters.AddWithValue("@SubCategoryDescription", txtSubCategoryDescription.Text);
-                    sqlCmd.Parameters.AddWithValue("@XmlData", XMLData);
-                }
-                else if (dvSubCategory.Visible == false && chkSubCategory.Checked == false)
-                {
-                    sqlCmd.Parameters.AddWithValue("@ActionType", "SaveCategory");
-                }
-                int numRes = sqlCmd.ExecuteNonQuery();
-                if (numRes > 0)
-                {
-                    lblError.Text = "Record Saved Successfully";
-                    //lblMsgSuccess.Visible = true;
-                    lblError.ForeColor = System.Drawing.Color.CornflowerBlue;
-                    lblError.Font.Size = 16;
-
-                    GetCategoryMasterDetails();
-                    dvAddCategoryDetails.Visible = false;
-                    dvSubCategory.Visible = false;
-                    dvListCategoryDetails.Visible = true;
-
-                    txtCategoryName.Text = string.Empty;
-                    txtCategoryDescription.Text = string.Empty;
-                    txtSubCategoryName.Text = string.Empty;
-                    txtSubCategoryDescription.Text = string.Empty;
-                    chkSubCategory.Checked = false;
-                }
-                else
-                    lblError.Text = ("Please Try Again !!!");
-            }
-
-            catch (Exception ex)
-            {
-                lblError.Text = ex.Message;
-            }
-            finally
-            {
-                dtData.Dispose();
-                sqlCmd.Dispose();
-                conn.Close();
-            }
-        }
-        //check
-        protected void grdCategoryMaster_RowDataBound(object sender, GridViewRowEventArgs e)
-        {
-            if (e.Row.RowType == DataControlRowType.DataRow)
-            {
-                string categoryId = grdCategoryMaster.DataKeys[e.Row.RowIndex].Value.ToString();
-                GridView grdSubCategoryMaster = e.Row.FindControl("grdSubCategoryMaster") as GridView;
-                dtData = new DataTable();
-                dtData = FetchSubCategoryMasterDetails(categoryId);
-                grdSubCategoryMaster.DataSource = dtData;
-                grdSubCategoryMaster.DataBind();
-            }
-        }
-       
-        //check
-        protected void BindGrid()
-        {
-            grdSubCategory.DataSource = (DataTable)ViewState["SubCategory"];
-            grdSubCategory.DataBind();
-        }
-        //check
-        
-        //check
-        protected void btnCancel_Click(object sender, EventArgs e)
-        {
-            txtCategoryName.Text = txtCategoryDescription.Text = txtSubCategoryName.Text = txtSubCategoryDescription.Text = string.Empty;
-            chkSubCategory.Checked = false;
-            CreateSubCategoryGrid();
-            dvAddCategoryDetails.Visible = dvSubCategory.Visible = false;
-            dvListCategoryDetails.Visible = true;
-        }
-        //check
-        protected void btnAddCategory_Click(object sender, EventArgs e)
-        {
-            lnkAddSubCategory.Text = "Add Sub-Category";
-            dvAddCategoryDetails.Visible = true;
-            dvListCategoryDetails.Visible = false;
-            CreateSubCategoryGrid();
-        }
-
-
-        #endregion
-        //previous page elements
+        #endregion   
+    
         protected void btnCancel_Click(object sender, EventArgs e)
         {
             txtInventoryDescription.Text = string.Empty;
@@ -466,6 +280,22 @@ namespace Inventory
             }
         }
 
+        //protected void chkIsIssue_CheckedChanged(object sender, EventArgs e)
+        //{
 
+        //    if(chkIsIssue.Checked)
+        //    {
+        //        dvAddIssueMasterDetails.Visible = true;
+        //    }
+        //    else
+        //    {
+        //        dvAddIssueMasterDetails.Visible = false;
+        //    }
+        //}
+
+        //protected void DropDownList1_SelectedIndexChanged(object sender, EventArgs e)
+        //{
+
+        //}
     }
 }

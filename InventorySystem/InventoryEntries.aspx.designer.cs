@@ -184,6 +184,69 @@ namespace Inventory {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvInventoryDescription;
         
         /// <summary>
+        /// Span8 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Span8;
+        
+        /// <summary>
+        /// txtInventoryRegisterNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtInventoryRegisterNo;
+        
+        /// <summary>
+        /// rfvtxtInventoryRegisterNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvtxtInventoryRegisterNo;
+        
+        /// <summary>
+        /// Span9 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Span9;
+        
+        /// <summary>
+        /// txtInventoryPageNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtInventoryPageNo;
+        
+        /// <summary>
+        /// rfvtxtInventoryPageNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvtxtInventoryPageNo;
+        
+        /// <summary>
+        /// revtxtInventoryPageNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revtxtInventoryPageNo;
+        
+        /// <summary>
         /// Span2 control.
         /// </summary>
         /// <remarks>
@@ -400,6 +463,15 @@ namespace Inventory {
         protected global::System.Web.UI.WebControls.CheckBox chkIsConsumable;
         
         /// <summary>
+        /// chkAddIssueDetails control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkAddIssueDetails;
+        
+        /// <summary>
         /// dvAddIssueMasterDetails control.
         /// </summary>
         /// <remarks>
@@ -508,13 +580,13 @@ namespace Inventory {
         protected global::System.Web.UI.WebControls.TextBox txtIssuerRemarks;
         
         /// <summary>
-        /// rfvIssuerRemarks control.
+        /// rfvtxtIssuerRemarks control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvIssuerRemarks;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvtxtIssuerRemarks;
         
         /// <summary>
         /// txtReceiptRemarks control.
@@ -526,13 +598,22 @@ namespace Inventory {
         protected global::System.Web.UI.WebControls.TextBox txtReceiptRemarks;
         
         /// <summary>
-        /// rfvReceiptRemarks control.
+        /// lnkAddIssueDetail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvReceiptRemarks;
+        protected global::System.Web.UI.WebControls.LinkButton lnkAddIssueDetail;
+        
+        /// <summary>
+        /// grdIssueDetailEntry control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grdIssueDetailEntry;
         
         /// <summary>
         /// btnSubmitInventoryEntries control.
@@ -551,6 +632,51 @@ namespace Inventory {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnCancel;
+        
+        /// <summary>
+        /// lblMsgSuccess control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label lblMsgSuccess;
+        
+        /// <summary>
+        /// dvListInventoryDetails control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvListInventoryDetails;
+        
+        /// <summary>
+        /// btnAddInventory control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnAddInventory;
+        
+        /// <summary>
+        /// Label1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Label Label1;
+        
+        /// <summary>
+        /// grdInventoryMaster control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.GridView grdInventoryMaster;
         
         /// <summary>
         /// countInventoryEntries control.
