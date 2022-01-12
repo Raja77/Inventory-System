@@ -56,9 +56,10 @@ namespace Inventory
                                 drpInventoryRegisterNo.DataTextField = "InventoryRegisterNo";
                                 drpInventoryRegisterNo.DataValueField = "InventoryRegisterNo";
                                 drpInventoryRegisterNo.DataBind();
-                                ListItem li = new ListItem("Select Register", "-1");
-                                li.Selected = true;
-                                drpInventoryRegisterNo.Items.Add(li);
+                                //ListItem li = new ListItem("Select Register", "-1");
+                                //li.Selected = true;
+                                //drpInventoryRegisterNo.Items.Add(li);
+                                drpInventoryRegisterNo.Items.Insert(0, new ListItem("Select Register No...", "-1"));
                             }
                             break;
                         case "drpInventoryPageNo":
@@ -93,6 +94,7 @@ namespace Inventory
                                 drpUserId.DataTextField = "UserName";
                                 drpUserId.DataValueField = "UserId";
                                 drpUserId.DataBind();
+                                drpUserId.Items.Insert(0, new ListItem("Select whom issue to", "-1"));
                             }
                             break;
                         case "grdIssueMaster":
