@@ -116,8 +116,9 @@
         </div>
         <%-- Submit Button  --%>
         <div class="mb-4 row">
-            <label for="btnSubmit" class="col-sm-3 txt"></label>
-            <div class="col-sm-6">
+             <label for="btnSubmit" class="col-sm-4"></label>
+            <label for="btnSubmit" class="col-sm-4"></label>
+            <div class="col-sm-4 txt">
                 <asp:Button ID="btnSubmit" runat="server" Text="Issue Item" CssClass="btn btn-primary txt" ToolTip="Click here to Submit Issue Details"
                     OnClick="btnSubmit_Click" ValidationGroup="valIssueMaster" />
             </div>
