@@ -148,13 +148,22 @@ namespace Inventory {
         protected global::System.Web.UI.WebControls.TextBox txtIssueQuantity;
         
         /// <summary>
-        /// rfvCategoryDescription control.
+        /// rfvIssueQuantity control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCategoryDescription;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvIssueQuantity;
+        
+        /// <summary>
+        /// revIssueQuantity control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revIssueQuantity;
         
         /// <summary>
         /// txtIssuerRemarks control.

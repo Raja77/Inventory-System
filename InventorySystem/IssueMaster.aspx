@@ -17,10 +17,10 @@
             <div class="col-sm-4">
                 <asp:DropDownList ID="drpInventoryRegisterNo" runat="server" CssClass="form-control drp" 
                     OnSelectedIndexChanged="drpInventoryRegisterNo_SelectedIndexChanged" AutoPostBack="true">
-                    <asp:ListItem Text="Select Register No" Value="-1" Selected="True" ></asp:ListItem>
+                   <%-- <asp:ListItem Text="Select Register No" Value="-1" Selected="True" ></asp:ListItem>--%>
                 </asp:DropDownList>
                 <asp:RequiredFieldValidator ID="rfvdrpInventoryRegisterNo" runat="server" CssClass="lbl" 
-                    ErrorMessage="Select Register No" InitialValue="-1" ControlToValidate="drpInventoryRegisterNo"
+                    ErrorMessage="Select Register No..." InitialValue="-1" ControlToValidate="drpInventoryRegisterNo"
                     Display="Dynamic" ValidationGroup="valIssueMaster"></asp:RequiredFieldValidator>
             </div>
         <%--Select Page No --%>
@@ -52,36 +52,39 @@
         
         <%--Issue To --%>
             <label for="drpUserId" class="col-sm-2 " style="text-align: right;">
-                <span class="RequiredField">*</span>Select User</label>
+                <span class="RequiredField">*</span>Select whom Issue To</label>
             <div class="col-sm-4">
                 <asp:DropDownList ID="drpUserId" runat="server" CssClass="form-control drp" >
                     <asp:ListItem Text="Select User" Value="-1" Selected="True"></asp:ListItem>
                 </asp:DropDownList>
                 <asp:RequiredFieldValidator ID="rfvdrpUserId" runat="server" CssClass="lbl" 
-                    ErrorMessage="Select User" InitialValue="-1" ControlToValidate="drpUserId"
+                    ErrorMessage="Select whom issue to" InitialValue="-1" ControlToValidate="drpUserId"
                     Display="Dynamic" ValidationGroup="valIssueMaster"></asp:RequiredFieldValidator>
             </div>
         </div>
         <%--Issue Date--%>
         <div class="mb-4 row">
             <label for="txtIssueDate" class="col-sm-2 txt"><span class="RequiredField">* </span>Issue Date</label>
-            <div class="col-sm-3">
+            <div class="col-sm-2">
                 <asp:TextBox ID="txtIssueDate" runat="server" CssClass="form-control" placeholder="dd-MMM-yyyy"></asp:TextBox>
             </div>
-            <div class="col-sm-1">
+            <div class="col-sm-2">
                 <asp:ImageButton ID="imgPopup" ImageUrl="../Images/cal.png" Width="35px" Height="35px" ImageAlign="Bottom"
                     runat="server" />
                 <ajaxToolkit:CalendarExtender ID="Calendar1" PopupButtonID="imgPopup" runat="server" TargetControlID="txtIssueDate"
                     Format="dd-MMM-yyyy"></ajaxToolkit:CalendarExtender>
-            </div>
-            <asp:RequiredFieldValidator ID="rfvIssueDate" runat="server" CssClass="lbl" ErrorMessage="Enter Issued Date"
+                       <asp:RequiredFieldValidator ID="rfvIssueDate" runat="server" CssClass="lbl" ErrorMessage="Enter Issued Date"
                 ControlToValidate="txtIssueDate" Display="Dynamic" ValidationGroup="valIssueMaster"></asp:RequiredFieldValidator>
+            </div>
+     
        <%-- Issue Quantity--%>
             <label for="txtIssueQuantity" class="col-sm-2 txt"><span class="RequiredField">* </span>Issue Quantity</label>
             <div class="col-sm-4">
                 <asp:TextBox ID="txtIssueQuantity" runat="server" CssClass="form-control" placeholder="Quantity Number"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="rfvCategoryDescription" runat="server" CssClass="lbl" ErrorMessage="Enter Issue Quantity"
-                    ControlToValidate="txtIssueQuantity" Display="Dynamic" ValidationGroup="valCategoryMaster"></asp:RequiredFieldValidator>
+                <asp:RequiredFieldValidator ID="rfvIssueQuantity" runat="server" CssClass="lbl" ErrorMessage="Enter Issue Quantity"
+                    ControlToValidate="txtIssueQuantity" Display="Dynamic" ValidationGroup="valIssueMaster"></asp:RequiredFieldValidator>
+                    <asp:RegularExpressionValidator ID="revIssueQuantity" CssClass="lbl" ControlToValidate="txtIssueQuantity" runat="server"
+                    ErrorMessage="Only Numbers allowed" ValidationExpression="\d+" ValidationGroup="valIssueMaster"></asp:RegularExpressionValidator>
             </div>
        </div>
         <%-- Issuer Remarks --%>
