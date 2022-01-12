@@ -16,19 +16,19 @@
         <div class="col-md-4">
             <p>
                 &nbsp;<a href="InventorySystem/CategoryMaster.aspx" class="btn btn-primary btn-lg">Category Master &raquo;</a>
-                For Creating/Editing Categories and Subcategories
+                For Creating/Editing/Viewing Categories and Subcategories
             </p>
         </div>
         <div class="col-md-4">
             <p>
                 &nbsp;<a href="InventorySystem/InventoryEntries.aspx" class="btn btn-primary btn-lg">Inventory Entries &raquo;</a>
-                For Making Inventory Entries
+                For Making/Viewing/Editing Inventory Entries
             </p>
         </div>
         <div class="col-md-4">
             <p>
                 &nbsp;<a href="InventorySystem/IssueMaster.aspx" class="btn btn-primary btn-lg">Issue Master &raquo;</a>
-                For Viewing Issue Details
+                For Making/Editing/Viewing Issue Details
             </p>
         </div>
         </div>

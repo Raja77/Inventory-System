@@ -31,22 +31,76 @@ namespace Inventory {
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvAddIssueMasterDetails;
         
         /// <summary>
-        /// txtIssuedTo control.
+        /// drpInventoryRegisterNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtIssuedTo;
+        protected global::System.Web.UI.WebControls.DropDownList drpInventoryRegisterNo;
         
         /// <summary>
-        /// rfvCategoryName control.
+        /// rfvdrpInventoryRegisterNo control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCategoryName;
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvdrpInventoryRegisterNo;
+        
+        /// <summary>
+        /// drpInventoryPageNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpInventoryPageNo;
+        
+        /// <summary>
+        /// rfvdrpInventoryPageNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvdrpInventoryPageNo;
+        
+        /// <summary>
+        /// drpInventoryId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpInventoryId;
+        
+        /// <summary>
+        /// rfvdrpInventoryId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvdrpInventoryId;
+        
+        /// <summary>
+        /// drpUserId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList drpUserId;
+        
+        /// <summary>
+        /// rfvdrpUserId control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvdrpUserId;
         
         /// <summary>
         /// txtIssueDate control.
@@ -103,33 +157,6 @@ namespace Inventory {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvCategoryDescription;
         
         /// <summary>
-        /// drpInventory control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.DropDownList drpInventory;
-        
-        /// <summary>
-        /// rfvdrpInventory control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvdrpInventory;
-        
-        /// <summary>
-        /// chkIsReceived control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkIsReceived;
-        
-        /// <summary>
         /// txtIssuerRemarks control.
         /// </summary>
         /// <remarks>
@@ -146,6 +173,15 @@ namespace Inventory {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvIssuerRemarks;
+        
+        /// <summary>
+        /// chkIsReceived control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.CheckBox chkIsReceived;
         
         /// <summary>
         /// txtReceiptRemarks control.
@@ -182,24 +218,6 @@ namespace Inventory {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label lblMsgSuccess;
-        
-        /// <summary>
-        /// btnAddIssueMaster control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnAddIssueMaster;
-        
-        /// <summary>
-        /// Label1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
         
         /// <summary>
         /// grdIssueMaster control.
