@@ -231,6 +231,9 @@ namespace Inventory
                 sqlCmd.Parameters.AddWithValue("@CategoryId", drpCategory.SelectedItem.Value);
                 sqlCmd.Parameters.AddWithValue("@SubCategoryId", drpSubCategory.SelectedItem.Value);
                 sqlCmd.Parameters.AddWithValue("@InventoryName", txtInventoryName.Text);
+                sqlCmd.Parameters.AddWithValue("@InventoryDescription1", txtInventoryDescription1.Text);
+                sqlCmd.Parameters.AddWithValue("@InventoryDescription2", txtInventoryDescription2.Text);
+                sqlCmd.Parameters.AddWithValue("@InventoryDescription3", txtInventoryDescription3.Text);
                 sqlCmd.Parameters.AddWithValue("@InventoryDescription", txtInventoryDescription.Text);
                 sqlCmd.Parameters.AddWithValue("@PurchasedFrom", txtPurchasedFrom.Text);
                 sqlCmd.Parameters.AddWithValue("@PurchaseDate", txtPurchaseDate.Text);
@@ -321,6 +324,9 @@ namespace Inventory
             drpCategory.SelectedItem.Value = "-1";
             drpSubCategory.SelectedItem.Value = "-1";
             txtInventoryName.Text = string.Empty;
+            txtInventoryDescription1.Text = string.Empty;
+            txtInventoryDescription2.Text = string.Empty;
+            txtInventoryDescription3.Text = string.Empty;
             txtInventoryDescription.Text = string.Empty;
             txtPurchasedFrom.Text = string.Empty;
             txtPurchaseDate.Text = string.Empty;
@@ -397,6 +403,9 @@ namespace Inventory
             Label InventoryId = grdInventoryMaster.Rows[e.RowIndex].FindControl("lblItemId") as Label;
             Label CategoryId = grdInventoryMaster.Rows[e.RowIndex].FindControl("lblCategoryId") as Label;
             TextBox InventoryName = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtInventoryName") as TextBox;
+            TextBox InventoryDescription1 = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtInventoryDescription1") as TextBox;
+            TextBox InventoryDescription2 = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtInventoryDescription2") as TextBox;
+            TextBox InventoryDescription3 = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtInventoryDescription3") as TextBox;
             TextBox InventoryDescription = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtInventoryDescription") as TextBox;
             TextBox PurchaseDate = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtPurchaseDate") as TextBox;
             TextBox PurchasedFrom = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtPurchasedFrom") as TextBox;
@@ -423,6 +432,9 @@ namespace Inventory
                 sqlCmd.Parameters.AddWithValue("@InventoryId", InventoryId.Text);
                 sqlCmd.Parameters.AddWithValue("@CategoryId", CategoryId.Text);
                 sqlCmd.Parameters.AddWithValue("@InventoryName", InventoryName.Text);
+                sqlCmd.Parameters.AddWithValue("@InventoryDescription1", InventoryDescription1.Text);
+                sqlCmd.Parameters.AddWithValue("@InventoryDescription2", InventoryDescription2.Text);
+                sqlCmd.Parameters.AddWithValue("@InventoryDescription3", InventoryDescription3.Text);
                 sqlCmd.Parameters.AddWithValue("@InventoryDescription", InventoryDescription.Text);
                 sqlCmd.Parameters.AddWithValue("@PurchaseDate", PurchaseDate.Text);
                 sqlCmd.Parameters.AddWithValue("@PurchasedFrom", PurchasedFrom.Text);
@@ -488,6 +500,9 @@ namespace Inventory
                 sqlCmd.Parameters.AddWithValue("@CategoryId", drpCategory.SelectedItem.Value);
                 sqlCmd.Parameters.AddWithValue("@SubCategoryId", drpSubCategory.SelectedItem.Value);
                 sqlCmd.Parameters.AddWithValue("@InventoryName", txtInventoryName.Text);
+                sqlCmd.Parameters.AddWithValue("@InventoryDescription1", txtInventoryDescription1.Text);
+                sqlCmd.Parameters.AddWithValue("@InventoryDescription2", txtInventoryDescription2.Text);
+                sqlCmd.Parameters.AddWithValue("@InventoryDescription3", txtInventoryDescription3.Text);
                 sqlCmd.Parameters.AddWithValue("@InventoryDescription", txtInventoryDescription.Text);
                 sqlCmd.Parameters.AddWithValue("@PurchasedFrom",  txtPurchasedFrom.Text);
                 sqlCmd.Parameters.AddWithValue("@PurchaseDate", txtPurchaseDate.Text);

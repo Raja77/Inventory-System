@@ -62,20 +62,55 @@
             </div>
         </div>
         <br />
-        <div class="mb-4 row">
-            <label for="txtInventoryName" class="col-sm-2 " style="text-align: right;"><span id="SpanInventoryName" runat="server" class="RequiredField">* </span>Item Name:</label>
-            <div class="col-sm-4">
-                <asp:TextBox ID="txtInventoryName" runat="server" CssClass="form-control"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="rfvtxtInventoryName" runat="server" CssClass="lbl" ErrorMessage="Enter Item Name"
-                    ControlToValidate="txtInventoryName" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
+        <div class="row">
+            <div class="col-sm-6">
+                <label for="txtInventoryName" class="col-sm-4 " style="text-align: right;"><span id="SpanInventoryName" runat="server" class="RequiredField">* </span>Item Name:</label>
+                <div class="col-sm-8">
+                    <asp:TextBox ID="txtInventoryName" runat="server" CssClass="form-control"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="rfvtxtInventoryName" runat="server" CssClass="lbl" ErrorMessage="Enter Item Name"
+                        ControlToValidate="txtInventoryName" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
+                </div>
+                <br />
+                <label for="txtInventoryDescription1" class="col-sm-4 " style="text-align: right;">
+                    <span id="Span10" runat="server" class="RequiredField">* </span>Item Label 1:</label>
+                <div class="col-sm-8">
+                    <asp:TextBox ID="txtInventoryDescription1" runat="server" CssClass="form-control"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="rfvtxtInventoryDescription1" runat="server" CssClass="lbl" ErrorMessage="Enter Item Label 1"
+                        ControlToValidate="txtInventoryDescription1" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
+                </div>
+                <br />
+                <label for="txtInventoryDescription2" class="col-sm-4 " style="text-align: right;">
+                    <span id="Span11" runat="server" class="RequiredField">* </span>Item Label 2:</label>
+                <div class="col-sm-8">
+                    <asp:TextBox ID="txtInventoryDescription2" runat="server" CssClass="form-control"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="rfvtxtInventoryDescription2" runat="server" CssClass="lbl" ErrorMessage="Enter Label2"
+                        ControlToValidate="txtInventoryDescription2" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
+                </div>
+                <br />
+                <label for="txtInventoryDescription3" class="col-sm-4 " style="text-align: right;">
+                    <span id="Span12" runat="server" class="RequiredField">* </span>Item Label 3</label>
+                <div class="col-sm-8">
+                    <asp:TextBox ID="txtInventoryDescription3" runat="server" CssClass="form-control"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="rfvtxtInventoryDescription3" runat="server" CssClass="lbl" ErrorMessage="Enter Label3"
+                        ControlToValidate="txtInventoryDescription3" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
+                </div>
             </div>
-
+            <div class="col-sm-6">
+                <label for="txtInventoryDescription" class="col-sm-4 " style="text-align: right;"><span id="spInventoryDescription" runat="server" class="RequiredField">* </span>Inventory Description:</label>
+                <div class="col-sm-8">
+                    <asp:TextBox ID="txtInventoryDescription" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="6" Columns="4"></asp:TextBox>
+                    <asp:RequiredFieldValidator ID="rfvInventoryDescription" runat="server" CssClass="lbl" ErrorMessage="Enter Inventory Description"
+                        ControlToValidate="txtInventoryDescription" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
+                </div>
+            </div>
+        </div>
+        <br />
+        <div class="row">
             <label for="txtPurchaseDate" class="col-sm-2" style="text-align: right;">Purchase Date (dd-MMM-yyyy):</label>
-
-            <div class="col-sm-2">
+            <div class="col-sm-3">
                 <asp:TextBox ID="txtPurchaseDate" runat="server" CssClass="form-control" placeholder="dd-MMM-yyyy"></asp:TextBox>
             </div>
-            <div class="col-sm-2">
+            <div class="col-sm-1">
                 <asp:ImageButton ID="imgPurchaseDate" ImageUrl="../Images/cal.png" Width="35px" Height="35px" ImageAlign="Bottom"
                     runat="server" />
                 <ajaxToolkit:CalendarExtender ID="calPurchaseDate" PopupButtonID="imgPopup" runat="server" TargetControlID="txtPurchaseDate"
@@ -83,20 +118,11 @@
                 <asp:RequiredFieldValidator ID="rfvPurchaseDate" runat="server" CssClass="lbl" ErrorMessage="Enter Purchase Date"
                     ControlToValidate="txtPurchaseDate" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
             </div>
-        </div>
-        <br />
-        <div class="mb-4 row">
             <label for="txtPurchasedFrom" class="col-sm-2 " style="text-align: right;"><span id="Span1" runat="server" class="RequiredField">* </span>Purchased From:</label>
             <div class="col-sm-4">
-                <asp:TextBox ID="txtPurchasedFrom" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="6" Columns="4"></asp:TextBox>
+                <asp:TextBox ID="txtPurchasedFrom" runat="server" CssClass="form-control" ></asp:TextBox>
                 <asp:RequiredFieldValidator ID="rfvPurchasedFrom" runat="server" CssClass="lbl" ErrorMessage="Enter Purchased From"
                     ControlToValidate="txtPurchasedFrom" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
-            </div>
-            <label for="txtInventoryDescription" class="col-sm-2 " style="text-align: right;"><span id="spInventoryDescription" runat="server" class="RequiredField">* </span>Inventory Description:</label>
-            <div class="col-sm-4">
-                <asp:TextBox ID="txtInventoryDescription" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="6" Columns="4"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="rfvInventoryDescription" runat="server" CssClass="lbl" ErrorMessage="Enter Inventory Description"
-                    ControlToValidate="txtInventoryDescription" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
             </div>
         </div>
         <br />
@@ -345,19 +371,38 @@
                 <asp:TemplateField HeaderText="S No." HeaderStyle-Width="5%" HeaderStyle-HorizontalAlign="Left">
                     <ItemTemplate><%# Container.DataItemIndex + 1 + "." %>
                         <asp:Label ID="lblItemId" runat="server" Text='<%#Eval("InventoryId") %>' Visible="false"></asp:Label>
+                        <ItemTemplate><asp:Label ID="lblCategoryId" runat="server" Text='<%#Eval("CategoryId") %>' Visible="false"></asp:Label></ItemTemplate>
                     </ItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Item Name">
                     <ItemTemplate><asp:Label ID="lblInventoryName" runat="server" Text='<%#Eval("InventoryName") %>'></asp:Label></ItemTemplate>
                     <EditItemTemplate><asp:TextBox ID="txtInventoryName" runat="server" Text='<%#Eval("InventoryName") %>'></asp:TextBox></EditItemTemplate>
                 </asp:TemplateField>
-                    <asp:TemplateField HeaderText="Category">
-                    <ItemTemplate><asp:Label ID="lblCategoryName" runat="server" Text='<%#Eval("CategoryName") %>'></asp:Label></ItemTemplate>
+                <asp:TemplateField HeaderText="Item Category">
+                    <ItemTemplate><asp:Label ID="lblItemCategory" runat="server" Text='<%#Eval("CategoryName") %>'></asp:Label></ItemTemplate>
+                    <%--<EditItemTemplate><asp:TextBox ID="txtItemCategory" runat="server" Text='<%#Eval("CategoryName") %>'></asp:TextBox></EditItemTemplate>--%>
+                </asp:TemplateField>
+                   <%-- <asp:TemplateField HeaderText="Category">
+                    <ItemTemplate><asp:Label ID="lblCategoryNames" runat="server" Text='<%#Eval("CategoryId") %>'></asp:Label></ItemTemplate>
+                    <ItemTemplate><asp:Label ID="lblCategoryId" runat="server" Text='<%#Eval("CategoryId") %>' Visible="false"></asp:Label></ItemTemplate>
+                </asp:TemplateField>--%>
                     <%--<EditItemTemplate><asp:TextBox ID="txtCategoryName" runat="server" Text='<%#Eval("CategoryName") %>'></asp:TextBox></EditItemTemplate>--%>
                 <%--</asp:TemplateField>
                     <asp:TemplateField HeaderText="Sub Category">
                     <ItemTemplate><asp:Label ID="lblSubCategoryId" runat="server" Text='<%#Eval("SubCategoryId") %>'></asp:Label></ItemTemplate>
                     <%--<EditItemTemplate><asp:TextBox ID="txtSubCategoryName" runat="server" Text='<%#Eval("SubCategoryName") %>'></asp:TextBox></EditItemTemplate>--%>
+                
+                <asp:TemplateField HeaderText="Label 1">
+                    <ItemTemplate><asp:Label ID="lblInventoryDescription1" runat="server" Text='<%#Eval("InventoryDescription1") %>'></asp:Label></ItemTemplate>
+                    <EditItemTemplate><asp:TextBox ID="txtInventoryDescription1" runat="server" Text='<%#Eval("InventoryDescription1") %>'></asp:TextBox></EditItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Label 2">
+                    <ItemTemplate><asp:Label ID="lblInventoryDescription2" runat="server" Text='<%#Eval("InventoryDescription2") %>'></asp:Label></ItemTemplate>
+                    <EditItemTemplate><asp:TextBox ID="txtInventoryDescription2" runat="server" Text='<%#Eval("InventoryDescription2") %>'></asp:TextBox></EditItemTemplate>
+                </asp:TemplateField>
+                <asp:TemplateField HeaderText="Label 3">
+                    <ItemTemplate><asp:Label ID="lblInventoryDescription3" runat="server" Text='<%#Eval("InventoryDescription3") %>'></asp:Label></ItemTemplate>
+                    <EditItemTemplate><asp:TextBox ID="txtInventoryDescription3" runat="server" Text='<%#Eval("InventoryDescription3") %>'></asp:TextBox></EditItemTemplate>
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Description">
                     <ItemTemplate><asp:Label ID="lblInventoryDescription" runat="server" Text='<%#Eval("InventoryDescription") %>'></asp:Label></ItemTemplate>
