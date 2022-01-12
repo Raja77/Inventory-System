@@ -36,26 +36,26 @@
     <asp:Label ID="lblError" runat="server" CssClass="lbl" Font-Size="14"></asp:Label>
     <div id="dvInventoryDetails" runat="server">
         <br />
-        
-       <%-- <p style="font-size: 18px; background-color: lightpink; color: black;">
+
+        <%-- <p style="font-size: 18px; background-color: lightpink; color: black;">
             <strong style="font-size: 20px;">Disclamer: </strong><i>Fill the details properly.</i>
         </p>--%>
-        <h3 style="background-color: lightgray; ; padding:10px;"><strong>Inventory Entries</strong></h3>
+        <h3 style="background-color: lightgray; padding: 10px;"><strong>Inventory Entries</strong></h3>
         <hr />
         <div class="mb-4 row">
             <label for="drpCategory" class="col-sm-2 " style="text-align: right;"><span class="RequiredField">* </span>Select Category:</label>
             <div class="col-sm-4">
                 <asp:DropDownList ID="drpCategory" runat="server" AutoPostBack="true" CssClass="form-control drp" OnSelectedIndexChanged="drpCategory_SelectedIndexChanged1">
-                    <asp:ListItem Text="Select Category" Value="-1"></asp:ListItem>
+                    <asp:ListItem Text="Select Category" Selected="True" Value="-1"></asp:ListItem>
                 </asp:DropDownList>
                 <asp:RequiredFieldValidator ID="rfvdrpCategory" runat="server" CssClass="lbl" ErrorMessage="Select Category" InitialValue="-1"
                     ControlToValidate="drpCategory" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
-
+                 
             </div>
             <label for="drpSubCategory" class="col-sm-2 " style="text-align: right;"><span class="RequiredField">* </span>Select Sub Category:</label>
             <div class="col-sm-4">
                 <asp:DropDownList ID="drpSubCategory" runat="server" CssClass="form-control drp">
-                    <asp:ListItem Text="Select Sub Category" Value="-1"></asp:ListItem>
+                    <asp:ListItem Text="Select Sub Category" Selected="True" Value="-1"></asp:ListItem>
                 </asp:DropDownList>
                 <asp:RequiredFieldValidator ID="rfvdrpSubCategory" runat="server" CssClass="lbl" ErrorMessage="Select Sub Category" InitialValue="-1"
                     ControlToValidate="drpSubCategory" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
@@ -72,28 +72,31 @@
                 </div>
                 <br />
                 <label for="txtInventoryDescription1" class="col-sm-4 " style="text-align: right;">
-                    <span id="Span10" runat="server" class="RequiredField">* </span>Item Label 1:</label>
+                    <%--<span id="Span10" runat="server" class="RequiredField">* </span>--%>
+                    Item Label 1:</label>
                 <div class="col-sm-8">
-                    <asp:TextBox ID="txtInventoryDescription1" runat="server" CssClass="form-control"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="rfvtxtInventoryDescription1" runat="server" CssClass="lbl" ErrorMessage="Enter Item Label 1"
+                    <asp:TextBox ID="txtInventoryDescription1" runat="server" CssClass="form-control" placeholder="Item Description Label 1 (if any)"></asp:TextBox>
+                    <%-- <asp:RequiredFieldValidator ID="rfvtxtInventoryDescription1" runat="server" CssClass="lbl" ErrorMessage="Enter Item Label 1"
                         ControlToValidate="txtInventoryDescription1" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
-                </div>
+               --%> </div>
                 <br />
                 <label for="txtInventoryDescription2" class="col-sm-4 " style="text-align: right;">
-                    <span id="Span11" runat="server" class="RequiredField">* </span>Item Label 2:</label>
+                    <%-- <span id="Span11" runat="server" class="RequiredField">* </span>--%>
+                    Item Label 2:</label>
                 <div class="col-sm-8">
-                    <asp:TextBox ID="txtInventoryDescription2" runat="server" CssClass="form-control"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="rfvtxtInventoryDescription2" runat="server" CssClass="lbl" ErrorMessage="Enter Label2"
+                    <asp:TextBox ID="txtInventoryDescription2" runat="server" CssClass="form-control" placeholder="Item Description Label 2 (if any)"></asp:TextBox>
+                    <%--  <asp:RequiredFieldValidator ID="rfvtxtInventoryDescription2" runat="server" CssClass="lbl" ErrorMessage="Enter Label2"
                         ControlToValidate="txtInventoryDescription2" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
-                </div>
+                --%></div>
                 <br />
                 <label for="txtInventoryDescription3" class="col-sm-4 " style="text-align: right;">
-                    <span id="Span12" runat="server" class="RequiredField">* </span>Item Label 3</label>
+                    <%--    <span id="Span12" runat="server" class="RequiredField">* </span>--%>
+                    Item Label 3</label>
                 <div class="col-sm-8">
-                    <asp:TextBox ID="txtInventoryDescription3" runat="server" CssClass="form-control"></asp:TextBox>
-                    <asp:RequiredFieldValidator ID="rfvtxtInventoryDescription3" runat="server" CssClass="lbl" ErrorMessage="Enter Label3"
+                    <asp:TextBox ID="txtInventoryDescription3" runat="server" CssClass="form-control" placeholder="Item Description Label 3 (if any)"></asp:TextBox>
+                    <%-- <asp:RequiredFieldValidator ID="rfvtxtInventoryDescription3" runat="server" CssClass="lbl" ErrorMessage="Enter Label3"
                         ControlToValidate="txtInventoryDescription3" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
-                </div>
+                --%></div>
             </div>
             <div class="col-sm-6">
                 <label for="txtInventoryDescription" class="col-sm-4 " style="text-align: right;"><span id="spInventoryDescription" runat="server" class="RequiredField">* </span>Inventory Description:</label>
@@ -120,7 +123,7 @@
             </div>
             <label for="txtPurchasedFrom" class="col-sm-2 " style="text-align: right;"><span id="Span1" runat="server" class="RequiredField">* </span>Purchased From:</label>
             <div class="col-sm-4">
-                <asp:TextBox ID="txtPurchasedFrom" runat="server" CssClass="form-control" ></asp:TextBox>
+                <asp:TextBox ID="txtPurchasedFrom" runat="server" CssClass="form-control"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="rfvPurchasedFrom" runat="server" CssClass="lbl" ErrorMessage="Enter Purchased From"
                     ControlToValidate="txtPurchasedFrom" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
             </div>
@@ -132,6 +135,8 @@
                 <asp:TextBox ID="txtInventoryRegisterNo" runat="server" CssClass="form-control"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="rfvtxtInventoryRegisterNo" runat="server" CssClass="lbl" ErrorMessage="Enter Register No"
                     ControlToValidate="txtInventoryRegisterNo" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
+                     <asp:RegularExpressionValidator ID="revRegisterNo" CssClass="lbl" ControlToValidate="txtInventoryRegisterNo" runat="server"
+                    ErrorMessage="Only Numbers allowed" ValidationExpression="\d+" ValidationGroup="VerifyInventory"></asp:RegularExpressionValidator>
             </div>
             <label for="txtInventoryPageNo" class="col-sm-2 " style="text-align: right;"><span id="Span9" runat="server" class="RequiredField">* </span>Register Page No:</label>
             <div class="col-sm-4">
@@ -204,18 +209,18 @@
             <div class="col-sm-2">
                 <asp:CheckBox ID="chkIsConsumable" runat="server" Style="margin-top: 10px;" />
             </div>
-            <br/>
+            <br />
             <label for="chkIsIssue" class="col-sm-4 txt">
                 Do you want to add Issue details
             </label>
             <div class="col-sm-2">
-                <asp:CheckBox ID="chkAddIssueDetails" runat="server" AutoPostBack="true" OnCheckedChanged="chkAddIssueDetails_CheckedChanged"/>
+                <asp:CheckBox ID="chkAddIssueDetails" runat="server" AutoPostBack="true" OnCheckedChanged="chkAddIssueDetails_CheckedChanged" />
             </div>
         </div>
         <br />
         <div id="dvAddIssueMasterDetails" runat="server" visible="false">
-        <h3 style="background-color: lightgray; padding:10px;"><strong>Issue Entries</strong></h3>
-        <hr />
+            <h3 style="background-color: lightgray; padding: 10px;"><strong>Issue Entries</strong></h3>
+            <hr />
 
             <div class="mb-4 row">
                 <label for="drpIssuedTo" class="col-sm-2 " style="text-align: right;"><span class="RequiredField">* </span>Select Issue To:</label>
@@ -246,8 +251,8 @@
                     <asp:TextBox ID="txtIssueQuantity" runat="server" CssClass="form-control" placeholder="Quantity Number"></asp:TextBox>
                     <asp:RequiredFieldValidator ID="rfvIssueQuantity" runat="server" CssClass="lbl" ErrorMessage="Enter Issue Quantity"
                         ControlToValidate="txtIssueQuantity" Display="Dynamic" ValidationGroup="VerifyIssue"></asp:RequiredFieldValidator>
-                     <asp:RegularExpressionValidator ID="revIssueQuantity" CssClass="lbl" ControlToValidate="txtIssueQuantity" runat="server"
-                    ErrorMessage="Only Numbers allowed" ValidationExpression="\d+" ValidationGroup="VerifyIssue"></asp:RegularExpressionValidator>
+                    <asp:RegularExpressionValidator ID="revIssueQuantity" CssClass="lbl" ControlToValidate="txtIssueQuantity" runat="server"
+                        ErrorMessage="Only Numbers allowed" ValidationExpression="\d+" ValidationGroup="VerifyIssue"></asp:RegularExpressionValidator>
                 </div>
                 <label for="chkSubCategory" class="col-sm-2 txt">
                     Is Received
@@ -261,10 +266,10 @@
                 <label for="txtIssuerRemarks" class="col-sm-2 txt"><span class="RequiredField">*</span>Issuer Remarks</label>
                 <div class="col-sm-4">
                     <asp:TextBox ID="txtIssuerRemarks" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="6" Columns="4">OK</asp:TextBox>
-                     <asp:RequiredFieldValidator ID="rfvtxtIssuerRemarks" runat="server" CssClass="lbl" ErrorMessage="Enter Issuer Remarks"
+                    <asp:RequiredFieldValidator ID="rfvtxtIssuerRemarks" runat="server" CssClass="lbl" ErrorMessage="Enter Issuer Remarks"
                         ControlToValidate="txtIssuerRemarks" Display="Dynamic" ValidationGroup="VerifyIssue"></asp:RequiredFieldValidator>
                 </div>
-                <label for="txtReceiptRemarks" class="col-sm-2 txt"><span class="RequiredField"> </span>Receipt Remarks</label>
+                <label for="txtReceiptRemarks" class="col-sm-2 txt"><span class="RequiredField"></span>Receipt Remarks</label>
                 <div class="col-sm-4">
                     <asp:TextBox ID="txtReceiptRemarks" runat="server" CssClass="form-control" TextMode="MultiLine" Rows="6" Columns="4">Not Yet recieved</asp:TextBox>
 
@@ -272,38 +277,40 @@
             </div>
             <br />
             <%--Multiple Issue Entries Button--%>
-                 <div class="col-sm-2">
-                      <asp:LinkButton ID="lnkAddIssueDetail" runat="server" Text="Add Issue Detail" ValidationGroup="VerifyIssue"
-                OnClick="AddIssueDetail_Click" CssClass="btn btn-primary txt" ToolTip="Click here to add Issue Details(one by one) as many as you want!"/>
-                 </div>
+            <div class="col-sm-2">
+                <asp:LinkButton ID="lnkAddIssueDetail" runat="server" Text="Add Issue Detail" ValidationGroup="VerifyIssue"
+                    OnClick="AddIssueDetail_Click" CssClass="btn btn-primary txt" ToolTip="Click here to add Issue Details(one by one) as many as you want!" />
+            </div>
         </div>
         <%--Multiple Issue Entries SubGrid View grdIssueDetail--%>
-            <div style="overflow-x: auto;">
-                <asp:GridView ID="grdIssueDetailEntry" CellPadding="0" CellSpacing="0" CssClass="table" BorderColor="Aqua"
-                    GridLines="None" runat="server" AutoGenerateColumns="false">
-                    <HeaderStyle />
-                    <EmptyDataTemplate>
-                        <label class="lbl">Item has not been issued yet</label>
-                    </EmptyDataTemplate>
-                    <AlternatingRowStyle CssClass="alt" />
-                    <Columns>
-                          <asp:TemplateField HeaderText="S No." HeaderStyle-Width="5%" HeaderStyle-HorizontalAlign="Left">
-                                        <ItemTemplate>
-                                            <%# Container.DataItemIndex + 1 + "." %>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                        <asp:BoundField DataField="UserId" HeaderText="Issued To" ItemStyle-Width="120" />
-                        <asp:BoundField DataField="IssueDate" HeaderText="Date of Issue" ItemStyle-Width="120" />
-                        <asp:BoundField DataField="IssueQuantity" HeaderText="Quantity" ItemStyle-Width="120" />
-                        <asp:BoundField DataField="IsReceived" HeaderText="Is Recieved" ItemStyle-Width="120" />
-                        <asp:BoundField DataField="IssuerRemarks" HeaderText="Issuer Remarks" ItemStyle-Width="120" />
-                        <asp:BoundField DataField="ReceiptRemarks" HeaderText="Receiver Remarks" ItemStyle-Width="120" />
-                    </Columns>
-                </asp:GridView>
-            </div>
+        <div style="overflow-x: auto;">
+            <asp:GridView ID="grdIssueDetailEntry" CellPadding="0" CellSpacing="0" CssClass="table" BorderColor="Aqua"
+                GridLines="None" runat="server" AutoGenerateColumns="false">
+                <HeaderStyle />
+                <EmptyDataTemplate>
+                    <label class="lbl">Item has not been issued yet</label>
+                </EmptyDataTemplate>
+                <AlternatingRowStyle CssClass="alt" />
+                <Columns>
+                    <asp:TemplateField HeaderText="S No." HeaderStyle-Width="5%" HeaderStyle-HorizontalAlign="Left">
+                        <ItemTemplate>
+                            <%# Container.DataItemIndex + 1 + "." %>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:BoundField DataField="UserId" HeaderText="Issued To" ItemStyle-Width="120" />
+                    <asp:BoundField DataField="IssueDate" HeaderText="Date of Issue" ItemStyle-Width="120" />
+                    <asp:BoundField DataField="IssueQuantity" HeaderText="Quantity" ItemStyle-Width="120" />
+                    <asp:BoundField DataField="IsReceived" HeaderText="Is Recieved" ItemStyle-Width="120" />
+                    <asp:BoundField DataField="IssuerRemarks" HeaderText="Issuer Remarks" ItemStyle-Width="120" />
+                    <asp:BoundField DataField="ReceiptRemarks" HeaderText="Receiver Remarks" ItemStyle-Width="120" />
+                </Columns>
+            </asp:GridView>
+        </div>
         <br />
         <%--Submit Inventory Details--%>
         <div class="mb-4 row">
+            <div class="col-sm-4"></div>
+            <div class="col-sm-4"></div>
             <div class="col-sm-4 txt">
                 <asp:Button ID="btnSubmitInventoryEntries" runat="server" CssClass="btn btn-primary txt" Text="Submit Details" ValidationGroup="VerifyInventory"
                     OnClick="btnSubmit_Click" VaidationGroup="verifyInventory" ToolTip="Click here to Submit Inventory Details" />
@@ -314,173 +321,253 @@
     </div>
     <%--New Grid for Issue Details as well as Inventory--%>
     <div id="dvListInventoryDetails" runat="server">
-    <div class="mb-4 row">
-        <label for="btnSubmit" class="col-sm-3">
-            <h4>Check Inventory Details</h4>
-        </label>
-        <div class="col-sm-9 txt">
-            <asp:Button ID="btnAddInventory" runat="server" Text="Add New Item" CssClass="btn btn-primary txt" ToolTip="Click here to Add New Item Details"
-                OnClick="btnAddInventory_Click" Visible="false  " />
+        <div class="mb-4 row">
+            <label for="btnSubmit" class="col-sm-3">
+                <h4>Check Inventory Details</h4>
+            </label>
+            <div class="col-sm-9 txt">
+                <asp:Button ID="btnAddInventory" runat="server" Text="Add New Item" CssClass="btn btn-primary txt" ToolTip="Click here to Add New Item Details"
+                    OnClick="btnAddInventory_Click" Visible="false  " />
+            </div>
+            <asp:Label ID="Label1" runat="server" Text="Data Saved Successfully" Visible="false"></asp:Label>
         </div>
-        <asp:Label ID="Label1" runat="server" Text="Data Saved Successfully" Visible="false"></asp:Label>
-    </div>
-    <hr />
-    <div style="overflow-x: auto;">
-        <asp:GridView ID="grdInventoryMaster" CellPadding="0" CellSpacing="0" CssClass="table table-bordered table-striped"
-            AllowPaging="true" OnPageIndexChanging="grdInventoryMaster_PageIndexChanging" OnRowDataBound="grdInventoryMaster_RowDataBound"
-            DataKeyNames="InventoryId" GridLines="None" runat="server" AutoGenerateColumns="false" PageSize="10"
-            OnRowCancelingEdit="grdInventoryMaster_RowCancelingEdit" OnRowEditing="grdInventoryMaster_RowEditing"
-            OnRowUpdating="grdInventoryMaster_RowUpdating">
-            
-            <HeaderStyle />
-            <EmptyDataTemplate>
-                <label class="lbl">No Item found in our system !</label>
-            </EmptyDataTemplate>
-            <AlternatingRowStyle CssClass="alt" />
-            <Columns>
-                <%--Template Field for Issue Details--%>
-                <asp:TemplateField ItemStyle-Width="10px">
-                    <ItemTemplate>
-                        <img alt="" style="cursor: pointer" src="../Images/plusIcon.png" />
-                        <asp:Panel ID="pnlIssueDetails" runat="server" Style="display: none">
-                            <asp:GridView ID="grdIssueDetailDisplay" runat="server" AutoGenerateColumns="false" DataKeyNames="IssueId"
-                                CssClass="ChildGrid table table-bordered table-striped">
-                                <HeaderStyle />
-                                <EmptyDataTemplate>
-                                    <label class="lbl">No Issue details found for this item !</label>
-                                </EmptyDataTemplate>
-                                <AlternatingRowStyle CssClass="alt" />
-                                <Columns>
-                                    <asp:TemplateField HeaderText="S No." HeaderStyle-Width="5%" HeaderStyle-HorizontalAlign="Left">
-                                        <ItemTemplate>
-                                            <%# Container.DataItemIndex + 1 + "." %>
-                                        </ItemTemplate>
-                                    </asp:TemplateField>
-                                    <asp:BoundField DataField="UserName" HeaderText="Issued To" ItemStyle-Width="10%" ><HeaderStyle /></asp:BoundField>
-                                    <asp:BoundField DataField="IssueDate" HeaderText="Date of Issue" ItemStyle-Width="20%" ><HeaderStyle /></asp:BoundField>
-                                    <asp:BoundField DataField="IssueQuantity" HeaderText="Quantity" ItemStyle-Width="10%" ><HeaderStyle /></asp:BoundField>
-                                    <asp:BoundField DataField="IsReceived" HeaderText="Is Recieved" ItemStyle-Width="10%" ><HeaderStyle /></asp:BoundField>
-                                    <asp:BoundField DataField="IssuerRemarks" HeaderText="Issuer Remarks" ItemStyle-Width="20%" ><HeaderStyle /></asp:BoundField>
-                                    <asp:BoundField DataField="ReceiptRemarks" HeaderText="Receiver Remarks" ItemStyle-Width="20%" ><HeaderStyle /></asp:BoundField>
-                                </Columns>
-                            </asp:GridView>
-                        </asp:Panel>
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <%--Template Field for Item Details with Corresponding Edit Options--%>
-                <asp:TemplateField HeaderText="S No." HeaderStyle-Width="5%" HeaderStyle-HorizontalAlign="Left">
-                    <ItemTemplate><%# Container.DataItemIndex + 1 + "." %>
-                        <asp:Label ID="lblItemId" runat="server" Text='<%#Eval("InventoryId") %>' Visible="false"></asp:Label>
-                        <ItemTemplate><asp:Label ID="lblCategoryId" runat="server" Text='<%#Eval("CategoryId") %>' Visible="false"></asp:Label></ItemTemplate>
-                    </ItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Item Name">
-                    <ItemTemplate><asp:Label ID="lblInventoryName" runat="server" Text='<%#Eval("InventoryName") %>'></asp:Label></ItemTemplate>
-                    <EditItemTemplate><asp:TextBox ID="txtInventoryName" runat="server" Text='<%#Eval("InventoryName") %>'></asp:TextBox></EditItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Item Category">
-                    <ItemTemplate><asp:Label ID="lblItemCategory" runat="server" Text='<%#Eval("CategoryName") %>'></asp:Label></ItemTemplate>
-                    <%--<EditItemTemplate><asp:TextBox ID="txtItemCategory" runat="server" Text='<%#Eval("CategoryName") %>'></asp:TextBox></EditItemTemplate>--%>
-                </asp:TemplateField>
-                   <%-- <asp:TemplateField HeaderText="Category">
+        <hr />
+        <div style="overflow-x: auto;">
+            <asp:GridView ID="grdInventoryMaster" CellPadding="0" CellSpacing="0" CssClass="table table-bordered table-striped"
+                AllowPaging="true" OnPageIndexChanging="grdInventoryMaster_PageIndexChanging" OnRowDataBound="grdInventoryMaster_RowDataBound"
+                DataKeyNames="InventoryId" GridLines="None" runat="server" AutoGenerateColumns="false" PageSize="10"
+                OnRowCancelingEdit="grdInventoryMaster_RowCancelingEdit" OnRowEditing="grdInventoryMaster_RowEditing"
+                OnRowUpdating="grdInventoryMaster_RowUpdating">
+
+                <HeaderStyle />
+                <EmptyDataTemplate>
+                    <label class="lbl">No Item found in our system !</label>
+                </EmptyDataTemplate>
+                <AlternatingRowStyle CssClass="alt" />
+                <Columns>
+                    <%--Template Field for Issue Details--%>
+                    <asp:TemplateField ItemStyle-Width="10px">
+                        <ItemTemplate>
+                            <img alt="" style="cursor: pointer" src="../Images/plusIcon.png" />
+                            <asp:Panel ID="pnlIssueDetails" runat="server" Style="display: none">
+                                <asp:GridView ID="grdIssueDetailDisplay" runat="server" AutoGenerateColumns="false" DataKeyNames="IssueId"
+                                    CssClass="ChildGrid table table-bordered table-striped">
+                                    <HeaderStyle />
+                                    <EmptyDataTemplate>
+                                        <label class="lbl">No Issue details found for this item !</label>
+                                    </EmptyDataTemplate>
+                                    <AlternatingRowStyle CssClass="alt" />
+                                    <Columns>
+                                        <asp:TemplateField HeaderText="S No." HeaderStyle-Width="5%" HeaderStyle-HorizontalAlign="Left">
+                                            <ItemTemplate>
+                                                <%# Container.DataItemIndex + 1 + "." %>
+                                            </ItemTemplate>
+                                        </asp:TemplateField>
+                                        <asp:BoundField DataField="UserName" HeaderText="Issued To" ItemStyle-Width="10%">
+                                            <HeaderStyle />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="IssueDate" HeaderText="Date of Issue" ItemStyle-Width="20%">
+                                            <HeaderStyle />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="IssueQuantity" HeaderText="Quantity" ItemStyle-Width="10%">
+                                            <HeaderStyle />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="IsReceived" HeaderText="Is Recieved" ItemStyle-Width="10%">
+                                            <HeaderStyle />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="IssuerRemarks" HeaderText="Issuer Remarks" ItemStyle-Width="20%">
+                                            <HeaderStyle />
+                                        </asp:BoundField>
+                                        <asp:BoundField DataField="ReceiptRemarks" HeaderText="Receiver Remarks" ItemStyle-Width="20%">
+                                            <HeaderStyle />
+                                        </asp:BoundField>
+                                    </Columns>
+                                </asp:GridView>
+                            </asp:Panel>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <%--Template Field for Item Details with Corresponding Edit Options--%>
+                    <asp:TemplateField HeaderText="S No." HeaderStyle-Width="5%" HeaderStyle-HorizontalAlign="Left">
+                        <ItemTemplate>
+                            <%# Container.DataItemIndex + 1 + "." %>
+                            <asp:Label ID="lblItemId" runat="server" Text='<%#Eval("InventoryId") %>' Visible="false"></asp:Label>
+                            <itemtemplate><asp:Label ID="lblCategoryId" runat="server" Text='<%#Eval("CategoryId") %>' Visible="false"></asp:Label></itemtemplate>
+                        </ItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Item Name">
+                        <ItemTemplate>
+                            <asp:Label ID="lblInventoryName" runat="server" Text='<%#Eval("InventoryName") %>'></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtInventoryName" runat="server" Text='<%#Eval("InventoryName") %>'></asp:TextBox>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Item Category">
+                        <ItemTemplate>
+                            <asp:Label ID="lblItemCategory" runat="server" Text='<%#Eval("CategoryName") %>'></asp:Label>
+                        </ItemTemplate>
+                        <%--<EditItemTemplate><asp:TextBox ID="txtItemCategory" runat="server" Text='<%#Eval("CategoryName") %>'></asp:TextBox></EditItemTemplate>--%>
+                    </asp:TemplateField>
+                    <%-- <asp:TemplateField HeaderText="Category">
                     <ItemTemplate><asp:Label ID="lblCategoryNames" runat="server" Text='<%#Eval("CategoryId") %>'></asp:Label></ItemTemplate>
                     <ItemTemplate><asp:Label ID="lblCategoryId" runat="server" Text='<%#Eval("CategoryId") %>' Visible="false"></asp:Label></ItemTemplate>
                 </asp:TemplateField>--%>
                     <%--<EditItemTemplate><asp:TextBox ID="txtCategoryName" runat="server" Text='<%#Eval("CategoryName") %>'></asp:TextBox></EditItemTemplate>--%>
-                <%--</asp:TemplateField>
+                    <%--</asp:TemplateField>
                     <asp:TemplateField HeaderText="Sub Category">
                     <ItemTemplate><asp:Label ID="lblSubCategoryId" runat="server" Text='<%#Eval("SubCategoryId") %>'></asp:Label></ItemTemplate>
                     <%--<EditItemTemplate><asp:TextBox ID="txtSubCategoryName" runat="server" Text='<%#Eval("SubCategoryName") %>'></asp:TextBox></EditItemTemplate>--%>
-                
-                <asp:TemplateField HeaderText="Label 1">
-                    <ItemTemplate><asp:Label ID="lblInventoryDescription1" runat="server" Text='<%#Eval("InventoryDescription1") %>'></asp:Label></ItemTemplate>
-                    <EditItemTemplate><asp:TextBox ID="txtInventoryDescription1" runat="server" Text='<%#Eval("InventoryDescription1") %>'></asp:TextBox></EditItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Label 2">
-                    <ItemTemplate><asp:Label ID="lblInventoryDescription2" runat="server" Text='<%#Eval("InventoryDescription2") %>'></asp:Label></ItemTemplate>
-                    <EditItemTemplate><asp:TextBox ID="txtInventoryDescription2" runat="server" Text='<%#Eval("InventoryDescription2") %>'></asp:TextBox></EditItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Label 3">
-                    <ItemTemplate><asp:Label ID="lblInventoryDescription3" runat="server" Text='<%#Eval("InventoryDescription3") %>'></asp:Label></ItemTemplate>
-                    <EditItemTemplate><asp:TextBox ID="txtInventoryDescription3" runat="server" Text='<%#Eval("InventoryDescription3") %>'></asp:TextBox></EditItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Description">
-                    <ItemTemplate><asp:Label ID="lblInventoryDescription" runat="server" Text='<%#Eval("InventoryDescription") %>'></asp:Label></ItemTemplate>
-                    <EditItemTemplate><asp:TextBox ID="txtInventoryDescription" runat="server" Text='<%#Eval("InventoryDescription") %>'></asp:TextBox></EditItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Register No">
-                    <ItemTemplate><asp:Label ID="lblInventoryRegisterNo" runat="server" Text='<%#Eval("InventoryRegisterNo") %>'></asp:Label></ItemTemplate>
-                    <EditItemTemplate><asp:TextBox ID="txtInventoryRegisterNo" runat="server" Text='<%#Eval("InventoryRegisterNo") %>'></asp:TextBox></EditItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Register Page No">
-                    <ItemTemplate><asp:Label ID="lblInventoryPageNo" runat="server" Text='<%#Eval("InventoryPageNo") %>'></asp:Label></ItemTemplate>
-                    <EditItemTemplate><asp:TextBox ID="txtInventoryPageNo" runat="server" Text='<%#Eval("InventoryPageNo") %>'></asp:TextBox></EditItemTemplate>
-                </asp:TemplateField>
+
+                    <asp:TemplateField HeaderText="Label 1">
+                        <ItemTemplate>
+                            <asp:Label ID="lblInventoryDescription1" runat="server" Text='<%#Eval("InventoryDescription1") %>'></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtInventoryDescription1" runat="server" Text='<%#Eval("InventoryDescription1") %>'></asp:TextBox>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Label 2">
+                        <ItemTemplate>
+                            <asp:Label ID="lblInventoryDescription2" runat="server" Text='<%#Eval("InventoryDescription2") %>'></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtInventoryDescription2" runat="server" Text='<%#Eval("InventoryDescription2") %>'></asp:TextBox>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Label 3">
+                        <ItemTemplate>
+                            <asp:Label ID="lblInventoryDescription3" runat="server" Text='<%#Eval("InventoryDescription3") %>'></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtInventoryDescription3" runat="server" Text='<%#Eval("InventoryDescription3") %>'></asp:TextBox>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Description">
+                        <ItemTemplate>
+                            <asp:Label ID="lblInventoryDescription" runat="server" Text='<%#Eval("InventoryDescription") %>'></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtInventoryDescription" runat="server" Text='<%#Eval("InventoryDescription") %>'></asp:TextBox>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Register No">
+                        <ItemTemplate>
+                            <asp:Label ID="lblInventoryRegisterNo" runat="server" Text='<%#Eval("InventoryRegisterNo") %>'></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtInventoryRegisterNo" runat="server" Text='<%#Eval("InventoryRegisterNo") %>'></asp:TextBox>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Register Page No">
+                        <ItemTemplate>
+                            <asp:Label ID="lblInventoryPageNo" runat="server" Text='<%#Eval("InventoryPageNo") %>'></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtInventoryPageNo" runat="server" Text='<%#Eval("InventoryPageNo") %>'></asp:TextBox>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
                     <asp:TemplateField HeaderText="Purchase Date">
-                    <ItemTemplate><asp:Label ID="lblPurchaseDate" runat="server" Text='<%#Eval("PurchaseDate") %>'></asp:Label></ItemTemplate>
-                    <EditItemTemplate><asp:TextBox ID="txtPurchaseDate" runat="server" Text='<%#Eval("PurchaseDate", "{0: dd-MMM-yyyy}") %>'></asp:TextBox>
-                    <div class="col-sm-2">
-                    <asp:ImageButton ID="imgIssueDate" ImageUrl="../Images/cal.png" Width="35px" Height="35px" ImageAlign="Bottom" runat="server" />
-                    <ajaxToolkit:CalendarExtender ID="calIssueDate" PopupButtonID="imgPopup" runat="server" TargetControlID="txtPurchaseDate"
-                        Format="dd-MMM-yyyy"></ajaxToolkit:CalendarExtender>
-                        </div>
-                    </EditItemTemplate>
-                </asp:TemplateField>
+                        <ItemTemplate>
+                            <asp:Label ID="lblPurchaseDate" runat="server" Text='<%#Eval("PurchaseDate") %>'></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtPurchaseDate" runat="server" Text='<%#Eval("PurchaseDate", "{0: dd-MMM-yyyy}") %>'></asp:TextBox>
+                            <div class="col-sm-2">
+                                <asp:ImageButton ID="imgIssueDate" ImageUrl="../Images/cal.png" Width="35px" Height="35px" ImageAlign="Bottom" runat="server" />
+                                <ajaxToolkit:CalendarExtender ID="calIssueDate" PopupButtonID="imgPopup" runat="server" TargetControlID="txtPurchaseDate"
+                                    Format="dd-MMM-yyyy"></ajaxToolkit:CalendarExtender>
+                            </div>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
                     <asp:TemplateField HeaderText="Vendor">
-                    <ItemTemplate><asp:Label ID="lblPurchasedFrom" runat="server" Text='<%#Eval("PurchasedFrom") %>'></asp:Label></ItemTemplate>
-                    <EditItemTemplate><asp:TextBox ID="txtPurchasedFrom" runat="server" Text='<%#Eval("PurchasedFrom") %>'></asp:TextBox></EditItemTemplate>
-                </asp:TemplateField>
+                        <ItemTemplate>
+                            <asp:Label ID="lblPurchasedFrom" runat="server" Text='<%#Eval("PurchasedFrom") %>'></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtPurchasedFrom" runat="server" Text='<%#Eval("PurchasedFrom") %>'></asp:TextBox>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
                     <asp:TemplateField HeaderText="Bill No">
-                    <ItemTemplate><asp:Label ID="lblBill_InvoiceNo" runat="server" Text='<%#Eval("Bill_InvoiceNo") %>'></asp:Label></ItemTemplate>
-                    <EditItemTemplate><asp:TextBox ID="txtBill_InvoiceNo" runat="server" Text='<%#Eval("Bill_InvoiceNo") %>'></asp:TextBox></EditItemTemplate>
-                </asp:TemplateField>
+                        <ItemTemplate>
+                            <asp:Label ID="lblBill_InvoiceNo" runat="server" Text='<%#Eval("Bill_InvoiceNo") %>'></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtBill_InvoiceNo" runat="server" Text='<%#Eval("Bill_InvoiceNo") %>'></asp:TextBox>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
                     <asp:TemplateField HeaderText="Quantity">
-                    <ItemTemplate><asp:Label ID="lblItemQuantity" runat="server" Text='<%#Eval("ItemQuantity") %>'></asp:Label></ItemTemplate>
-                    <EditItemTemplate><asp:TextBox ID="txtItemQuantity" runat="server" Text='<%#Eval("ItemQuantity") %>'></asp:TextBox></EditItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Rate per Unit">
-                    <ItemTemplate><asp:Label ID="lblItemRatePerUnit" runat="server" Text='<%#Eval("ItemRatePerUnit") %>'></asp:Label></ItemTemplate>
-                    <EditItemTemplate><asp:TextBox ID="txtItemRatePerUnit" runat="server" Text='<%#Eval("ItemRatePerUnit") %>'></asp:TextBox></EditItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Total Cost">
-                    <ItemTemplate><asp:Label ID="lblItemTotalCost" runat="server" Text='<%#Eval("ItemTotalCost") %>'></asp:Label></ItemTemplate>
-                    <EditItemTemplate><asp:TextBox ID="txtItemTotalCost" runat="server" Text='<%#Eval("ItemTotalCost") %>'></asp:TextBox></EditItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Tax">
-                    <ItemTemplate><asp:Label ID="lblSalesTax" runat="server" Text='<%#Eval("SalesTax") %>'></asp:Label></ItemTemplate>
-                    <EditItemTemplate><asp:TextBox ID="txtSalesTax" runat="server" Text='<%#Eval("SalesTax") %>'></asp:TextBox></EditItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="Total Amount">
-                    <ItemTemplate><asp:Label ID="lblTotalAmount" runat="server" Text='<%#Eval("TotalAmount") %>'></asp:Label></ItemTemplate>
-                    <EditItemTemplate><asp:TextBox ID="txtTotalAmount" runat="server" Text='<%#Eval("TotalAmount") %>'></asp:TextBox></EditItemTemplate>
-                </asp:TemplateField>
-                <asp:TemplateField HeaderText="IsConsumable">
-                    <ItemTemplate><asp:Label ID="lblIsConsumable" runat="server" Text='<%#Eval("IsConsumable") %>'></asp:Label></ItemTemplate>
-                    <EditItemTemplate><asp:CheckBox ID="chkIsConsumable" runat="server" Checked='<%#Eval("IsConsumable") %>'></asp:CheckBox></EditItemTemplate>
-                   <%-- <EditItemTemplate><asp:TextBox ID="txtIsConsumable" runat="server" Text='<%#Eval("IsConsumable") %>'></asp:TextBox></EditItemTemplate>--%>
-                </asp:TemplateField>
-<%--                <asp:TemplateField HeaderText="Warranty Till">
+                        <ItemTemplate>
+                            <asp:Label ID="lblItemQuantity" runat="server" Text='<%#Eval("ItemQuantity") %>'></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtItemQuantity" runat="server" Text='<%#Eval("ItemQuantity") %>'></asp:TextBox>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Rate per Unit">
+                        <ItemTemplate>
+                            <asp:Label ID="lblItemRatePerUnit" runat="server" Text='<%#Eval("ItemRatePerUnit") %>'></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtItemRatePerUnit" runat="server" Text='<%#Eval("ItemRatePerUnit") %>'></asp:TextBox>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Total Cost">
+                        <ItemTemplate>
+                            <asp:Label ID="lblItemTotalCost" runat="server" Text='<%#Eval("ItemTotalCost") %>'></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtItemTotalCost" runat="server" Text='<%#Eval("ItemTotalCost") %>'></asp:TextBox>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Tax">
+                        <ItemTemplate>
+                            <asp:Label ID="lblSalesTax" runat="server" Text='<%#Eval("SalesTax") %>'></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtSalesTax" runat="server" Text='<%#Eval("SalesTax") %>'></asp:TextBox>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="Total Amount">
+                        <ItemTemplate>
+                            <asp:Label ID="lblTotalAmount" runat="server" Text='<%#Eval("TotalAmount") %>'></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:TextBox ID="txtTotalAmount" runat="server" Text='<%#Eval("TotalAmount") %>'></asp:TextBox>
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                    <asp:TemplateField HeaderText="IsConsumable">
+                        <ItemTemplate>
+                            <asp:Label ID="lblIsConsumable" runat="server" Text='<%#Eval("IsConsumable") %>'></asp:Label>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:CheckBox ID="chkIsConsumable" runat="server" Checked='<%#Eval("IsConsumable") %>'></asp:CheckBox>
+                        </EditItemTemplate>
+                        <%-- <EditItemTemplate><asp:TextBox ID="txtIsConsumable" runat="server" Text='<%#Eval("IsConsumable") %>'></asp:TextBox></EditItemTemplate>--%>
+                    </asp:TemplateField>
+                    <%--                <asp:TemplateField HeaderText="Warranty Till">
                     <ItemTemplate><asp:Label ID="lblWarrantyTo" runat="server" Text='<%#Eval("WarrantyTo") %>'></asp:Label></ItemTemplate>
                     <EditItemTemplate><asp:TextBox ID="txtWarrantyTo" runat="server" Text='<%#Eval("WarrantyTo") %>'></asp:TextBox></EditItemTemplate>
                         
                     </asp:TemplateField>--%>
-                 <%--Template Field for Edit Update Cancel--%>
-                <asp:TemplateField>
-                    <ItemTemplate><asp:Button ID="btn_Edit" runat="server" Text="Edit Item" CommandName="Edit" /></ItemTemplate>
-                    <EditItemTemplate>
-                        <asp:Button ID="btn_Update" runat="server" Text="Update Item" CommandName="Update" />
-                        <asp:Button ID="btn_Cancel" runat="server" Text="Cancel" CommandName="Cancel" />
-                    </EditItemTemplate>
-                </asp:TemplateField>
-            </Columns>
-            <PagerStyle HorizontalAlign="Right" CssClass="GridPager" />
-        </asp:GridView>
-    </div>
-
+                    <%--Template Field for Edit Update Cancel--%>
+                    <asp:TemplateField>
+                        <ItemTemplate>
+                            <asp:Button ID="btn_Edit" runat="server" Text="Edit Item" CommandName="Edit" />
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:Button ID="btn_Update" runat="server" Text="Update Item" CommandName="Update" />
+                            <asp:Button ID="btn_Cancel" runat="server" Text="Cancel" CommandName="Cancel" />
+                        </EditItemTemplate>
+                    </asp:TemplateField>
+                </Columns>
+                <PagerStyle HorizontalAlign="Right" CssClass="GridPager" />
+            </asp:GridView>
         </div>
 
-   <%-- Old Grid For Issue Details--%>
-    <div style="overflow-x:auto;">
+    </div>
+
+    <%-- Old Grid For Issue Details--%>
+    <div style="overflow-x: auto;">
         <header>Inventory Entries <strong>(<span id="countInventoryEntries" runat="server">0</span>)</strong></header>
         <asp:GridView ID="grdInventoryEntries" CellPadding="0" CellSpacing="0" CssClass="table table-bordered table-striped"
             DataKeyNames="InventoryId" GridLines="None" runat="server" AutoGenerateColumns="true" PageSize="5"
@@ -509,5 +596,3 @@
         </asp:GridView>
     </div>
 </asp:Content>
-
-

@@ -98,6 +98,7 @@ namespace Inventory
                     drpIssuedTo.DataSource = ds.Tables[2];
                     drpIssuedTo.DataBind();
                 }
+                drpCategory.Items.Insert(0, new ListItem("Select Category...", "-1"));
                 drpCategory_SelectedIndexChanged1(null, null);
             }
             catch (Exception ex)
@@ -621,6 +622,7 @@ namespace Inventory
                     drpSubCategory.DataValueField = "SubCategoryID";
                     drpSubCategory.DataBind();
                 }
+                drpSubCategory.Items.Insert(0, new ListItem("Select Sub-Category...", "-1"));
             }
             catch (Exception ex)
             {

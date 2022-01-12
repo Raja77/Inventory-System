@@ -94,15 +94,6 @@ namespace Inventory {
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvtxtInventoryName;
         
         /// <summary>
-        /// Span10 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Span10;
-        
-        /// <summary>
         /// txtInventoryDescription1 control.
         /// </summary>
         /// <remarks>
@@ -110,24 +101,6 @@ namespace Inventory {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtInventoryDescription1;
-        
-        /// <summary>
-        /// rfvtxtInventoryDescription1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvtxtInventoryDescription1;
-        
-        /// <summary>
-        /// Span11 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Span11;
         
         /// <summary>
         /// txtInventoryDescription2 control.
@@ -139,24 +112,6 @@ namespace Inventory {
         protected global::System.Web.UI.WebControls.TextBox txtInventoryDescription2;
         
         /// <summary>
-        /// rfvtxtInventoryDescription2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvtxtInventoryDescription2;
-        
-        /// <summary>
-        /// Span12 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl Span12;
-        
-        /// <summary>
         /// txtInventoryDescription3 control.
         /// </summary>
         /// <remarks>
@@ -164,15 +119,6 @@ namespace Inventory {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtInventoryDescription3;
-        
-        /// <summary>
-        /// rfvtxtInventoryDescription3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvtxtInventoryDescription3;
         
         /// <summary>
         /// spInventoryDescription control.
@@ -290,6 +236,15 @@ namespace Inventory {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator rfvtxtInventoryRegisterNo;
+        
+        /// <summary>
+        /// revRegisterNo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RegularExpressionValidator revRegisterNo;
         
         /// <summary>
         /// Span9 control.
