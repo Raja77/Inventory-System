@@ -32,12 +32,12 @@
             <div class="col-sm-5">
                 <asp:DropDownList ID="drpUserType" runat="server" CssClass="form-control drp">
                     <asp:ListItem Text="Select User/Role Type" Value="-1"></asp:ListItem>
-            <%--        <asp:ListItem Text="Principal" Value="Principal"></asp:ListItem>
+                    <asp:ListItem Text="Principal" Value="Principal"></asp:ListItem>
                     <asp:ListItem Text="Department HOD" Value="DepartmentHOD"></asp:ListItem>
                     <asp:ListItem Text="Department Staff Member" Value="DepartmentStaffMember"></asp:ListItem>
                     <asp:ListItem Text="Non Teaching Staff Member" Value="NonTeachingStaffMember"></asp:ListItem>
                     <asp:ListItem Text="Local Fund Employee" Value="LFE"></asp:ListItem>
-                    <asp:ListItem Text="Data Entry Operator" Value="DEO"></asp:ListItem>--%>
+                    <asp:ListItem Text="Data Entry Operator" Value="DEO"></asp:ListItem>
                 </asp:DropDownList>
                 <asp:RequiredFieldValidator ID="rfvdrpUserType" runat="server" CssClass="lbl" ErrorMessage="Select User/Role Type" InitialValue="-1"
                     ControlToValidate="drpUserType" Display="Dynamic" ValidationGroup="valUserMaster"></asp:RequiredFieldValidator>
