@@ -319,6 +319,7 @@
             <asp:Label ID="lblMsgSuccess" runat="server" Text="Data Saved Successfully" Visible="false"></asp:Label>
         </div>
     </div>
+    
     <%--New Grid for Issue Details as well as Inventory--%>
     <div id="dvListInventoryDetails" runat="server">
         <div class="mb-4 row">
