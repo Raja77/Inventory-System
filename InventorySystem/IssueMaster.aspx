@@ -157,7 +157,7 @@
                 </asp:TemplateField>
                 <asp:TemplateField HeaderText="Issued To">
                     <ItemTemplate>
-                        <asp:Label ID="lblUserName" runat="server" Text='<%#Eval("UserName") %>'></asp:Label>
+                        <asp:Label ID="lblIssuerName" runat="server" Text='<%#Eval("IssuerName") %>'></asp:Label>
                         <asp:Label ID="lblUserId" runat="server" Text='<%#Eval("UserId") %>' Visible="false"></asp:Label>
                     </ItemTemplate>
                     <%-- <EditItemTemplate>

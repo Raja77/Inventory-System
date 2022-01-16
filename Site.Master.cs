@@ -22,6 +22,25 @@ namespace Inventory
             if (!IsPostBack)
             {
                 GetCommentDetails();
+                if (Session["UserRoleX"].Equals("DEO1") && Session["UserNameX"].Equals("Data Entry Operator 1"))
+                {
+                    liUserMaster.Visible = liIssueDetails.Visible = liComment.Visible = false;
+
+                }
+                else if (Session["UserRoleX"].Equals("DEO2") && Session["UserNameX"].Equals("Data Entry Operator 2"))
+                {
+                    
+                   liCategoryMaster.Visible = liInventoryEntries.Visible = liComment.Visible = false;
+                }
+                else if (Session["UserRoleX"].Equals("SuperAdmin") && Session["UserNameX"].Equals("Admin"))
+                {
+                    
+
+                }
+                else
+                {
+                    Response.Redirect("~/UnauthorizedAccess.aspx");
+                }
             }
         }
 
