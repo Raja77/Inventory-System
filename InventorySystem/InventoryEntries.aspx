@@ -214,7 +214,7 @@
                 Do you want to add Issue details
             </label>
             <div class="col-sm-2">
-                <asp:CheckBox ID="chkAddIssueDetails" runat="server" AutoPostBack="true" OnCheckedChanged="chkAddIssueDetails_CheckedChanged" />
+                <asp:CheckBox ID="chkAddIssueDetails" Enabled="false" runat="server" AutoPostBack="true" OnCheckedChanged="chkAddIssueDetails_CheckedChanged" />
             </div>
         </div>
         <br />

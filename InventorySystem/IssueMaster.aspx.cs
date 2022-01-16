@@ -91,7 +91,7 @@ namespace Inventory
                             if (ds.Tables[1].Rows.Count > 0) //User Id Table
                             {
                                 drpUserId.DataSource = ds.Tables[1];
-                                drpUserId.DataTextField = "UserName";
+                                drpUserId.DataTextField = "IssuerName";
                                 drpUserId.DataValueField = "UserId";
                                 drpUserId.DataBind();
                                 drpUserId.Items.Insert(0, new ListItem("Select whom issue to", "-1"));
