@@ -38,7 +38,7 @@
             </Scripts>
         </asp:ScriptManager>
 
-        <div class="navbar navbar-inverse navbar-fixed-top">
+        <div class="navbar navbar-inverse navbar-fixed-top  ">
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
@@ -50,20 +50,26 @@
                         <img src="/Images/icsclogosmall.png" height="30" alt="">
                     </a>
                 </div>
-                <div class="navbar-collapse collapse">
-                    <ul class="nav navbar-nav">
-                        <li id="liComment" runat="server"><a runat="server" href="~/">Home (Comments Log)</a></li>
+                <div class="navbar-collapse collapse justify-content-between">
+                    <span class="navbar-text">
+                        <a href="~/LogIn.aspx" class="btn btn-default btn-flat" runat="server" id="lnkNavbarLoginStatus">Login</a>
+                    </span>
+                    <ul class="nav navbar-nav" id="ulPermittedPagesList" runat="server">
+                        <%--<li id="liComment" runat="server"><a runat="server" href="~/">Home (Comments Log)</a></li>
                         <li id="liUserMaster" runat="server"><a runat="server" href="~/InventorySystem/UserMaster.aspx">User Master</a></li>
                         <li id="liCategoryMaster" runat="server"><a runat="server" href="~/InventorySystem/CategoryMaster.aspx">Category Master</a></li>
                         <li id="liInventoryEntries" runat="server"><a runat="server" href="~/InventorySystem/InventoryEntries.aspx">Inventory Entries</a></li>
-                        <li id="liIssueDetails" runat="server"><a runat="server" href="~/InventorySystem/IssueMaster.aspx">Issue Details</a></li>
-                         </ul>
-                        <ul>
+                        <li id="liIssueDetails" runat="server"><a runat="server" href="~/InventorySystem/IssueMaster.aspx">Issue Details</a></li>--%>
+                     </ul>
+                    
+                        <%--<ul>
                         <li style="float:right; padding-top:7px;">
+                            <ul 
                             <a href="../LogOut.aspx" class="btn btn-default btn-flat">Log Out</a>
                         </li>
-                    </ul>
+                    </ul>--%>
                 </div>
+
             </div>
         </div>
         <div class="container body-content">
@@ -72,7 +78,8 @@
             <hr />
             <footer>
                 <hr />
-                <div id="PageCommentSection" style="background: repeating-linear-gradient(45deg,#f2f2f2,#f2f2f2 10px,#ffffff 10px ,#ffffff 20px); padding: 10px">
+                <asp:Panel ID="pnlCommentsView" runat="server" Visible="false">
+                    <div id="PageCommentSection" style="background: repeating-linear-gradient(45deg,#f2f2f2,#f2f2f2 10px,#ffffff 10px ,#ffffff 20px); padding: 10px">
                     <h4>Page Review Comments</h4>
                     <asp:Label ID="lblError" runat="server" Text="Label"></asp:Label>
                     <div style="overflow-x: auto;">
@@ -116,6 +123,7 @@
                     </div>
                     <asp:Label ID="lblCommentSubmitError" runat="server" CssClass="lbl" Font-Size="14" Text=""></asp:Label>
                 </div>
+                </asp:Panel>
                 <p>&copy; <%: DateTime.Now.Year %> - ICSC Inventory System</p>
             </footer>
         </div>

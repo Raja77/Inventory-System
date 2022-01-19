@@ -19,9 +19,9 @@ namespace Inventory
             lblMsg.InnerText = "";
             if (!Page.IsPostBack)
             {
-                if (Request.IsAuthenticated && !string.IsNullOrEmpty(Request.QueryString["ReturnUrl"]))
-                    // This is an unauthorized, authenticated request...
-                    Response.Redirect("~/UnauthorizedAccess.aspx");
+                //if (Request.IsAuthenticated && !string.IsNullOrEmpty(Request.QueryString["ReturnUrl"]))
+                //    // This is an unauthorized, authenticated request...
+                //    Response.Redirect("~/UnauthorizedAccess.aspx");
             }
         }
 
@@ -30,8 +30,8 @@ namespace Inventory
             DataSet ds = new DataSet();
             try
             {
-                SqlCommand com = new SqlCommand("select * from tbuserDetails where (UserEmail='" + txtLogIn.Value + "' or" +
-                    " UserName='" + txtLogIn.Value + "') " + "and [Password]='" + txtPassword.Value + "'", conn);
+                SqlCommand com = new SqlCommand("select * from tbuserDetails where (UserEmail='" + txtLogIn2.Text + "' or" +
+                    " UserName='" + txtLogIn2.Text + "') " + "and [Password]='" + txtPassword2.Text + "'", conn);
                 SqlDataAdapter sda = new SqlDataAdapter(com);
                 sda.Fill(ds);
 
@@ -52,12 +52,12 @@ namespace Inventory
             }
             if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
             {
-                Session["UserNameX"] = ds.Tables[0].Rows[0]["UserName"];
-                //Session["Image"] = ds.Tables[0].Rows[0]["Image"];
-                Session["UserID"] = ds.Tables[0].Rows[0]["UserID"];
-                Session["UserRoleX"] = ds.Tables[0].Rows[0]["UserType"];
+                Session["UserNameX"]    = ds.Tables[0].Rows[0]["UserName"];
+                //Session["Image"]      = ds.Tables[0].Rows[0]["Image"];
+                Session["UserID"]       = ds.Tables[0].Rows[0]["UserID"];
+                Session["UserRoleX"]    = ds.Tables[0].Rows[0]["UserType"];
 
-
+                FormsAuthentication.RedirectFromLoginPage(ds.Tables[0].Rows[0]["UserID"].ToString(), true);
 
                 //// Success, create non-persistent authentication cookie.
                 //FormsAuthentication.SetAuthCookie(
@@ -93,34 +93,25 @@ namespace Inventory
                 //}
                 //Response.Redirect(returnUrl1);
 
-
-
-
-
-
-
-
-
-
-
-                if (Session["UserRoleX"].Equals("DEO1") && Session["UserNameX"].Equals("Data Entry Operator 1"))
-                {
-                    Response.Redirect("~/InventorySystem/InventoryEntries.aspx");
-                }
-                else if (Session["UserRoleX"].Equals("DEO2") && Session["UserNameX"].Equals("Data Entry Operator 2"))
-                {
-                    Response.Redirect("~/InventorySystem/IssueMaster.aspx");
-                }
-                else if (Session["UserRoleX"].Equals("SuperAdmin") && Session["UserNameX"].Equals("Admin"))
-                {
-                    Response.Redirect("~/Default.aspx");
-                }
-                else
-                {
-                    lblMsg.Style.Add("color", "violet");
-                    lblMsg.Style.Add("font-size", "20px");
-                    lblMsg.InnerText = "You are not yet authorised user to access the system!!!";
-                }
+                //Redirection to appropriate page code
+                //if (Session["UserRoleX"].Equals("DEO1") && Session["UserNameX"].Equals("Data Entry Operator 1"))
+                //{
+                //    Response.Redirect("~/InventorySystem/InventoryEntries.aspx");
+                //}
+                //else if (Session["UserRoleX"].Equals("DEO2") && Session["UserNameX"].Equals("Data Entry Operator 2"))
+                //{
+                //    Response.Redirect("~/InventorySystem/IssueMaster.aspx");
+                //}
+                //else if (Session["UserRoleX"].Equals("SuperAdmin") && Session["UserNameX"].Equals("Admin"))
+                //{
+                //    Response.Redirect("~/Default.aspx");
+                //}
+                //else
+                //{
+                //    lblMsg.Style.Add("color", "violet");
+                //    lblMsg.Style.Add("font-size", "20px");
+                //    lblMsg.InnerText = "You are not yet authorised user to access the system!!!";
+                //}
             }
             else
             {

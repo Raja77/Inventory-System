@@ -8,6 +8,7 @@ using System.Data.SqlClient;
 using System.Configuration;
 using System.Data;
 using System.Collections;
+using System.Web.UI.HtmlControls;
 
 namespace Inventory
 {
@@ -20,9 +21,48 @@ namespace Inventory
 
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Request.IsAuthenticated || Session["UserID"] == null)
+            {
+                Response.Redirect("~/Login.aspx");
+            }
+            else
+            {
+                string UserRole = Session["UserRoleX"].ToString();
+                if (this.Master.PageAccessList.ContainsKey(UserRole))
+                {
+                    string[] AllowedPages = this.Master.PageAccessList[UserRole];
+                    foreach (string PageName in AllowedPages)
+                    {
+                        HyperLink link = new HyperLink();
+                        if (   PageName == "Default"
+                            || PageName == "LogIn"
+                            || PageName == "LogOut"
+                            || PageName == "UnauthorizedAccess")
+                        {
+                            //nothing, dont display 
+                        }
+                        else //dynamically generate and display permissible page Links
+                        {
+                            link.ID = PageName;
+                            link.NavigateUrl = "~/InventorySystem/" + PageName + ".aspx";
+                            link.Text = PageName ;
+                            link.Attributes["class"] = "btn btn-primary btn - lg";
+                            HtmlGenericControl li = new HtmlGenericControl("li"); //Create html control <li>
+                            li.Controls.Add(link); //add hyperlink to <li>
+                            
+                            ulPermittedPagesList.Controls.Add(li);  //add <li> to <ul>
+                        }
+                    }
+                }
+                else
+                {
+                    Response.Write("UserID not found in PageAccessList" +
+                                    " <br/><a href='~/Login.aspx'>Login Again</a>");
+                }
+            }
             if (!IsPostBack)
             {
-                GetCommentDetails();
+                //GetCommentDetails();
             }
             lblError.Text = string.Empty;
         }

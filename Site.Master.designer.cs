@@ -13,49 +13,22 @@ namespace Inventory {
     public partial class SiteMaster {
         
         /// <summary>
-        /// liComment control.
+        /// lnkNavbarLoginStatus control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liComment;
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor lnkNavbarLoginStatus;
         
         /// <summary>
-        /// liUserMaster control.
+        /// ulPermittedPagesList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liUserMaster;
-        
-        /// <summary>
-        /// liCategoryMaster control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liCategoryMaster;
-        
-        /// <summary>
-        /// liInventoryEntries control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liInventoryEntries;
-        
-        /// <summary>
-        /// liIssueDetails control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl liIssueDetails;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ulPermittedPagesList;
         
         /// <summary>
         /// MainContent control.
@@ -65,6 +38,15 @@ namespace Inventory {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ContentPlaceHolder MainContent;
+        
+        /// <summary>
+        /// pnlCommentsView control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlCommentsView;
         
         /// <summary>
         /// lblError control.

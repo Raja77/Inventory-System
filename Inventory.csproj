@@ -114,10 +114,12 @@
     <Content Include="About.aspx" />
     <Content Include="App_Data\Script on Jan 05 2022.sql" />
     <Content Include="App_Data\Script on Jan 05 2022_1.sql" />
-    <Content Include="App_Data\shafat_Jan16_2022_1.sql" />
+    <Content Include="App_Data\shafat_Jan16_2022_1 - Copy.sql" />
+    <Content Include="App_Data\faisal_Jan19_2022.sql" />
     <Content Include="App_Data\shafat_Jan_06_2022_1.sql" />
     <Content Include="App_Data\shafat_Jan_08_2022_1.sql" />
     <Content Include="App_Data\shafat_Jan_09_2022_1.sql" />
+    <Content Include="UnauthorizedAccess.aspx" />
     <Content Include="LogOut.aspx" />
     <Content Include="LogIn.aspx" />
     <Content Include="Content\bootstrap-theme.css" />
@@ -137,7 +139,6 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
-    <Content Include="UnauthorizedAccess.aspx" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
     <Content Include="IC Inventory screen shots\category Add without sub cattegory.PNG" />
@@ -186,10 +187,10 @@
     <Content Include="Scripts\WebForms\WebParts.js" />
     <Content Include="Scripts\WebForms\WebUIValidation.js" />
     <Content Include="Site.Master" />
-    <Content Include="ViewSwitcher.ascx" />
+    <None Include="ViewSwitcher.ascx.bak" />
     <Content Include="Web.config" />
     <Content Include="Bundle.config" />
-    <Content Include="Site.Mobile.Master" />
+    <None Include="Site.Mobile.Master.bak" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
@@ -201,6 +202,13 @@
       <DependentUpon>About.aspx</DependentUpon>
     </Compile>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="UnauthorizedAccess.aspx.cs">
+      <DependentUpon>UnauthorizedAccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="UnauthorizedAccess.aspx.designer.cs">
+      <DependentUpon>UnauthorizedAccess.aspx</DependentUpon>
+    </Compile>
     <Compile Include="LogOut.aspx.cs">
       <DependentUpon>LogOut.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
@@ -269,25 +277,18 @@
       <DependentUpon>Site.Master</DependentUpon>
     </Compile>
     <Compile Include="Site.Mobile.Master.cs">
-      <DependentUpon>Site.Mobile.Master</DependentUpon>
+      <DependentUpon>Site.Mobile.Master.bak</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Site.Mobile.Master.designer.cs">
-      <DependentUpon>Site.Mobile.Master</DependentUpon>
+      <DependentUpon>Site.Mobile.Master.bak</DependentUpon>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.cs">
-      <DependentUpon>ViewSwitcher.ascx</DependentUpon>
+      <DependentUpon>ViewSwitcher.ascx.bak</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="ViewSwitcher.ascx.designer.cs">
-      <DependentUpon>ViewSwitcher.ascx</DependentUpon>
-    </Compile>
-    <Compile Include="UnauthorizedAccess.aspx.cs">
-      <DependentUpon>UnauthorizedAccess.aspx</DependentUpon>
-      <SubType>ASPXCodeBehind</SubType>
-    </Compile>
-    <Compile Include="UnauthorizedAccess.aspx.designer.cs">
-      <DependentUpon>UnauthorizedAccess.aspx</DependentUpon>
+      <DependentUpon>ViewSwitcher.ascx.bak</DependentUpon>
     </Compile>
   </ItemGroup>
   <ItemGroup />
