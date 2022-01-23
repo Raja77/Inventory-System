@@ -499,13 +499,13 @@ namespace Inventory {
         protected global::System.Web.UI.WebControls.CheckBox chkIsConsumable;
         
         /// <summary>
-        /// chkAddIssueDetails control.
+        /// txtLocation control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.CheckBox chkAddIssueDetails;
+        protected global::System.Web.UI.WebControls.TextBox txtLocation;
         
         /// <summary>
         /// dvAddIssueMasterDetails control.
@@ -679,15 +679,6 @@ namespace Inventory {
         protected global::System.Web.UI.WebControls.Label lblMsgSuccess;
         
         /// <summary>
-        /// dvListInventoryDetails control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvListInventoryDetails;
-        
-        /// <summary>
         /// btnAddInventory control.
         /// </summary>
         /// <remarks>
@@ -704,6 +695,24 @@ namespace Inventory {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Label Label1;
+        
+        /// <summary>
+        /// dvListInventoryDetails control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl dvListInventoryDetails;
+        
+        /// <summary>
+        /// cntInv control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl cntInv;
         
         /// <summary>
         /// grdInventoryMaster control.
