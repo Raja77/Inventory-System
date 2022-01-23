@@ -1,12 +1,17 @@
 ﻿<%@ Page Title="Home Page" Language="C#" MasterPageFile="~/Site.Master" AutoEventWireup="true" CodeBehind="Default.aspx.cs" Inherits="Inventory._Default" %>
-
+<%@ MasterType  virtualPath="~/Site.Master"%>
 <asp:Content ID="BodyContent" ContentPlaceHolderID="MainContent" runat="server">
 
     <div class="jumbotron">
         <h1>INVENTORY MANAGEMENT - ICSC</h1>
         <p class="lead">Click on Links for Pages</p>
     </div>
-    <div class="row">
+    <div id="dvPages" class="row">
+        <ul id="ulPermittedPagesList" runat="server">
+
+        </ul>
+    </div>
+    <div class="row" id="oldPagesPanel" runat="server" visible="false">
         <div class="col-md-4">
             <p>
                 &nbsp;<a href="InventorySystem/UserMaster.aspx" class="btn btn-primary btn-lg">User Master &raquo;</a>
@@ -32,7 +37,7 @@
             </p>
         </div>
         </div>
-
+   <asp:Panel ID="pnlCommentLog" runat="server" Visible="false">
     <h1>Comment Log</h1>
     <asp:Label ID="lblError" runat="server" CssClass="lbl" Font-Size="14"></asp:Label>
         <div id="chkDetails" runat="server">
@@ -102,4 +107,5 @@
             <AlternatingRowStyle CssClass="alt" />          
         </asp:GridView>
   </div>
+   </asp:Panel>
     </asp:Content>

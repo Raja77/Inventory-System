@@ -24,7 +24,7 @@ namespace Inventory
             }
         }
 
-        protected void Timer1_Tick(object sender, EventArgs e)
+        public void Timer1_Tick(object sender, EventArgs e)
         {
             Session.Clear();
             Session.Abandon();

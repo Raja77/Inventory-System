@@ -35,6 +35,10 @@ namespace Inventory
         #region Events
         protected void Page_Load(object sender, EventArgs e)
         {
+            if (!Request.IsAuthenticated || Session["UserID"] == null)
+            {
+                Response.Redirect("~/Login.aspx");
+            }
             if (!IsPostBack)
             {
                 GetInventoryEntries();

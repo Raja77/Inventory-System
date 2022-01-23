@@ -13,6 +13,33 @@ namespace Inventory {
     public partial class _Default {
         
         /// <summary>
+        /// ulPermittedPagesList control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl ulPermittedPagesList;
+        
+        /// <summary>
+        /// oldPagesPanel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl oldPagesPanel;
+        
+        /// <summary>
+        /// pnlCommentLog control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Panel pnlCommentLog;
+        
+        /// <summary>
         /// lblError control.
         /// </summary>
         /// <remarks>
@@ -119,5 +146,17 @@ namespace Inventory {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.GridView grdComments;
+        
+        /// <summary>
+        /// Master property.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated property.
+        /// </remarks>
+        public new Inventory.SiteMaster Master {
+            get {
+                return ((Inventory.SiteMaster)(base.Master));
+            }
+        }
     }
 }
