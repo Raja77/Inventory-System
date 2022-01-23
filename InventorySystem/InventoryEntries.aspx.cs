@@ -70,11 +70,13 @@ namespace Inventory
                 {
                     grdInventoryMaster.DataSource = ds.Tables[0];
                     grdInventoryMaster.DataBind();
+                    cntInv.InnerText = "(" + ds.Tables[0].Rows.Count.ToString() + ")";
                 }
                 else
                 {
                     grdInventoryMaster.DataSource = ds.Tables[0];
                     grdInventoryMaster.DataBind();
+                    cntInv.InnerText = "(0)";
                 }
                 
                     countInventoryEntries.InnerText = ds.Tables[0].Rows.Count.ToString();
@@ -205,19 +207,19 @@ namespace Inventory
             }
             return dtData;
         }
-        protected void chkAddIssueDetails_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkAddIssueDetails.Checked)
-            {
-                dvAddIssueMasterDetails.Visible = true;
-                // grdIssueDetailEntry.Visible = true;
-            }
-            else
-            {
-                dvAddIssueMasterDetails.Visible = false;
-                grdIssueDetailEntry.Visible = false;
-            }
-        }
+        //protected void chkAddIssueDetails_CheckedChanged(object sender, EventArgs e)
+        //{
+        //    if (chkAddIssueDetails.Checked)
+        //    {
+        //        dvAddIssueMasterDetails.Visible = true;
+        //        // grdIssueDetailEntry.Visible = true;
+        //    }
+        //    else
+        //    {
+        //        dvAddIssueMasterDetails.Visible = false;
+        //        grdIssueDetailEntry.Visible = false;
+        //    }
+        //}
 
 
 
@@ -233,6 +235,11 @@ namespace Inventory
                 dtData = new DataTable();
                 sqlCmd = new SqlCommand("spInventories", conn);
                 sqlCmd.CommandType = CommandType.StoredProcedure;
+                if (btnSubmitInventoryEntries.Text == "Update Details")
+                {
+                    sqlCmd.Parameters.AddWithValue("@InventoryId", Session["InventoryId"]);
+                }
+
                 sqlCmd.Parameters.AddWithValue("@CategoryId", drpCategory.SelectedItem.Value);
                 sqlCmd.Parameters.AddWithValue("@SubCategoryId", drpSubCategory.SelectedItem.Value);
                 sqlCmd.Parameters.AddWithValue("@InventoryName", txtInventoryName.Text);
@@ -248,48 +255,57 @@ namespace Inventory
                 sqlCmd.Parameters.AddWithValue("@ItemTotalCost", txtItemTotalCost.Text);
                 sqlCmd.Parameters.AddWithValue("@SalesTax", txtSalesTax.Text);
                 sqlCmd.Parameters.AddWithValue("@TotalAmount", txtTotalAmount.Text);
-                sqlCmd.Parameters.AddWithValue("@InventoryCreatedBy", 1);//filhal otherwise from session
+                sqlCmd.Parameters.AddWithValue("@InventoryCreatedBy", Session["UserID"]);//filhal otherwise from session
                 sqlCmd.Parameters.AddWithValue("@InventoryCreatedOn", DateTime.Now);
-                sqlCmd.Parameters.AddWithValue("@InventoryUpdatedBy", 1);//filhal otherwise from session
+                sqlCmd.Parameters.AddWithValue("@InventoryUpdatedBy", Session["UserID"]);//filhal otherwise from session
                 sqlCmd.Parameters.AddWithValue("@InventoryUpdatedOn", DateTime.Now);
                 sqlCmd.Parameters.AddWithValue("@IsConsumable", chkIsConsumable.Checked);
                 sqlCmd.Parameters.AddWithValue("@InventoryRegisterNo", txtInventoryRegisterNo.Text);
                 sqlCmd.Parameters.AddWithValue("@InventoryPageNo", txtInventoryPageNo.Text);
+                sqlCmd.Parameters.AddWithValue("@Location", txtLocation.Text);
 
 
-                if (dvAddIssueMasterDetails.Visible == true && chkAddIssueDetails.Checked == true)
-                {
-                    sqlCmd.Parameters.AddWithValue("@ActionType", "SaveIEandIssue");
-                    sqlCmd.Parameters.AddWithValue("@XmlData", XMLData);
-                    //sqlCmd.Parameters.AddWithValue("@UserId", drpIssuedTo.SelectedItem.Value);
-                    //sqlCmd.Parameters.AddWithValue("@IssueDate", txtIssueDate.Text);
-                    //sqlCmd.Parameters.AddWithValue("@IssuedBy", 1); //filhal
-                    //sqlCmd.Parameters.AddWithValue("@IssueQuantity", txtIssueQuantity.Text);
-                    //sqlCmd.Parameters.AddWithValue("@IsReceived", chkIsReceived.Checked);
-                    //sqlCmd.Parameters.AddWithValue("@IssuerRemarks", txtIssuerRemarks.Text);
-                    //sqlCmd.Parameters.AddWithValue("@ReceiptRemarks", txtReceiptRemarks.Text);
+                //if (dvAddIssueMasterDetails.Visible == true && chkAddIssueDetails.Checked == true)
+                //{
+                //    sqlCmd.Parameters.AddWithValue("@ActionType", "SaveIEandIssue");
+                //    sqlCmd.Parameters.AddWithValue("@XmlData", XMLData);
+                //    //sqlCmd.Parameters.AddWithValue("@UserId", drpIssuedTo.SelectedItem.Value);
+                //    //sqlCmd.Parameters.AddWithValue("@IssueDate", txtIssueDate.Text);
+                //    //sqlCmd.Parameters.AddWithValue("@IssuedBy", 1); //filhal
+                //    //sqlCmd.Parameters.AddWithValue("@IssueQuantity", txtIssueQuantity.Text);
+                //    //sqlCmd.Parameters.AddWithValue("@IsReceived", chkIsReceived.Checked);
+                //    //sqlCmd.Parameters.AddWithValue("@IssuerRemarks", txtIssuerRemarks.Text);
+                //    //sqlCmd.Parameters.AddWithValue("@ReceiptRemarks", txtReceiptRemarks.Text);
 
 
-                }
-                else if (dvAddIssueMasterDetails.Visible == false && chkAddIssueDetails.Checked == false)
-                {
+                //}
+                //else if (dvAddIssueMasterDetails.Visible == false && chkAddIssueDetails.Checked == false)
+                //{
                     sqlCmd.Parameters.AddWithValue("@ActionType", "SaveInventoryEntries");
-                }
+                //}
                 int numRes = sqlCmd.ExecuteNonQuery();
                 if (numRes > 0)
-                {
-                    lblError.Text = "Record Saved Successfully";
-                    //lblMsgSuccess.Visible = true;
-                    lblError.ForeColor = System.Drawing.Color.CornflowerBlue;
-                    lblError.Font.Size = 16;
-
-                    GetInventoryEntries();
+                {                   
+                    lblError.Font.Size = 16;                 
                     //dvAddCategoryDetails.Visible = false;
                     dvAddIssueMasterDetails.Visible = false;
                     grdIssueDetailEntry.Visible = false;
                     dvListInventoryDetails.Visible = true;
-
-                    clearAllFields();
+                   
+                    if (btnSubmitInventoryEntries.Text == "Submit Details")
+                    {
+                        lblError.Text = "Record Saved Successfully";
+                        //lblMsgSuccess.Visible = true;
+                        lblError.ForeColor = System.Drawing.Color.CornflowerBlue;
+                    }
+                    else
+                    {
+                        lblError.Text = "Record Updated Successfully";
+                        lblError.ForeColor = System.Drawing.Color.ForestGreen;
+                       
+                    }
+                    GetInventoryEntries();
+                    btnCancel_Click(null, null);
                     
                 }
                 else
@@ -342,15 +358,16 @@ namespace Inventory
             txtSalesTax.Text = string.Empty;
             txtTotalAmount.Text = string.Empty;
             chkIsConsumable.Checked = false;
-            chkAddIssueDetails.Checked = false;
+         //   chkAddIssueDetails.Checked = false;
             chkIsReceived.Checked = false;
-            drpIssuedTo.SelectedItem.Value = "-1";
+            /*drpIssuedTo.SelectedItem.Value = "-1";
             txtIssueDate.Text = string.Empty;
             txtIssueQuantity.Text=  string.Empty;
             txtIssuerRemarks.Text = string.Empty;
-            txtReceiptRemarks.Text = string.Empty;
+            txtReceiptRemarks.Text = string.Empty;*/
             txtInventoryPageNo.Text = string.Empty;
             txtInventoryRegisterNo.Text = string.Empty;
+            txtLocation.Text = string.Empty;
         }
 
         protected void grdInventoryMaster_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -374,6 +391,7 @@ namespace Inventory
         
         protected void btnCancel_Click(object sender, EventArgs e)
         {
+            btnSubmitInventoryEntries.Text = "Submit Details";
             clearAllFields();
             CreateIssueDetailsGrid();
             //  dvAddCategoryDetails.Visible = dvSubCategory.Visible = false;
@@ -408,25 +426,26 @@ namespace Inventory
             Label InventoryId = grdInventoryMaster.Rows[e.RowIndex].FindControl("lblItemId") as Label;
             Label CategoryId = grdInventoryMaster.Rows[e.RowIndex].FindControl("lblCategoryId") as Label;
             TextBox InventoryName = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtInventoryName") as TextBox;
-            TextBox InventoryDescription1 = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtInventoryDescription1") as TextBox;
-            TextBox InventoryDescription2 = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtInventoryDescription2") as TextBox;
-            TextBox InventoryDescription3 = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtInventoryDescription3") as TextBox;
-            TextBox InventoryDescription = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtInventoryDescription") as TextBox;
-            TextBox PurchaseDate = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtPurchaseDate") as TextBox;
-            TextBox PurchasedFrom = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtPurchasedFrom") as TextBox;
-            TextBox Bill_InvoiceNo = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtBill_InvoiceNo") as TextBox;
-            TextBox ItemQuantity = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtItemQuantity") as TextBox;
-            TextBox ItemRatePerUnit = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtItemRatePerUnit") as TextBox;
-            TextBox ItemTotalCost = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtItemTotalCost") as TextBox;
-            TextBox SalesTax = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtSalesTax") as TextBox;
-            TextBox TotalAmount = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtTotalAmount") as TextBox;
+            //TextBox InventoryDescription1 = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtInventoryDescription1") as TextBox;
+            //TextBox InventoryDescription2 = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtInventoryDescription2") as TextBox;
+            //TextBox InventoryDescription3 = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtInventoryDescription3") as TextBox;
+            //TextBox InventoryDescription = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtInventoryDescription") as TextBox;
+            //TextBox PurchaseDate = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtPurchaseDate") as TextBox;
+            //TextBox PurchasedFrom = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtPurchasedFrom") as TextBox;
+            //TextBox Bill_InvoiceNo = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtBill_InvoiceNo") as TextBox;
+            //TextBox ItemQuantity = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtItemQuantity") as TextBox;
+            //TextBox ItemRatePerUnit = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtItemRatePerUnit") as TextBox;
+            //TextBox ItemTotalCost = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtItemTotalCost") as TextBox;
+            //TextBox SalesTax = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtSalesTax") as TextBox;
+            //TextBox TotalAmount = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtTotalAmount") as TextBox;
             TextBox InventoryRegisterNo = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtInventoryRegisterNo") as TextBox;
             TextBox InventoryPageNo = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtInventoryPageNo") as TextBox;
-            CheckBox IsConsumable = grdInventoryMaster.Rows[e.RowIndex].FindControl("chkIsConsumable") as CheckBox;
+            //CheckBox IsConsumable = grdInventoryMaster.Rows[e.RowIndex].FindControl("chkIsConsumable") as CheckBox;
             //TextBox WarrantyTo = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtWarrantyTo") as TextBox;
-
+            TextBox txtLocation = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtLocation") as TextBox;
             try
             {
+                
                 if (conn.State == ConnectionState.Closed)
                 {
                     conn.Open();
@@ -437,23 +456,24 @@ namespace Inventory
                 sqlCmd.Parameters.AddWithValue("@InventoryId", InventoryId.Text);
                 sqlCmd.Parameters.AddWithValue("@CategoryId", CategoryId.Text);
                 sqlCmd.Parameters.AddWithValue("@InventoryName", InventoryName.Text);
-                sqlCmd.Parameters.AddWithValue("@InventoryDescription1", InventoryDescription1.Text);
-                sqlCmd.Parameters.AddWithValue("@InventoryDescription2", InventoryDescription2.Text);
-                sqlCmd.Parameters.AddWithValue("@InventoryDescription3", InventoryDescription3.Text);
-                sqlCmd.Parameters.AddWithValue("@InventoryDescription", InventoryDescription.Text);
-                sqlCmd.Parameters.AddWithValue("@PurchaseDate", PurchaseDate.Text);
-                sqlCmd.Parameters.AddWithValue("@PurchasedFrom", PurchasedFrom.Text);
-                sqlCmd.Parameters.AddWithValue("@Bill_InvoiceNo", Bill_InvoiceNo.Text);
-                sqlCmd.Parameters.AddWithValue("@ItemQuantity", ItemQuantity.Text);
-                sqlCmd.Parameters.AddWithValue("@ItemRatePerUnit", ItemRatePerUnit.Text);
-                sqlCmd.Parameters.AddWithValue("@ItemTotalCost", ItemTotalCost.Text);
-                sqlCmd.Parameters.AddWithValue("@SalesTax", SalesTax.Text);
-                sqlCmd.Parameters.AddWithValue("@TotalAmount", TotalAmount.Text);
-                sqlCmd.Parameters.AddWithValue("@IsConsumable", IsConsumable.Text);
+                //sqlCmd.Parameters.AddWithValue("@InventoryDescription1", InventoryDescription1.Text);
+                //sqlCmd.Parameters.AddWithValue("@InventoryDescription2", InventoryDescription2.Text);
+                //sqlCmd.Parameters.AddWithValue("@InventoryDescription3", InventoryDescription3.Text);
+                //sqlCmd.Parameters.AddWithValue("@InventoryDescription", InventoryDescription.Text);
+                //sqlCmd.Parameters.AddWithValue("@PurchaseDate", PurchaseDate.Text);
+                //sqlCmd.Parameters.AddWithValue("@PurchasedFrom", PurchasedFrom.Text);
+                //sqlCmd.Parameters.AddWithValue("@Bill_InvoiceNo", Bill_InvoiceNo.Text);
+                //sqlCmd.Parameters.AddWithValue("@ItemQuantity", ItemQuantity.Text);
+                //sqlCmd.Parameters.AddWithValue("@ItemRatePerUnit", ItemRatePerUnit.Text);
+                //sqlCmd.Parameters.AddWithValue("@ItemTotalCost", ItemTotalCost.Text);
+                //sqlCmd.Parameters.AddWithValue("@SalesTax", SalesTax.Text);
+                //sqlCmd.Parameters.AddWithValue("@TotalAmount", TotalAmount.Text);
+                //sqlCmd.Parameters.AddWithValue("@IsConsumable", IsConsumable.Text);
                 sqlCmd.Parameters.AddWithValue("@InventoryRegisterNo", InventoryRegisterNo.Text);
                 sqlCmd.Parameters.AddWithValue("@InventoryPageNo", InventoryPageNo.Text);
-                sqlCmd.Parameters.AddWithValue("@InventoryUpdatedBy", 1);//user id filhal
+                sqlCmd.Parameters.AddWithValue("@InventoryUpdatedBy", Session["UserID"]);//user id filhal
                 sqlCmd.Parameters.AddWithValue("@InventoryUpdatedOn", DateTime.Now);
+                sqlCmd.Parameters.AddWithValue("@Location", txtLocation.Text);
                 //  sqlCmd.Parameters.AddWithValue("@WarrantyTo", WarrantyTo.Text);
                 sqlCmd.Parameters.AddWithValue("@ActionType", "SaveInventoryEntries");
                 int numRes = sqlCmd.ExecuteNonQuery();
@@ -547,6 +567,7 @@ namespace Inventory
                     lblError.Font.Size = 16;
                     GetInventoryEntries();
                     clearAllFields();
+                    
                 }
                 else
                     lblError.Text = ("Please Try Again !!!");
@@ -595,6 +616,68 @@ namespace Inventory
         protected void chkIsReceived_CheckedChanged(object sender, EventArgs e)
         {
             txtReceiptRemarks.Visible = chkIsReceived.Checked;
+        }
+
+        protected void grdInventoryMaster_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            string[] arg = new string[24];
+            if (e.CommandName == "EditRecord")
+            {
+                
+                arg = e.CommandArgument.ToString().Split(';');
+                Session["InventoryId"] = arg[0];
+                Session["InventoryName"] = arg[1];
+                Session["CategoryId"] = arg[2];
+                Session["CategoryName"] = arg[3];
+                Session["SubCategoryId"] = arg[4];
+                Session["SubCategoryName"] = arg[5];
+                Session["Location"] = arg[6];
+                Session["InventoryDescription"] = arg[7];
+                Session["InventoryDescription1"] = arg[8];
+                Session["InventoryDescription2"] = arg[9];
+                Session["InventoryDescription3"] = arg[10];
+                Session["PurchasedFrom"] = arg[11];
+                Session["PurchaseDate"] = arg[12];
+                Session["Bill_InvoiceNo"] = arg[13];
+                Session["ItemTotalCost"] = arg[14];
+                Session["TotalAmount"] = arg[15];
+                Session["ItemQuantity"] = arg[16];
+                Session["ItemRatePerUnit"] = arg[17];
+                Session["IsConsumable"] = arg[18];
+                Session["SalesTax"] = arg[19];
+                Session["WarrantyTo"] = arg[20];
+                Session["InventoryRegisterNo"] = arg[21];
+                Session["InventoryPageNo"] = arg[22];
+
+
+
+                txtInventoryDescription.Text = Session["InventoryDescription"].ToString();
+                txtInventoryDescription1.Text= Session["InventoryDescription1"].ToString();
+                txtInventoryDescription2.Text= Session["InventoryDescription2"].ToString();
+                txtInventoryDescription3.Text= Session["InventoryDescription3"].ToString();
+
+                txtInventoryName.Text = Session["InventoryName"].ToString();
+                txtInventoryRegisterNo.Text = Session["InventoryRegisterNo"].ToString();
+                txtInventoryPageNo.Text= Session["InventoryPageNo"].ToString();
+
+              
+                txtItemQuantity.Text = Session["ItemQuantity"].ToString();
+                txtItemRatePerUnit.Text= Session["ItemRatePerUnit"].ToString();
+                txtItemTotalCost.Text = Session["ItemTotalCost"].ToString();
+                txtLocation.Text = Session["Location"].ToString();
+                txtPurchaseDate.Text = Session["PurchaseDate"].ToString();
+                txtPurchasedFrom.Text = Session["PurchasedFrom"].ToString();
+                txtSalesTax.Text = Session["SalesTax"].ToString();
+                txtTotalAmount.Text= Session["TotalAmount"].ToString();
+                txtBill_InvoiceNo.Text = Session["Bill_InvoiceNo"].ToString();
+                drpCategory.SelectedValue = string.IsNullOrEmpty(Session["CategoryId"].ToString()) ? "-1" : Session["CategoryId"].ToString();
+                drpCategory_SelectedIndexChanged1(null, null);
+
+                chkIsConsumable.Checked = Convert.ToBoolean(string.IsNullOrEmpty(Session["IsConsumable"].ToString())?false: Session["IsConsumable"]);
+            
+                drpSubCategory.SelectedValue = string.IsNullOrEmpty(Session["SubCategoryId"].ToString()) ? "-1" : Session["SubCategoryId"].ToString();
+                btnSubmitInventoryEntries.Text = "Update Details";
+            }
         }
 
         protected void drpCategory_SelectedIndexChanged1(object sender, EventArgs e)

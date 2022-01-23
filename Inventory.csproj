@@ -119,6 +119,7 @@
     <Content Include="App_Data\shafat_Jan_06_2022_1.sql" />
     <Content Include="App_Data\shafat_Jan_08_2022_1.sql" />
     <Content Include="App_Data\shafat_Jan_09_2022_1.sql" />
+    <Content Include="App_Data\shafat_Jan_23_2022.sql" />
     <Content Include="UnauthorizedAccess.aspx" />
     <Content Include="LogOut.aspx" />
     <Content Include="LogIn.aspx" />
