@@ -171,7 +171,7 @@
                 <asp:RequiredFieldValidator ID="rfvItemRatePerUnit" runat="server" CssClass="lbl" ErrorMessage="Enter Item Rate Quantity"
                     ControlToValidate="txtItemRatePerUnit" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator ID="revItemRatePerUnit" CssClass="lbl" ControlToValidate="txtItemRatePerUnit" runat="server"
-                    ErrorMessage="Only Numbers allowed" ValidationExpression="\d+" ValidationGroup="VerifyInventory"></asp:RegularExpressionValidator>
+                    ErrorMessage="Only Numbers/Decimal Numbers allowed" ValidationExpression="^[0-9]*(?:\.[0-9]*)?$" ValidationGroup="VerifyInventory"></asp:RegularExpressionValidator>
             </div>
             <label for="txtItemTotalCost" class="col-sm-2 " style="text-align: right;"><span id="Span5" runat="server" class="RequiredField">* </span>Item Total Cost:</label>
             <div class="col-sm-4">
@@ -179,7 +179,7 @@
                 <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" CssClass="lbl" ErrorMessage="Enter Item Total Cost"
                     ControlToValidate="txtItemTotalCost" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator ID="revItemTotalCost" CssClass="lbl" ControlToValidate="txtItemTotalCost" runat="server"
-                    ErrorMessage="Only Numbers allowed" ValidationExpression="\d+" ValidationGroup="VerifyInventory"></asp:RegularExpressionValidator>
+                    ErrorMessage="Only Numbers/Decimal Numbers allowed" ValidationExpression="^[0-9]*(?:\.[0-9]*)?$" ValidationGroup="VerifyInventory"></asp:RegularExpressionValidator>
             </div>
         </div>
         <br />
@@ -190,7 +190,7 @@
                 <asp:RequiredFieldValidator ID="rfvSalesTax" runat="server" CssClass="lbl" ErrorMessage="Enter Sales Tax"
                     ControlToValidate="txtSalesTax" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator ID="revSalesTax" CssClass="lbl" ControlToValidate="txtSalesTax" runat="server"
-                    ErrorMessage="Only Numbers allowed" ValidationExpression="\d+" ValidationGroup="VerifyInventory"></asp:RegularExpressionValidator>
+                    ErrorMessage="Only Numbers/Decimal Numbers allowed" ValidationExpression="^[0-9]*(?:\.[0-9]*)?$" ValidationGroup="VerifyInventory"></asp:RegularExpressionValidator>
             </div>
             <label for="txtTotalAmount" class="col-sm-2 " style="text-align: right;"><span id="Span7" runat="server" class="RequiredField">* </span>Total Amount:</label>
             <div class="col-sm-4">
@@ -198,7 +198,7 @@
                 <asp:RequiredFieldValidator ID="rfvTotalAmount" runat="server" CssClass="lbl" ErrorMessage="Enter Total Amount"
                     ControlToValidate="txtTotalAmount" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator ID="revTotalAmount" CssClass="lbl" ControlToValidate="txtTotalAmount" runat="server"
-                    ErrorMessage="Only Numbers allowed" ValidationExpression="\d+" ValidationGroup="VerifyInventory"></asp:RegularExpressionValidator>
+                    ErrorMessage="Only Numbers/Decimal Numbers allowed" ValidationExpression="^[0-9]*(?:\.[0-9]*)?$" ValidationGroup="VerifyInventory"></asp:RegularExpressionValidator>
             </div>
         </div>
         <br />
