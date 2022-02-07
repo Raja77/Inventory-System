@@ -142,15 +142,6 @@
     <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
     <None Include="Scripts\jquery-3.3.1.intellisense.js" />
-    <Content Include="IC Inventory screen shots\category Add without sub cattegory.PNG" />
-    <Content Include="IC Inventory screen shots\category Add.PNG" />
-    <Content Include="IC Inventory screen shots\category List screen.PNG" />
-    <Content Include="IC Inventory screen shots\Inventory add without issue.PNG" />
-    <Content Include="IC Inventory screen shots\Inventory add.PNG" />
-    <Content Include="IC Inventory screen shots\Inventory List.PNG" />
-    <Content Include="IC Inventory screen shots\Issue Add.PNG" />
-    <Content Include="IC Inventory screen shots\List screen of category.PNG" />
-    <Content Include="IC Inventory screen shots\User Master screen.PNG" />
     <Content Include="Images\cal.png" />
     <Content Include="Images\minusIcon.png" />
     <Content Include="Images\plusIcon.png" />

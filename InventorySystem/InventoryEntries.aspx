@@ -50,7 +50,7 @@
                 </asp:DropDownList>
                 <asp:RequiredFieldValidator ID="rfvdrpCategory" runat="server" CssClass="lbl" ErrorMessage="Select Category" InitialValue="-1"
                     ControlToValidate="drpCategory" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
-                 
+
             </div>
             <label for="drpSubCategory" class="col-sm-2 " style="text-align: right;"><span class="RequiredField">* </span>Select Sub Category:</label>
             <div class="col-sm-4">
@@ -78,7 +78,8 @@
                     <asp:TextBox ID="txtInventoryDescription1" runat="server" CssClass="form-control" placeholder="Item Description Label 1 (if any)"></asp:TextBox>
                     <%-- <asp:RequiredFieldValidator ID="rfvtxtInventoryDescription1" runat="server" CssClass="lbl" ErrorMessage="Enter Item Label 1"
                         ControlToValidate="txtInventoryDescription1" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
-               --%> </div>
+                    --%>
+                </div>
                 <br />
                 <label for="txtInventoryDescription2" class="col-sm-4 " style="text-align: right;">
                     <%-- <span id="Span11" runat="server" class="RequiredField">* </span>--%>
@@ -87,7 +88,8 @@
                     <asp:TextBox ID="txtInventoryDescription2" runat="server" CssClass="form-control" placeholder="Item Description Label 2 (if any)"></asp:TextBox>
                     <%--  <asp:RequiredFieldValidator ID="rfvtxtInventoryDescription2" runat="server" CssClass="lbl" ErrorMessage="Enter Label2"
                         ControlToValidate="txtInventoryDescription2" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
-                --%></div>
+                    --%>
+                </div>
                 <br />
                 <label for="txtInventoryDescription3" class="col-sm-4 " style="text-align: right;">
                     <%--    <span id="Span12" runat="server" class="RequiredField">* </span>--%>
@@ -96,7 +98,8 @@
                     <asp:TextBox ID="txtInventoryDescription3" runat="server" CssClass="form-control" placeholder="Item Description Label 3 (if any)"></asp:TextBox>
                     <%-- <asp:RequiredFieldValidator ID="rfvtxtInventoryDescription3" runat="server" CssClass="lbl" ErrorMessage="Enter Label3"
                         ControlToValidate="txtInventoryDescription3" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
-                --%></div>
+                    --%>
+                </div>
             </div>
             <div class="col-sm-6">
                 <label for="txtInventoryDescription" class="col-sm-4 " style="text-align: right;"><span id="spInventoryDescription" runat="server" class="RequiredField">* </span>Inventory Description:</label>
@@ -135,7 +138,7 @@
                 <asp:TextBox ID="txtInventoryRegisterNo" runat="server" CssClass="form-control"></asp:TextBox>
                 <asp:RequiredFieldValidator ID="rfvtxtInventoryRegisterNo" runat="server" CssClass="lbl" ErrorMessage="Enter Register No"
                     ControlToValidate="txtInventoryRegisterNo" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
-                     <asp:RegularExpressionValidator ID="revRegisterNo" CssClass="lbl" ControlToValidate="txtInventoryRegisterNo" runat="server"
+                <asp:RegularExpressionValidator ID="revRegisterNo" CssClass="lbl" ControlToValidate="txtInventoryRegisterNo" runat="server"
                     ErrorMessage="Only Numbers allowed" ValidationExpression="\d+" ValidationGroup="VerifyInventory"></asp:RegularExpressionValidator>
             </div>
             <label for="txtInventoryPageNo" class="col-sm-2 " style="text-align: right;"><span id="Span9" runat="server" class="RequiredField">* </span>Register Page No:</label>
@@ -160,7 +163,7 @@
                 <asp:RequiredFieldValidator ID="rfvItemQuantity" runat="server" CssClass="lbl" ErrorMessage="Enter Item Quantity"
                     ControlToValidate="txtItemQuantity" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator ID="revItemQuantity" CssClass="lbl" ControlToValidate="txtItemQuantity" runat="server"
-                    ErrorMessage="Only Numbers allowed" ValidationExpression="\d+" ValidationGroup="VerifyInventory"></asp:RegularExpressionValidator>
+                    ErrorMessage="Only Numbers/Decimal Numbers allowed" ValidationExpression="^[0-9]*(?:\.[0-9]*)?$" ValidationGroup="VerifyInventory"></asp:RegularExpressionValidator>
             </div>
         </div>
         <br />
@@ -176,7 +179,7 @@
             <label for="txtItemTotalCost" class="col-sm-2 " style="text-align: right;"><span id="Span5" runat="server" class="RequiredField">* </span>Item Total Cost:</label>
             <div class="col-sm-4">
                 <asp:TextBox ID="txtItemTotalCost" runat="server" CssClass="form-control"></asp:TextBox>
-                <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" CssClass="lbl" ErrorMessage="Enter Item Total Cost"
+                <asp:RequiredFieldValidator ID="rfvItemTotalCost" runat="server" CssClass="lbl" ErrorMessage="Enter Item Total Cost"
                     ControlToValidate="txtItemTotalCost" Display="Dynamic" ValidationGroup="VerifyInventory"></asp:RequiredFieldValidator>
                 <asp:RegularExpressionValidator ID="revItemTotalCost" CssClass="lbl" ControlToValidate="txtItemTotalCost" runat="server"
                     ErrorMessage="Only Numbers/Decimal Numbers allowed" ValidationExpression="^[0-9]*(?:\.[0-9]*)?$" ValidationGroup="VerifyInventory"></asp:RegularExpressionValidator>
@@ -209,13 +212,13 @@
             <div class="col-sm-4">
                 <asp:CheckBox ID="chkIsConsumable" runat="server" Style="margin-top: 10px;" />
             </div>
-           
-                <label for="txtLocation" class="col-sm-2 " style="text-align: right;">Location:</label>
+
+            <label for="txtLocation" class="col-sm-2 " style="text-align: right;">Location:</label>
             <div class="col-sm-4">
                 <asp:TextBox ID="txtLocation" runat="server" CssClass="form-control" placeholder="Item Location"></asp:TextBox>
             </div>
 
-         <%--   <br />
+            <%--   <br />
             <label for="chkIsIssue" class="col-sm-4 txt">
                 Do you want to add Issue details
             </label>
@@ -326,18 +329,18 @@
         </div>
     </div>
     <div visible="false">
-          <div class="col-sm-9 txt" >
-                <asp:Button ID="btnAddInventory" runat="server" Text="Add New Item" CssClass="btn btn-primary txt" ToolTip="Click here to Add New Item Details"
-                    OnClick="btnAddInventory_Click" Visible="false  " />
-            </div>
-            <asp:Label ID="Label1" runat="server" Text="Data Saved Successfully" Visible="false"></asp:Label>
+        <div class="col-sm-9 txt">
+            <asp:Button ID="btnAddInventory" runat="server" Text="Add New Item" CssClass="btn btn-primary txt" ToolTip="Click here to Add New Item Details"
+                OnClick="btnAddInventory_Click" Visible="false  " />
         </div>
+        <asp:Label ID="Label1" runat="server" Text="Data Saved Successfully" Visible="false"></asp:Label>
+    </div>
     <%--New Grid for Issue Details as well as Inventory--%>
     <div id="dvListInventoryDetails" runat="server">
         <div class="mb-4 row">
-              <h4 class="col-sm-4">Check Inventory Details <strong id="cntInv" runat="server"></strong></h4>
+            <h4 class="col-sm-4">Check Inventory Details <strong id="cntInv" runat="server"></strong></h4>
             <div class="col-sm-8"></div>
-      
+
         </div>
         <hr />
         <div style="overflow-x: auto;">
@@ -399,7 +402,7 @@
                         <ItemTemplate>
                             <%# Container.DataItemIndex + 1 + "." %>
                             <asp:Label ID="lblItemId" runat="server" Text='<%#Eval("InventoryId") %>' Visible="false"></asp:Label>
-                                  <asp:Label ID="lblCategoryId" runat="server" Text='<%#Eval("CategoryId") %>' Visible="false" ></asp:Label>                  
+                            <asp:Label ID="lblCategoryId" runat="server" Text='<%#Eval("CategoryId") %>' Visible="false"></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
                     <asp:TemplateField HeaderText="Item Name">
@@ -415,7 +418,7 @@
                             <asp:Label ID="lblItemCategory" runat="server" Text='<%#Eval("CategoryName") %>'></asp:Label>
                         </ItemTemplate>
                     </asp:TemplateField>
-                          <asp:TemplateField HeaderText="Sub-Category">
+                    <asp:TemplateField HeaderText="Sub-Category">
                         <ItemTemplate>
                             <asp:Label ID="lblSubCategory" runat="server" Text='<%#Eval("SubCategoryName") %>'></asp:Label>
                         </ItemTemplate>
@@ -430,7 +433,7 @@
                     <ItemTemplate><asp:Label ID="lblSubCategoryId" runat="server" Text='<%#Eval("SubCategoryId") %>'></asp:Label></ItemTemplate>
                     <%--<EditItemTemplate><asp:TextBox ID="txtSubCategoryName" runat="server" Text='<%#Eval("SubCategoryName") %>'></asp:TextBox></EditItemTemplate>--%>
 
-                 <%--   <asp:TemplateField HeaderText="Label 1">
+                    <%--   <asp:TemplateField HeaderText="Label 1">
                         <ItemTemplate>
                             <asp:Label ID="lblInventoryDescription1" runat="server" Text='<%#Eval("InventoryDescription1") %>'></asp:Label>
                         </ItemTemplate>
@@ -478,7 +481,7 @@
                             <asp:TextBox ID="txtInventoryPageNo" runat="server" Text='<%#Eval("InventoryPageNo") %>'></asp:TextBox>
                         </EditItemTemplate>
                     </asp:TemplateField>
-                <%--    <asp:TemplateField HeaderText="Purchase Date">
+                    <%--    <asp:TemplateField HeaderText="Purchase Date">
                         <ItemTemplate>
                             <asp:Label ID="lblPurchaseDate" runat="server" Text='<%#Eval("PurchaseDate") %>'></asp:Label>
                         </ItemTemplate>
@@ -547,7 +550,7 @@
                             <asp:TextBox ID="txtTotalAmountx" runat="server" Text='<%#Eval("TotalAmount") %>'></asp:TextBox>
                         </EditItemTemplate>
                     </asp:TemplateField>--%>
-     <%--               <asp:TemplateField HeaderText="IsConsumable">
+                    <%--               <asp:TemplateField HeaderText="IsConsumable">
                         <ItemTemplate>
                             <asp:Label ID="lblIsConsumable" runat="server" Text='<%#Eval("IsConsumable") %>'></asp:Label>
                         </ItemTemplate>
@@ -557,14 +560,14 @@
                     
                     </asp:TemplateField>--%>
 
-                        <%-- <EditItemTemplate><asp:TextBox ID="txtIsConsumable" runat="server" Text='<%#Eval("IsConsumable") %>'></asp:TextBox></EditItemTemplate>--%>
+                    <%-- <EditItemTemplate><asp:TextBox ID="txtIsConsumable" runat="server" Text='<%#Eval("IsConsumable") %>'></asp:TextBox></EditItemTemplate>--%>
 
-                            <asp:TemplateField HeaderText="Location">
+                    <asp:TemplateField HeaderText="Location">
                         <ItemTemplate>
                             <asp:Label ID="lblLocation" runat="server" Text='<%#Eval("Location") %>'></asp:Label>
                         </ItemTemplate>
                         <EditItemTemplate>
-                                <asp:TextBox ID="txtLocation" runat="server" Text='<%#Eval("Location") %>'></asp:TextBox>
+                            <asp:TextBox ID="txtLocation" runat="server" Text='<%#Eval("Location") %>'></asp:TextBox>
                         </EditItemTemplate>
                         <%-- <EditItemTemplate><asp:TextBox ID="txtIsConsumable" runat="server" Text='<%#Eval("IsConsumable") %>'></asp:TextBox></EditItemTemplate>--%>
                     </asp:TemplateField>
@@ -578,14 +581,14 @@
                     <asp:TemplateField>
                         <ItemTemplate>
                             <asp:Button ID="btn_Edit" runat="server" Text="Quick Edit" CommandName="Edit" />
-                                  <asp:LinkButton ID="lnkEdit" runat="server" CommandArgument='<%#Eval("InventoryId") + ";" + Eval("InventoryName") + ";" 
+                            <asp:LinkButton ID="lnkEdit" runat="server" CommandArgument='<%#Eval("InventoryId") + ";" + Eval("InventoryName") + ";" 
                                 + Eval("CategoryId") + ";" + Eval("CategoryName")+ ";" + Eval("SubCategoryId")+ ";" + Eval("SubCategoryName") + ";" 
                                 + Eval("Location") + ";" + Eval("InventoryDescription")+ ";" + Eval("InventoryDescription1")+ ";" + Eval("InventoryDescription2") + ";" 
                                 + Eval("InventoryDescription3") + ";" + Eval("PurchasedFrom")+ ";" + Eval("PurchaseDate")+ ";" + Eval("Bill_InvoiceNo") + ";" 
                                 + Eval("ItemTotalCost") + ";" + Eval("TotalAmount")+ ";" + Eval("ItemQuantity")+ ";" + Eval("ItemRatePerUnit") + ";" + Eval("IsConsumable") + ";" 
                                 + Eval("SalesTax") + ";" + Eval("WarrantyTo")+ ";" + Eval("InventoryRegisterNo")+ ";" + Eval("InventoryPageNo")%>'
-                            CommandName="EditRecord"
-                            Text="Full Edit" ToolTip="Click to update the Item details"></asp:LinkButton>
+                                CommandName="EditRecord"
+                                Text="Full Edit" ToolTip="Click to update the Item details"></asp:LinkButton>
                         </ItemTemplate>
                         <EditItemTemplate>
                             <asp:Button ID="btn_Update" runat="server" Text="Update Item" CommandName="Update" />
@@ -596,7 +599,6 @@
                 <PagerStyle HorizontalAlign="Right" CssClass="GridPager" />
             </asp:GridView>
         </div>
-
     </div>
 
     <%-- Old Grid For Issue Details--%>
