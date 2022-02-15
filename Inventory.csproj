@@ -114,6 +114,7 @@
     <Content Include="About.aspx" />
     <Content Include="App_Data\Script on Jan 05 2022.sql" />
     <Content Include="App_Data\Script on Jan 05 2022_1.sql" />
+    <Content Include="App_Data\shafat_Feb_15_2022_1.sql" />
     <Content Include="App_Data\shafat_Jan16_2022_1 - Copy.sql" />
     <Content Include="App_Data\faisal_Jan19_2022.sql" />
     <Content Include="App_Data\shafat_Jan_06_2022_1.sql" />

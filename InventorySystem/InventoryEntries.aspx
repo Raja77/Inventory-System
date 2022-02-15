@@ -335,18 +335,69 @@
         </div>
         <asp:Label ID="Label1" runat="server" Text="Data Saved Successfully" Visible="false"></asp:Label>
     </div>
+       <br />
     <%--New Grid for Issue Details as well as Inventory--%>
     <div id="dvListInventoryDetails" runat="server">
-        <div class="mb-4 row">
+   <asp:Panel ID="pnlSearch" runat="server" DefaultButton="btnSearch" BorderWidth="1px">
+          <div class="mb-4 row">
+            <h4 class="col-sm-4">Search Inventory Details</h4>
+            <div class="col-sm-8"></div>
+  
+        </div>
+        <hr />
+     
+
+           <div class="mb-4 row">
+            <div class="col-sm-2">
+                <asp:TextBox ID="txtSrchItemName" runat="server" CssClass="form-control" placeholder="Item Name"></asp:TextBox> 
+                </div>
+                 <div class="col-sm-2">
+                <asp:TextBox ID="txtSrchCategory" runat="server" CssClass="form-control" placeholder="Category"></asp:TextBox> 
+                </div>
+                 <div class="col-sm-2">
+                <asp:TextBox ID="txtSrchSubCategory" runat="server" CssClass="form-control" placeholder="Sub-Category"></asp:TextBox> 
+                </div>
+                 <div class="col-sm-2">
+                <asp:TextBox ID="txtSrchRegisterNo" runat="server" CssClass="form-control" placeholder="Register No."></asp:TextBox>                      
+                <asp:RegularExpressionValidator ID="revSrchRegisterNo" CssClass="lbl" ControlToValidate="txtSrchRegisterNo" runat="server"
+                    ErrorMessage="Only Numbers allowed" ValidationExpression="\d+" ValidationGroup="VerifySearchInventory"></asp:RegularExpressionValidator>
+                </div>
+                 <div class="col-sm-2">
+                <asp:TextBox ID="txtSrchPageNo" runat="server" CssClass="form-control" placeholder="Page No."></asp:TextBox> 
+                      <asp:RegularExpressionValidator ID="revSrchPageNo" CssClass="lbl" ControlToValidate="txtSrchPageNo" runat="server"
+                    ErrorMessage="Only Numbers allowed" ValidationExpression="\d+" ValidationGroup="VerifySearchInventory"></asp:RegularExpressionValidator>
+               
+                </div>
+
+                 <div class="col-sm-2" id="dvUser" runat="server">
+                    <asp:DropDownList ID="drpUser" runat="server" CssClass="form-control drp">
+                    <asp:ListItem Text="All Users" Selected="True" Value=""></asp:ListItem>
+                </asp:DropDownList>
+             <%--   <asp:RequiredFieldValidator ID="RequiredFieldValidator1" runat="server" CssClass="lbl" ErrorMessage="Select User" InitialValue="-1"
+                    ControlToValidate="drpUser" Display="Dynamic" ValidationGroup="VerifySearchInventory"></asp:RequiredFieldValidator>
+              --%> 
+
+                 </div>
+                 
+        </div>
+          <div class="mb-2 row">
+        <div class="col-sm-2">
+                <asp:Button ID="btnSearch" runat="server" OnClick="btnSearch_Click" Text="Search" ValidationGroup="VerifySearchInventory"
+                    CssClass ="btn btn-info txt" />
+                </div>
+              </div>
+</asp:Panel>
+          <div class="mb-4 row">
             <h4 class="col-sm-4">Check Inventory Details <strong id="cntInv" runat="server"></strong></h4>
             <div class="col-sm-8"></div>
 
         </div>
+
         <hr />
         <div style="overflow-x: auto;">
             <asp:GridView ID="grdInventoryMaster" CellPadding="0" CellSpacing="0" CssClass="table table-bordered table-striped"
                 AllowPaging="true" OnPageIndexChanging="grdInventoryMaster_PageIndexChanging" OnRowDataBound="grdInventoryMaster_RowDataBound"
-                DataKeyNames="InventoryId" GridLines="None" runat="server" AutoGenerateColumns="false" PageSize="15"
+                DataKeyNames="InventoryId" GridLines="None" runat="server" AutoGenerateColumns="false" PageSize="10"
                 OnRowCancelingEdit="grdInventoryMaster_RowCancelingEdit" OnRowEditing="grdInventoryMaster_RowEditing"
                 OnRowUpdating="grdInventoryMaster_RowUpdating" OnRowCommand="grdInventoryMaster_RowCommand">
 
