@@ -20,8 +20,8 @@ namespace Inventory
     public partial class InventoryEntries : Page
     {
         #region Properties
-        SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultInventoryConnection"].ConnectionString);     
-        DataSet ds,dsGrid = null;
+        SqlConnection conn = new SqlConnection(ConfigurationManager.ConnectionStrings["DefaultInventoryConnection"].ConnectionString);
+        DataSet ds, dsGrid = null;
         DataTable dtData = null;
         SqlCommand sqlCmd = null;
 
@@ -43,10 +43,10 @@ namespace Inventory
             {
                 GetInventoryEntries();
                 CreateIssueDetailsGrid();
-                var x= Request.Url.ToString();               
+                var x = Request.Url.ToString();
             }
             lblError.Text = string.Empty;
-        }       
+        }
 
         public string ConvertNullableBoolToYesNo(object pBool)
         {
@@ -60,12 +60,20 @@ namespace Inventory
             }
         }
 
-        protected void GetInventoryEntries(string sortExpression = null)
+        protected void GetInventoryEntries(string sortExpression = null, string searchExpression = null)
         {
             try
             {
+                Session["SearchExp"] = searchExpression;
                 ds = new DataSet();
-                ds = FetchInventoryDetails();
+                if (string.IsNullOrEmpty(searchExpression))
+                {
+                    ds = FetchInventoryDetails();
+                }
+                else
+                {
+                    ds = FetchInventoryDetails(searchExpression);
+                }
                 if (ds.Tables.Count > 0 && ds.Tables[0].Rows.Count > 0)
                 {
                     grdInventoryMaster.DataSource = ds.Tables[0];
@@ -78,10 +86,10 @@ namespace Inventory
                     grdInventoryMaster.DataBind();
                     cntInv.InnerText = "(0)";
                 }
-                
-                    countInventoryEntries.InnerText = ds.Tables[0].Rows.Count.ToString();
-                    countInventoryEntries.Attributes.Add("title", "Inventory Details");
-              
+
+                countInventoryEntries.InnerText = ds.Tables[0].Rows.Count.ToString();
+                countInventoryEntries.Attributes.Add("title", "Inventory Details");
+
                 //Bind Category Dropdown
                 if (ds.Tables.Count > 0 && ds.Tables[1].Rows.Count > 0)
                 {
@@ -98,6 +106,14 @@ namespace Inventory
                     drpIssuedTo.DataTextField = "UserName";
                     drpIssuedTo.DataValueField = "UserId";
                     drpIssuedTo.DataBind();
+
+                    if (string.IsNullOrEmpty(searchExpression))
+                    {
+                        drpUser.DataSource = ds.Tables[2];
+                        drpUser.DataTextField = "UserName";
+                        drpUser.DataValueField = "UserId";
+                        drpUser.DataBind();
+                    }
                 }
                 else
                 {
@@ -105,14 +121,27 @@ namespace Inventory
                     drpIssuedTo.DataBind();
                 }
                 drpCategory.Items.Insert(0, new ListItem("Select Category...", "-1"));
+
                 drpCategory_SelectedIndexChanged1(null, null);
+                if (string.IsNullOrEmpty(searchExpression))
+                {
+                    drpUser.Items.Insert(0, new ListItem("All Users", ""));
+                }
+                if (Session["UserRoleX"].Equals("SuperAdmin"))
+                {
+                    dvUser.Visible = true;
+                }
+                else
+                {
+                    dvUser.Visible = false;
+                }
             }
             catch (Exception ex)
             {
                 lblError.Text = ex.Message;
             }
         }
-        private DataSet FetchInventoryDetails()
+        private DataSet FetchInventoryDetails(string searchExp = null)
         {
             try
             {
@@ -123,7 +152,38 @@ namespace Inventory
                 ds = new DataSet();
                 sqlCmd = new SqlCommand("spInventories", conn);
                 sqlCmd.CommandType = CommandType.StoredProcedure;
-                sqlCmd.Parameters.AddWithValue("@ActionType", "FetchInventoryEntries");
+
+                if (!string.IsNullOrEmpty(searchExp))
+                {
+                    sqlCmd.Parameters.AddWithValue("@SearchExp_Inventory", searchExp);
+                    sqlCmd.Parameters.AddWithValue("@InventoryName", txtSrchItemName.Text);
+                    sqlCmd.Parameters.AddWithValue("@CategoryName", txtSrchCategory.Text);
+                    sqlCmd.Parameters.AddWithValue("@SubCategoryName", txtSrchSubCategory.Text);
+                    sqlCmd.Parameters.AddWithValue("@InventoryRegisterNo", txtSrchRegisterNo.Text);
+                    sqlCmd.Parameters.AddWithValue("@InventoryPageNo", txtSrchPageNo.Text);
+                    if (Session["UserRoleX"].Equals("SuperAdmin"))
+                    {
+                        sqlCmd.Parameters.AddWithValue("@UserId", drpUser.SelectedItem.Value);
+                    }
+                    else
+                    {
+
+                        sqlCmd.Parameters.AddWithValue("@UserId", Session["UserID"]);
+                    }
+                    sqlCmd.Parameters.AddWithValue("@ActionType", "FetchInvBySearch");
+                }
+                else
+                {
+                    if (Session["UserRoleX"].Equals("SuperAdmin"))
+                    {
+                        sqlCmd.Parameters.AddWithValue("@ActionType", "FetchInventoryEntries");
+                    }
+                    else
+                    {
+                        sqlCmd.Parameters.AddWithValue("@UserId", Session["UserID"]);
+                        sqlCmd.Parameters.AddWithValue("@ActionType", "FetchInvEntriesByUserID");
+                    }
+                }
                 SqlDataAdapter sqlSda = new SqlDataAdapter(sqlCmd);
                 sqlSda.Fill(ds);
             }
@@ -161,7 +221,7 @@ namespace Inventory
                 lnkAddIssueDetail.Text = "Add Another Issue Detail";
             }
             this.BindGrid();
-           // drpIssuedTo.SelectedValue = "-1";
+            // drpIssuedTo.SelectedValue = "-1";
             txtIssueDate.Text = string.Empty;
             txtIssueQuantity.Text = string.Empty;
             chkIsReceived.Checked = false;
@@ -255,10 +315,17 @@ namespace Inventory
                 sqlCmd.Parameters.AddWithValue("@ItemTotalCost", txtItemTotalCost.Text);
                 sqlCmd.Parameters.AddWithValue("@SalesTax", txtSalesTax.Text);
                 sqlCmd.Parameters.AddWithValue("@TotalAmount", txtTotalAmount.Text);
-                sqlCmd.Parameters.AddWithValue("@InventoryCreatedBy", Session["UserID"]);//filhal otherwise from session
-                sqlCmd.Parameters.AddWithValue("@InventoryCreatedOn", DateTime.Now);
-                sqlCmd.Parameters.AddWithValue("@InventoryUpdatedBy", Session["UserID"]);//filhal otherwise from session
-                sqlCmd.Parameters.AddWithValue("@InventoryUpdatedOn", DateTime.Now);
+                if (btnSubmitInventoryEntries.Text == "Update Details")
+                {
+                    sqlCmd.Parameters.AddWithValue("@InventoryUpdatedBy", Session["UserID"]);//filhal otherwise from session
+                    sqlCmd.Parameters.AddWithValue("@InventoryUpdatedOn", DateTime.Now);
+                }
+                else
+                {
+                    sqlCmd.Parameters.AddWithValue("@InventoryCreatedBy", Session["UserID"]);//filhal otherwise from session
+                    sqlCmd.Parameters.AddWithValue("@InventoryCreatedOn", DateTime.Now);
+                }
+
                 sqlCmd.Parameters.AddWithValue("@IsConsumable", chkIsConsumable.Checked);
                 sqlCmd.Parameters.AddWithValue("@InventoryRegisterNo", txtInventoryRegisterNo.Text);
                 sqlCmd.Parameters.AddWithValue("@InventoryPageNo", txtInventoryPageNo.Text);
@@ -281,17 +348,17 @@ namespace Inventory
                 //}
                 //else if (dvAddIssueMasterDetails.Visible == false && chkAddIssueDetails.Checked == false)
                 //{
-                    sqlCmd.Parameters.AddWithValue("@ActionType", "SaveInventoryEntries");
+                sqlCmd.Parameters.AddWithValue("@ActionType", "SaveInventoryEntries");
                 //}
                 int numRes = sqlCmd.ExecuteNonQuery();
                 if (numRes > 0)
-                {                   
-                    lblError.Font.Size = 16;                 
+                {
+                    lblError.Font.Size = 16;
                     //dvAddCategoryDetails.Visible = false;
                     dvAddIssueMasterDetails.Visible = false;
                     grdIssueDetailEntry.Visible = false;
                     dvListInventoryDetails.Visible = true;
-                   
+
                     if (btnSubmitInventoryEntries.Text == "Submit Details")
                     {
                         lblError.Text = "Record Saved Successfully";
@@ -302,11 +369,11 @@ namespace Inventory
                     {
                         lblError.Text = "Record Updated Successfully";
                         lblError.ForeColor = System.Drawing.Color.ForestGreen;
-                       
+
                     }
-                    GetInventoryEntries();
+                    GetInventoryEntries(null, null);
                     btnCancel_Click(null, null);
-                    
+
                 }
                 else
                     lblError.Text = ("Please Try Again !!!");
@@ -328,12 +395,12 @@ namespace Inventory
         {
             StringBuilder sb = new StringBuilder();
             //Loop through each row of gridview
-            
+
             foreach (GridViewRow row in grdIssueDetailEntry.Rows)
             {
                 sb.Append(String.Format("<IssueDetails UserId='{0}' IssueDate='{1}' IssuedBy='{2}' IssueQuantity='{3}' IsReceived='{4}' IssuerRemarks='{5}' ReceiptRemarks='{6}'/>",
-                                                        row.Cells[1].Text, row.Cells[2].Text, 1, row.Cells[3].Text, row.Cells[4].Text, row.Cells[5].Text, 
-                                                        (row.Cells[4].Text == "False")?"Not Yet Recieved":row.Cells[6].Text));
+                                                        row.Cells[1].Text, row.Cells[2].Text, 1, row.Cells[3].Text, row.Cells[4].Text, row.Cells[5].Text,
+                                                        (row.Cells[4].Text == "False") ? "Not Yet Recieved" : row.Cells[6].Text));
             }
             //change 1 to session user ID issuedBy
             return String.Format("<ROOT>{0}</ROOT>", sb.ToString());
@@ -358,7 +425,7 @@ namespace Inventory
             txtSalesTax.Text = string.Empty;
             txtTotalAmount.Text = string.Empty;
             chkIsConsumable.Checked = false;
-         //   chkAddIssueDetails.Checked = false;
+            //   chkAddIssueDetails.Checked = false;
             chkIsReceived.Checked = false;
             /*drpIssuedTo.SelectedItem.Value = "-1";
             txtIssueDate.Text = string.Empty;
@@ -382,13 +449,13 @@ namespace Inventory
                 grdIssueDetailDisplay.DataBind();
             }
         }
-       
+
         protected void BindGrid()
         {
             grdIssueDetailEntry.DataSource = (DataTable)ViewState["IssueDetail"];
             grdIssueDetailEntry.DataBind();
         }
-        
+
         protected void btnCancel_Click(object sender, EventArgs e)
         {
             btnSubmitInventoryEntries.Text = "Submit Details";
@@ -400,7 +467,7 @@ namespace Inventory
         //check
         protected void btnAddInventory_Click(object sender, EventArgs e)
         {
-          //  lnkAddSubCategory.Text = "Add Sub-Category";
+            //  lnkAddSubCategory.Text = "Add Sub-Category";
             //dvAddCategoryDetails.Visible = true;
             //dvListCategoryDetails.Visible = false;
             //CreateSubCategoryGrid();
@@ -445,7 +512,7 @@ namespace Inventory
             TextBox txtLocation = grdInventoryMaster.Rows[e.RowIndex].FindControl("txtLocation") as TextBox;
             try
             {
-                
+
                 if (conn.State == ConnectionState.Closed)
                 {
                     conn.Open();
@@ -521,7 +588,7 @@ namespace Inventory
                 sqlCmd = new SqlCommand("spInventories", conn);
                 sqlCmd.CommandType = CommandType.StoredProcedure;
                 sqlCmd.Parameters.AddWithValue("@ActionType", "SaveIEandIssue");
-               // sqlCmd.Parameters.AddWithValue("@ItemId", drpCategory.SelectedItem.Value);
+                // sqlCmd.Parameters.AddWithValue("@ItemId", drpCategory.SelectedItem.Value);
                 sqlCmd.Parameters.AddWithValue("@CategoryId", drpCategory.SelectedItem.Value);
                 sqlCmd.Parameters.AddWithValue("@SubCategoryId", drpSubCategory.SelectedItem.Value);
                 sqlCmd.Parameters.AddWithValue("@InventoryName", txtInventoryName.Text);
@@ -529,7 +596,7 @@ namespace Inventory
                 sqlCmd.Parameters.AddWithValue("@InventoryDescription2", txtInventoryDescription2.Text);
                 sqlCmd.Parameters.AddWithValue("@InventoryDescription3", txtInventoryDescription3.Text);
                 sqlCmd.Parameters.AddWithValue("@InventoryDescription", txtInventoryDescription.Text);
-                sqlCmd.Parameters.AddWithValue("@PurchasedFrom",  txtPurchasedFrom.Text);
+                sqlCmd.Parameters.AddWithValue("@PurchasedFrom", txtPurchasedFrom.Text);
                 sqlCmd.Parameters.AddWithValue("@PurchaseDate", txtPurchaseDate.Text);
 
                 sqlCmd.Parameters.AddWithValue("@Bill_InvoiceNo", txtBill_InvoiceNo.Text);
@@ -550,7 +617,7 @@ namespace Inventory
                 sqlCmd.Parameters.AddWithValue("@InventoryPageNo", txtInventoryPageNo.Text);
 
                 sqlCmd.Parameters.AddWithValue("@IsConsumable", chkIsConsumable.Checked);
-                
+
                 sqlCmd.Parameters.AddWithValue("@UserId", drpIssuedTo.SelectedItem.Value);
                 sqlCmd.Parameters.AddWithValue("@IssueDate", txtIssueDate.Text);
                 sqlCmd.Parameters.AddWithValue("@IssuedBy", UserId);
@@ -567,7 +634,7 @@ namespace Inventory
                     lblError.Font.Size = 16;
                     GetInventoryEntries();
                     clearAllFields();
-                    
+
                 }
                 else
                     lblError.Text = ("Please Try Again !!!");
@@ -587,13 +654,22 @@ namespace Inventory
 
         protected void grdInventoryEntries_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
+            string srchExp = Session["SearchExp"].ToString();
             grdInventoryEntries.PageIndex = e.NewPageIndex;
-            this.GetInventoryEntries();
+            if (string.IsNullOrEmpty(srchExp))
+                this.GetInventoryEntries();
+            else
+                this.GetInventoryEntries(null, srchExp);
         }
         protected void grdInventoryMaster_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
+
+            string srchExp = Session["SearchExp"].ToString();
             grdInventoryMaster.PageIndex = e.NewPageIndex;
-            this.GetInventoryEntries();
+            if (string.IsNullOrEmpty(srchExp))
+                this.GetInventoryEntries();
+            else
+                this.GetInventoryEntries(null, srchExp);
         }
 
         protected void grdInventoryEntries_RowDataBound(object sender, GridViewRowEventArgs e)
@@ -603,7 +679,7 @@ namespace Inventory
                 e.Row.Cells[1].Attributes.Add("style", "display:none");
             }
         }
-   
+
 
         //    protected void grdInventoryMaster_RowDataBound(object sender, GridViewRowEventArgs e)
         //{
@@ -623,7 +699,7 @@ namespace Inventory
             string[] arg = new string[24];
             if (e.CommandName == "EditRecord")
             {
-                
+
                 arg = e.CommandArgument.ToString().Split(';');
                 Session["InventoryId"] = arg[0];
                 Session["InventoryName"] = arg[1];
@@ -652,31 +728,49 @@ namespace Inventory
 
 
                 txtInventoryDescription.Text = Session["InventoryDescription"].ToString();
-                txtInventoryDescription1.Text= Session["InventoryDescription1"].ToString();
-                txtInventoryDescription2.Text= Session["InventoryDescription2"].ToString();
-                txtInventoryDescription3.Text= Session["InventoryDescription3"].ToString();
+                txtInventoryDescription1.Text = Session["InventoryDescription1"].ToString();
+                txtInventoryDescription2.Text = Session["InventoryDescription2"].ToString();
+                txtInventoryDescription3.Text = Session["InventoryDescription3"].ToString();
 
                 txtInventoryName.Text = Session["InventoryName"].ToString();
                 txtInventoryRegisterNo.Text = Session["InventoryRegisterNo"].ToString();
-                txtInventoryPageNo.Text= Session["InventoryPageNo"].ToString();
+                txtInventoryPageNo.Text = Session["InventoryPageNo"].ToString();
 
-              
+
                 txtItemQuantity.Text = Session["ItemQuantity"].ToString();
-                txtItemRatePerUnit.Text= Session["ItemRatePerUnit"].ToString();
+                txtItemRatePerUnit.Text = Session["ItemRatePerUnit"].ToString();
                 txtItemTotalCost.Text = Session["ItemTotalCost"].ToString();
                 txtLocation.Text = Session["Location"].ToString();
                 txtPurchaseDate.Text = Session["PurchaseDate"].ToString();
                 txtPurchasedFrom.Text = Session["PurchasedFrom"].ToString();
                 txtSalesTax.Text = Session["SalesTax"].ToString();
-                txtTotalAmount.Text= Session["TotalAmount"].ToString();
+                txtTotalAmount.Text = Session["TotalAmount"].ToString();
                 txtBill_InvoiceNo.Text = Session["Bill_InvoiceNo"].ToString();
                 drpCategory.SelectedValue = string.IsNullOrEmpty(Session["CategoryId"].ToString()) ? "-1" : Session["CategoryId"].ToString();
                 drpCategory_SelectedIndexChanged1(null, null);
 
-                chkIsConsumable.Checked = Convert.ToBoolean(string.IsNullOrEmpty(Session["IsConsumable"].ToString())?false: Session["IsConsumable"]);
-            
+                chkIsConsumable.Checked = Convert.ToBoolean(string.IsNullOrEmpty(Session["IsConsumable"].ToString()) ? false : Session["IsConsumable"]);
+
                 drpSubCategory.SelectedValue = string.IsNullOrEmpty(Session["SubCategoryId"].ToString()) ? "-1" : Session["SubCategoryId"].ToString();
                 btnSubmitInventoryEntries.Text = "Update Details";
+            }
+        }
+
+        protected void btnSearch_Click(object sender, EventArgs e)
+        {
+            btnCancel_Click(null, null);
+            if (string.IsNullOrEmpty(txtSrchItemName.Text) && string.IsNullOrEmpty(txtSrchCategory.Text) &&
+                string.IsNullOrEmpty(txtSrchSubCategory.Text) && string.IsNullOrEmpty(txtSrchRegisterNo.Text) &&
+                string.IsNullOrEmpty(txtSrchPageNo.Text) && drpUser.SelectedValue == "")
+            {
+                GetInventoryEntries(null, null);
+            }
+            else
+            {
+                string searchExp = string.Format("InventoryName LIKE '%{0}%' OR CategoryName = '%{1}%' OR SubCategoryName LIKE '%{2}%' OR" +
+                    "InventoryRegisterNo LIKE '%{3}%' OR InventoryPageNo LIKE '%{4}%'", txtSrchItemName.Text, txtSrchCategory.Text,
+                    txtSrchSubCategory.Text, txtSrchRegisterNo.Text, txtSrchPageNo.Text);
+                GetInventoryEntries(null, searchExp);
             }
         }
 
