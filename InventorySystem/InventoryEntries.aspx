@@ -632,12 +632,12 @@
                     <asp:TemplateField>
                         <ItemTemplate>
                             <asp:Button ID="btn_Edit" runat="server" Text="Quick Edit" CommandName="Edit" />
-                            <asp:LinkButton ID="lnkEdit" runat="server" CommandArgument='<%#Eval("InventoryId") + ";" + Eval("InventoryName") + ";" 
-                                + Eval("CategoryId") + ";" + Eval("CategoryName")+ ";" + Eval("SubCategoryId")+ ";" + Eval("SubCategoryName") + ";" 
-                                + Eval("Location") + ";" + Eval("InventoryDescription")+ ";" + Eval("InventoryDescription1")+ ";" + Eval("InventoryDescription2") + ";" 
-                                + Eval("InventoryDescription3") + ";" + Eval("PurchasedFrom")+ ";" + Eval("PurchaseDate")+ ";" + Eval("Bill_InvoiceNo") + ";" 
-                                + Eval("ItemTotalCost") + ";" + Eval("TotalAmount")+ ";" + Eval("ItemQuantity")+ ";" + Eval("ItemRatePerUnit") + ";" + Eval("IsConsumable") + ";" 
-                                + Eval("SalesTax") + ";" + Eval("WarrantyTo")+ ";" + Eval("InventoryRegisterNo")+ ";" + Eval("InventoryPageNo")%>'
+                            <asp:LinkButton ID="lnkEdit" runat="server" CommandArgument='<%#Eval("InventoryId") + "^" + Eval("InventoryName") + "^" 
+                                + Eval("CategoryId") + "^" + Eval("CategoryName")+ "^" + Eval("SubCategoryId")+ "^" + Eval("SubCategoryName") + "^" 
+                                + Eval("Location") + "^" + Eval("InventoryDescription")+ "^" + Eval("InventoryDescription1")+ "^" + Eval("InventoryDescription2") + "^" 
+                                + Eval("InventoryDescription3") + "^" + Eval("PurchasedFrom")+ "^" + Eval("PurchaseDate")+ "^" + Eval("Bill_InvoiceNo") + "^" 
+                                + Eval("ItemTotalCost") + "^" + Eval("TotalAmount")+ "^" + Eval("ItemQuantity")+ "^" + Eval("ItemRatePerUnit") + "^" + Eval("IsConsumable") + "^" 
+                                + Eval("SalesTax") + "^" + Eval("WarrantyTo")+ "^" + Eval("InventoryRegisterNo")+ "^" + Eval("InventoryPageNo")%>'
                                 CommandName="EditRecord"
                                 Text="Full Edit" ToolTip="Click to update the Item details"></asp:LinkButton>
                         </ItemTemplate>

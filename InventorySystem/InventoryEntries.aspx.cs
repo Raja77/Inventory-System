@@ -699,8 +699,7 @@ namespace Inventory
             string[] arg = new string[24];
             if (e.CommandName == "EditRecord")
             {
-
-                arg = e.CommandArgument.ToString().Split(';');
+                arg = e.CommandArgument.ToString().Split('^');
                 Session["InventoryId"] = arg[0];
                 Session["InventoryName"] = arg[1];
                 Session["CategoryId"] = arg[2];
