@@ -14,6 +14,7 @@ using System.Data.SqlTypes;
 using System.Globalization;
 using System.Net.Mail;
 using System.Text;
+using System.Web.SessionState;
 
 namespace Inventory
 {
@@ -24,6 +25,34 @@ namespace Inventory
         DataSet ds, dsGrid = null;
         DataTable dtData = null;
         SqlCommand sqlCmd = null;
+
+        public static HttpSessionState CurrentSession
+        {
+            get { return HttpContext.Current.Session; }
+        }
+
+        public static string SearchExpID
+        {
+            set { CurrentSession["SearchExpID"] = value; }
+            get
+            {
+                string result;
+                try
+                {
+                    result = (string)CurrentSession["SearchExpID"];
+                }
+                catch
+                {
+                    result = String.Empty;
+                }
+                return result;
+            }
+        }
+
+        //public Session["SearchExp"]="";
+        //public string SearchExpID = Convert.ToString(HttpContext.Current.Session["SearchExp"]);
+
+
 
         private string SortDirection
         {
@@ -64,7 +93,7 @@ namespace Inventory
         {
             try
             {
-                Session["SearchExp"] = searchExpression;
+                SearchExpID = searchExpression;
                 ds = new DataSet();
                 if (string.IsNullOrEmpty(searchExpression))
                 {
@@ -654,7 +683,7 @@ namespace Inventory
 
         protected void grdInventoryEntries_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
-            string srchExp = Session["SearchExp"].ToString();
+            string srchExp = SearchExpID;
             grdInventoryEntries.PageIndex = e.NewPageIndex;
             if (string.IsNullOrEmpty(srchExp))
                 this.GetInventoryEntries();
@@ -664,7 +693,7 @@ namespace Inventory
         protected void grdInventoryMaster_PageIndexChanging(object sender, GridViewPageEventArgs e)
         {
 
-            string srchExp = Session["SearchExp"].ToString();
+            string srchExp = SearchExpID;
             grdInventoryMaster.PageIndex = e.NewPageIndex;
             if (string.IsNullOrEmpty(srchExp))
                 this.GetInventoryEntries();
